@@ -1,0 +1,1 @@
+/usr/bin/c++ -std=c++17 -Wall -Werror -O2 -g -pthread CMakeFiles/main_executable.dir/main.cpp.o -o main_executable 
