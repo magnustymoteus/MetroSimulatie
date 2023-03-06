@@ -7,6 +7,14 @@
 
 #include <string>
 
+/**
+ * This serves as a metro station.
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
+
 class Station {
 private:
     std::string fNaam;

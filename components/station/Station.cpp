@@ -3,12 +3,6 @@
 //
 
 #include "Station.h"
-/*
- * This serves as the implementation for a metro station.
- * @author Patryk Pilichowski
- * @date 06/03/2023
- * @version 0.1
- */
 
 // getters
 std::string Station::getNaam() const {
