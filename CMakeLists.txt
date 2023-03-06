@@ -14,7 +14,7 @@ include_directories(gtest/googletest/include)
 #include the googlemock/include dir
 include_directories(gtest/googlemock/include)
 
-set(RELEASE_SOURCE_FILES main.cpp DesignByContract.h)
+set(RELEASE_SOURCE_FILES DesignByContract.h components main.cpp)
 set(DEBUG_SOURCE_FILES tests/Tests.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
