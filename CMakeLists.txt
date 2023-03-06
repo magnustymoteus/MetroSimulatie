@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 project(project_software_practicum2)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Werror -O2")
+set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_FLAGS "-std=c++98 -Wall -Werror -O2")
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 
 add_subdirectory(gtest)
