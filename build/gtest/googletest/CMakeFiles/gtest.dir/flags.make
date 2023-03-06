@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/magnustymoteus/projects/MetroSimulatie/gtest/googletest/include -I/home/magnustymoteus/projects/MetroSimulatie/gtest/googletest
 
-CXX_FLAGS = -std=c++17 -Wall -Werror -O2 -g -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+CXX_FLAGS = -std=c++98 -Wall -Werror -O2 -g -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++14
 
