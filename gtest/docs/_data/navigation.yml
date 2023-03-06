@@ -39,5 +39,5 @@ nav:
     url: "/samples.html"
   - title: "Using pkg-config"
     url: "/pkgconfig.html"
-  - title: "Community Documentation"
+  - title: "Community docs"
     url: "/community_created_documentation.html"

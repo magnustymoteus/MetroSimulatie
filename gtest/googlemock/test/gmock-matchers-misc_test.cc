@@ -9,7 +9,7 @@
 // notice, this list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above
 // copyright notice, this list of conditions and the following disclaimer
-// in the documentation and/or other materials provided with the
+// in the docs and/or other materials provided with the
 // distribution.
 //     * Neither the name of Google Inc. nor the names of its
 // contributors may be used to endorse or promote products derived from
@@ -1632,7 +1632,7 @@ TEST(MockMethodMockFunctionTest, EnsureNoUnusedButMarkedUnusedWarning) {
 // std::function<void()> is used below for compatibility with older copies of
 // GCC. Normally, a raw lambda is all that is needed.
 
-// Test that examples from documentation compile
+// Test that examples from docs compile
 TEST(ThrowsTest, Examples) {
   EXPECT_THAT(
       std::function<void()>([]() { throw std::runtime_error("message"); }),

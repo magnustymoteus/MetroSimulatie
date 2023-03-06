@@ -9,7 +9,7 @@
 // notice, this list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above
 // copyright notice, this list of conditions and the following disclaimer
-// in the documentation and/or other materials provided with the
+// in the docs and/or other materials provided with the
 // distribution.
 //     * Neither the name of Google Inc. nor the names of its
 // contributors may be used to endorse or promote products derived from
@@ -1358,7 +1358,7 @@ class ReferenceOrValueWrapper {
 };
 
 // Specialization for lvalue reference types. See primary template
-// for documentation.
+// for docs.
 template <typename T>
 class ReferenceOrValueWrapper<T&> {
  public:

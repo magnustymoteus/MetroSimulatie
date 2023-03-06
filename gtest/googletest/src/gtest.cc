@@ -9,7 +9,7 @@
 // notice, this list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above
 // copyright notice, this list of conditions and the following disclaimer
-// in the documentation and/or other materials provided with the
+// in the docs and/or other materials provided with the
 // distribution.
 //     * Neither the name of Google Inc. nor the names of its
 // contributors may be used to endorse or promote products derived from
@@ -6545,7 +6545,7 @@ static const char kColorEncodedHelpMessage[] =
     "COLOR@D environment variable to @Gno@D.\n"
     "\n"
     "For more information, please read the " GTEST_NAME_
-    " documentation at\n"
+    " docs at\n"
     "@G" GTEST_PROJECT_URL_ "@D. If you find a bug in " GTEST_NAME_
     "\n"
     "(not one in your own code or tests), please report it to\n"

@@ -9,7 +9,7 @@
 // notice, this list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above
 // copyright notice, this list of conditions and the following disclaimer
-// in the documentation and/or other materials provided with the
+// in the docs and/or other materials provided with the
 // distribution.
 //     * Neither the name of Google Inc. nor the names of its
 // contributors may be used to endorse or promote products derived from
@@ -1001,7 +1001,7 @@ class ReturnAction final {
       // A copy of the value originally provided by the user. We retain this in
       // addition to the value of the mock function's result type below in case
       // the latter is a reference-like type. See the std::string_view example
-      // in the documentation on Return.
+      // in the docs on Return.
       R input_value;
 
       // The value we actually return, as the type returned by the mock function
@@ -1012,7 +1012,7 @@ class ReturnAction final {
       // reasons: in 2009-11, commit a070cbd91c (Google changelist 13540126)
       // made the Action<U()> conversion operator eagerly convert the R value to
       // U, but without keeping the R alive. This broke the use case discussed
-      // in the documentation for Return, making reference-like types such as
+      // in the docs for Return, making reference-like types such as
       // std::string_view not safe to use as U where the input type R is a
       // value-like type such as std::string.
       //
