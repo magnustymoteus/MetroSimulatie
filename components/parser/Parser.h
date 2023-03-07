@@ -13,11 +13,12 @@
  * @version 0.1
  */
 
+#include <string>
+
 class Parser {
 private:
-
 public:
-
+    void parseFile(const char* &relativeFilePath);
 };
 
 
