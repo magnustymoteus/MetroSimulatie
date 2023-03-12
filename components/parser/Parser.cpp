@@ -6,11 +6,14 @@
 #include "tinyxml.h"
 #include "../../DesignByContract.h"
 
+
+
 void Parser::parseFile(const char* &relativeFilePath) {
     TiXmlDocument doc;
     REQUIRE(doc.LoadFile(relativeFilePath), "file not found!");
-    bool volledigGelezen = false;
-    while(!volledigGelezen) {
-
+    TiXmlElement* current_elem = doc.FirstChildElement();
+    while(current_elem != nullptr) {
+        if(current_elem->Value() == )
+        current_elem = current_elem->NextSiblingElement();
     }
 }
