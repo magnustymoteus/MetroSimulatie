@@ -14,11 +14,20 @@
  */
 
 #include <string>
+#include <map>
+#include <vector>
+#include "../metronet/Metronet.h"
 
 class Parser {
 private:
+     bool isTagSupported(const std::string &tagName) const;
+     bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
+     void setSupportedTags();
+     std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
-    void parseFile(const char* &relativeFilePath);
+    Parser();
+     Metronet parseFile(const std::string &relativeFilePath);
+     bool isFileValid(const std::string &relativeFilePath) const;
 };
 
 

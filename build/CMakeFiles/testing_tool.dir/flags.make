@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/magnustymoteus/projects/MetroSimulatie/gtest/googlemock/include -I/home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml -isystem /home/magnustymoteus/projects/MetroSimulatie/gtest/googletest/include -isystem /home/magnustymoteus/projects/MetroSimulatie/gtest/googletest
+CXX_INCLUDES = -I/home/magnustymoteus/projects/MetroSimulatie/gtest/googlemock/include -I/home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml -I/home/magnustymoteus/projects/MetroSimulatie/components -isystem /home/magnustymoteus/projects/MetroSimulatie/gtest/googletest/include -isystem /home/magnustymoteus/projects/MetroSimulatie/gtest/googletest
 
 CXX_FLAGS = -std=c++98 -Wall -Werror -O2 -g -std=gnu++14
 
