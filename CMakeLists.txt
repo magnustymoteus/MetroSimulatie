@@ -15,11 +15,16 @@ include_directories(gtest/googletest/include)
 include_directories(gtest/googlemock/include)
 include_directories(tools/tinyxml)
 include_directories(components)
+include_directories(components/station)
+include_directories(components/metronet)
+include_directories(components/parser)
+include_directories(components/output)
+include_directories(components/tram)
 
 FILE(GLOB SOURCES "components/*/*.cpp")
 FILE(GLOB TINYXML "tools/tinyxml/*")
 
-set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp)
+set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp components/output/output.cpp components/output/output.h)
 set(DEBUG_SOURCE_FILES tests/Tests.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})

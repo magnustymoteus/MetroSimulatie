@@ -27,3 +27,11 @@ void Tram::setBeginStation(Station *const &newBeginStation) {
     fBeginStation = newBeginStation;
 }
 
+Station *Tram::getHuidigeStation() const {
+    return fHuidigeStation;
+}
+
+void Tram::setHuidigeStation(Station *fHuidigeStation) {
+    Tram::fHuidigeStation = fHuidigeStation;
+}
+
