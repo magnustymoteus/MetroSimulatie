@@ -277,7 +277,30 @@ CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o: ../components/par
   /usr/include/assert.h \
   ../tools/tinyxml/tinystr.h \
   ../DesignByContract.h \
-  /usr/include/c++/11/cassert
+  /usr/include/c++/11/cassert \
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/ostream \
+  /usr/include/c++/11/ios \
+  /usr/include/c++/11/exception \
+  /usr/include/c++/11/bits/ios_base.h \
+  /usr/include/c++/11/bits/locale_classes.h \
+  /usr/include/c++/11/bits/locale_classes.tcc \
+  /usr/include/c++/11/stdexcept \
+  /usr/include/c++/11/streambuf \
+  /usr/include/c++/11/bits/streambuf.tcc \
+  /usr/include/c++/11/bits/basic_ios.h \
+  /usr/include/c++/11/bits/locale_facets.h \
+  /usr/include/c++/11/cwctype \
+  /usr/include/wctype.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h \
+  /usr/include/c++/11/bits/streambuf_iterator.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h \
+  /usr/include/c++/11/bits/locale_facets.tcc \
+  /usr/include/c++/11/bits/basic_ios.tcc \
+  /usr/include/c++/11/bits/ostream.tcc \
+  /usr/include/c++/11/istream \
+  /usr/include/c++/11/bits/istream.tcc
 
 CMakeFiles/main_executable.dir/components/station/Station.cpp.o: ../components/station/Station.cpp \
   /usr/include/stdc-predef.h \
@@ -780,11 +803,43 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 ../main.cpp:
 
+/usr/include/c++/11/bits/istream.tcc:
+
+/usr/include/c++/11/istream:
+
+/usr/include/c++/11/bits/basic_ios.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
+
+/usr/include/c++/11/bits/streambuf_iterator.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/11/bits/locale_facets.h:
+
+/usr/include/c++/11/bits/basic_ios.h:
+
+/usr/include/c++/11/bits/streambuf.tcc:
+
+/usr/include/c++/11/stdexcept:
+
+/usr/include/c++/11/bits/locale_classes.tcc:
+
+/usr/include/c++/11/bits/ios_base.h:
+
+/usr/include/c++/11/exception:
+
 /usr/include/c++/11/cassert:
+
+/usr/include/c++/11/bits/locale_classes.h:
 
 ../tools/tinyxml/tinystr.h:
 
 /usr/include/c++/11/bits/std_abs.h:
+
+/usr/include/c++/11/cwctype:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
 
@@ -809,6 +864,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 /usr/include/stdlib.h:
 
 /usr/include/c++/11/stdlib.h:
+
+/usr/include/c++/11/bits/locale_facets.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
@@ -836,6 +893,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/c++/11/bits/stl_construct.h:
 
+/usr/include/c++/11/iostream:
+
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/c++/11/backward/binders.h:
@@ -851,6 +910,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/c++/11/bits/predefined_ops.h:
+
+/usr/include/c++/11/bits/ostream.tcc:
 
 /usr/include/c++/11/clocale:
 
@@ -926,6 +987,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/c++/11/bits/stl_function.h:
 
+/usr/include/c++/11/streambuf:
+
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/c++/11/bits/functexcept.h:
@@ -980,6 +1043,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
 
+/usr/include/c++/11/ostream:
+
 ../components/parser/Parser.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
@@ -1016,7 +1081,11 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/c++/11/ios:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 

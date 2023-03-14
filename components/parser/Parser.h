@@ -13,7 +13,7 @@
  * @version 0.1
  */
 
-#include <string>
+#include "tinyxml.h"
 #include <map>
 #include <vector>
 #include "../metronet/Metronet.h"
@@ -23,11 +23,13 @@ private:
      bool isTagSupported(const std::string &tagName) const;
      bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
      void setSupportedTags();
+     std::pair<std::string,std::pair<Station*, std::pair<std::string, std::string> > >
+     parseStation(TiXmlElement* stationElem) const;
+     std::pair<Tram*, std::string> parseTram(TiXmlElement* tramElem) const;
      std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
-    Parser();
+     Parser();
      Metronet parseFile(const std::string &relativeFilePath);
-     bool isFileValid(const std::string &relativeFilePath) const;
 };
 
 
