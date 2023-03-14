@@ -18,8 +18,8 @@
  */
 class Metronet {
 private:
-    std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station)
-    std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : tram)
+    std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)
+    std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
 public:
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
     Metronet() {}

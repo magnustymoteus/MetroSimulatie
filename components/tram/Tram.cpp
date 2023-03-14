@@ -31,7 +31,7 @@ Station *Tram::getHuidigeStation() const {
     return fHuidigeStation;
 }
 
-void Tram::setHuidigeStation(Station *fHuidigeStation) {
-    Tram::fHuidigeStation = fHuidigeStation;
+void Tram::setHuidigeStation(Station* newHuidigeStation) {
+    Tram::fHuidigeStation = newHuidigeStation;
 }
 
