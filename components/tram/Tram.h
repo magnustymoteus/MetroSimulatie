@@ -31,7 +31,7 @@ public:
     void setLijnNr(const int &newLijnNr);
     void setSnelheid(const int &newSnelheid);
     void setBeginStation(Station* const &newBeginStation);
-    void setHuidigeStation(Station *fHuidigeStation);
+    void setHuidigeStation(Station* newHuidigeStation);
 };
 
 
