@@ -242,6 +242,102 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+components/metronet/Metronet.o: components/metronet/Metronet.cpp.o
+.PHONY : components/metronet/Metronet.o
+
+# target to build an object file
+components/metronet/Metronet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.o
+.PHONY : components/metronet/Metronet.cpp.o
+
+components/metronet/Metronet.i: components/metronet/Metronet.cpp.i
+.PHONY : components/metronet/Metronet.i
+
+# target to preprocess a source file
+components/metronet/Metronet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.i
+.PHONY : components/metronet/Metronet.cpp.i
+
+components/metronet/Metronet.s: components/metronet/Metronet.cpp.s
+.PHONY : components/metronet/Metronet.s
+
+# target to generate assembly for a file
+components/metronet/Metronet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.s
+.PHONY : components/metronet/Metronet.cpp.s
+
+components/parser/Parser.o: components/parser/Parser.cpp.o
+.PHONY : components/parser/Parser.o
+
+# target to build an object file
+components/parser/Parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o
+.PHONY : components/parser/Parser.cpp.o
+
+components/parser/Parser.i: components/parser/Parser.cpp.i
+.PHONY : components/parser/Parser.i
+
+# target to preprocess a source file
+components/parser/Parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/parser/Parser.cpp.i
+.PHONY : components/parser/Parser.cpp.i
+
+components/parser/Parser.s: components/parser/Parser.cpp.s
+.PHONY : components/parser/Parser.s
+
+# target to generate assembly for a file
+components/parser/Parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/parser/Parser.cpp.s
+.PHONY : components/parser/Parser.cpp.s
+
+components/station/Station.o: components/station/Station.cpp.o
+.PHONY : components/station/Station.o
+
+# target to build an object file
+components/station/Station.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/station/Station.cpp.o
+.PHONY : components/station/Station.cpp.o
+
+components/station/Station.i: components/station/Station.cpp.i
+.PHONY : components/station/Station.i
+
+# target to preprocess a source file
+components/station/Station.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/station/Station.cpp.i
+.PHONY : components/station/Station.cpp.i
+
+components/station/Station.s: components/station/Station.cpp.s
+.PHONY : components/station/Station.s
+
+# target to generate assembly for a file
+components/station/Station.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/station/Station.cpp.s
+.PHONY : components/station/Station.cpp.s
+
+components/tram/Tram.o: components/tram/Tram.cpp.o
+.PHONY : components/tram/Tram.o
+
+# target to build an object file
+components/tram/Tram.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o
+.PHONY : components/tram/Tram.cpp.o
+
+components/tram/Tram.i: components/tram/Tram.cpp.i
+.PHONY : components/tram/Tram.i
+
+# target to preprocess a source file
+components/tram/Tram.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/tram/Tram.cpp.i
+.PHONY : components/tram/Tram.cpp.i
+
+components/tram/Tram.s: components/tram/Tram.cpp.s
+.PHONY : components/tram/Tram.s
+
+# target to generate assembly for a file
+components/tram/Tram.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/components/tram/Tram.cpp.s
+.PHONY : components/tram/Tram.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -290,6 +386,102 @@ tests/Tests.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/Tests.cpp.s
 .PHONY : tests/Tests.cpp.s
 
+tools/tinyxml/tinystr.o: tools/tinyxml/tinystr.cpp.o
+.PHONY : tools/tinyxml/tinystr.o
+
+# target to build an object file
+tools/tinyxml/tinystr.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o
+.PHONY : tools/tinyxml/tinystr.cpp.o
+
+tools/tinyxml/tinystr.i: tools/tinyxml/tinystr.cpp.i
+.PHONY : tools/tinyxml/tinystr.i
+
+# target to preprocess a source file
+tools/tinyxml/tinystr.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.i
+.PHONY : tools/tinyxml/tinystr.cpp.i
+
+tools/tinyxml/tinystr.s: tools/tinyxml/tinystr.cpp.s
+.PHONY : tools/tinyxml/tinystr.s
+
+# target to generate assembly for a file
+tools/tinyxml/tinystr.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.s
+.PHONY : tools/tinyxml/tinystr.cpp.s
+
+tools/tinyxml/tinyxml.o: tools/tinyxml/tinyxml.cpp.o
+.PHONY : tools/tinyxml/tinyxml.o
+
+# target to build an object file
+tools/tinyxml/tinyxml.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o
+.PHONY : tools/tinyxml/tinyxml.cpp.o
+
+tools/tinyxml/tinyxml.i: tools/tinyxml/tinyxml.cpp.i
+.PHONY : tools/tinyxml/tinyxml.i
+
+# target to preprocess a source file
+tools/tinyxml/tinyxml.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.i
+.PHONY : tools/tinyxml/tinyxml.cpp.i
+
+tools/tinyxml/tinyxml.s: tools/tinyxml/tinyxml.cpp.s
+.PHONY : tools/tinyxml/tinyxml.s
+
+# target to generate assembly for a file
+tools/tinyxml/tinyxml.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.s
+.PHONY : tools/tinyxml/tinyxml.cpp.s
+
+tools/tinyxml/tinyxmlerror.o: tools/tinyxml/tinyxmlerror.cpp.o
+.PHONY : tools/tinyxml/tinyxmlerror.o
+
+# target to build an object file
+tools/tinyxml/tinyxmlerror.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o
+.PHONY : tools/tinyxml/tinyxmlerror.cpp.o
+
+tools/tinyxml/tinyxmlerror.i: tools/tinyxml/tinyxmlerror.cpp.i
+.PHONY : tools/tinyxml/tinyxmlerror.i
+
+# target to preprocess a source file
+tools/tinyxml/tinyxmlerror.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.i
+.PHONY : tools/tinyxml/tinyxmlerror.cpp.i
+
+tools/tinyxml/tinyxmlerror.s: tools/tinyxml/tinyxmlerror.cpp.s
+.PHONY : tools/tinyxml/tinyxmlerror.s
+
+# target to generate assembly for a file
+tools/tinyxml/tinyxmlerror.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.s
+.PHONY : tools/tinyxml/tinyxmlerror.cpp.s
+
+tools/tinyxml/tinyxmlparser.o: tools/tinyxml/tinyxmlparser.cpp.o
+.PHONY : tools/tinyxml/tinyxmlparser.o
+
+# target to build an object file
+tools/tinyxml/tinyxmlparser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o
+.PHONY : tools/tinyxml/tinyxmlparser.cpp.o
+
+tools/tinyxml/tinyxmlparser.i: tools/tinyxml/tinyxmlparser.cpp.i
+.PHONY : tools/tinyxml/tinyxmlparser.i
+
+# target to preprocess a source file
+tools/tinyxml/tinyxmlparser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.i
+.PHONY : tools/tinyxml/tinyxmlparser.cpp.i
+
+tools/tinyxml/tinyxmlparser.s: tools/tinyxml/tinyxmlparser.cpp.s
+.PHONY : tools/tinyxml/tinyxmlparser.s
+
+# target to generate assembly for a file
+tools/tinyxml/tinyxmlparser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.s
+.PHONY : tools/tinyxml/tinyxmlparser.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -308,12 +500,36 @@ help:
 	@echo "... gtest_main"
 	@echo "... main_executable"
 	@echo "... testing_tool"
+	@echo "... components/metronet/Metronet.o"
+	@echo "... components/metronet/Metronet.i"
+	@echo "... components/metronet/Metronet.s"
+	@echo "... components/parser/Parser.o"
+	@echo "... components/parser/Parser.i"
+	@echo "... components/parser/Parser.s"
+	@echo "... components/station/Station.o"
+	@echo "... components/station/Station.i"
+	@echo "... components/station/Station.s"
+	@echo "... components/tram/Tram.o"
+	@echo "... components/tram/Tram.i"
+	@echo "... components/tram/Tram.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... tests/Tests.o"
 	@echo "... tests/Tests.i"
 	@echo "... tests/Tests.s"
+	@echo "... tools/tinyxml/tinystr.o"
+	@echo "... tools/tinyxml/tinystr.i"
+	@echo "... tools/tinyxml/tinystr.s"
+	@echo "... tools/tinyxml/tinyxml.o"
+	@echo "... tools/tinyxml/tinyxml.i"
+	@echo "... tools/tinyxml/tinyxml.s"
+	@echo "... tools/tinyxml/tinyxmlerror.o"
+	@echo "... tools/tinyxml/tinyxmlerror.i"
+	@echo "... tools/tinyxml/tinyxmlerror.s"
+	@echo "... tools/tinyxml/tinyxmlparser.o"
+	@echo "... tools/tinyxml/tinyxmlparser.i"
+	@echo "... tools/tinyxml/tinyxmlparser.s"
 .PHONY : help
 
 
