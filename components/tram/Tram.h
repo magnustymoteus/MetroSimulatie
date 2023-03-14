@@ -21,14 +21,17 @@ private:
     int fLijnNr;
     int fSnelheid;
     Station* fBeginStation;
+    Station* fHuidigeStation;
 public:
     int getLijnNr() const;
     int getSnelheid() const;
     Station* getBeginStation() const;
+    Station* getHuidigeStation() const;
 
     void setLijnNr(const int &newLijnNr);
     void setSnelheid(const int &newSnelheid);
     void setBeginStation(Station* const &newBeginStation);
+    void setHuidigeStation(Station *fHuidigeStation);
 };
 
 

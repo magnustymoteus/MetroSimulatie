@@ -23,6 +23,7 @@ private:
 public:
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
     Metronet() {}
+    void outputFile() const;
 };
 
 
