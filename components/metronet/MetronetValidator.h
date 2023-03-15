@@ -16,7 +16,12 @@
  */
 
 class MetronetValidator {
+private:
+    MetronetValidator* _initCheck;
+
+    bool properlyInitialized() const;
 public:
+    MetronetValidator();
     static void stationsLinkCheck(const Metronet &metronet);
     static void lijnNrExistsCheck(const Metronet &metronet);
     static void tramForSpoorCheck(const Metronet &metronet);

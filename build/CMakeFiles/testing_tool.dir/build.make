@@ -72,28 +72,28 @@ include CMakeFiles/testing_tool.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/testing_tool.dir/flags.make
 
-CMakeFiles/testing_tool.dir/tests/Tests.cpp.o: CMakeFiles/testing_tool.dir/flags.make
-CMakeFiles/testing_tool.dir/tests/Tests.cpp.o: ../tests/Tests.cpp
-CMakeFiles/testing_tool.dir/tests/Tests.cpp.o: CMakeFiles/testing_tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testing_tool.dir/tests/Tests.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing_tool.dir/tests/Tests.cpp.o -MF CMakeFiles/testing_tool.dir/tests/Tests.cpp.o.d -o CMakeFiles/testing_tool.dir/tests/Tests.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tests/Tests.cpp
+CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o: CMakeFiles/testing_tool.dir/flags.make
+CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o: ../tests/tests_main.cpp
+CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o: CMakeFiles/testing_tool.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o -MF CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o.d -o CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tests/tests_main.cpp
 
-CMakeFiles/testing_tool.dir/tests/Tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing_tool.dir/tests/Tests.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/magnustymoteus/projects/MetroSimulatie/tests/Tests.cpp > CMakeFiles/testing_tool.dir/tests/Tests.cpp.i
+CMakeFiles/testing_tool.dir/tests/tests_main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testing_tool.dir/tests/tests_main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/magnustymoteus/projects/MetroSimulatie/tests/tests_main.cpp > CMakeFiles/testing_tool.dir/tests/tests_main.cpp.i
 
-CMakeFiles/testing_tool.dir/tests/Tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing_tool.dir/tests/Tests.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/magnustymoteus/projects/MetroSimulatie/tests/Tests.cpp -o CMakeFiles/testing_tool.dir/tests/Tests.cpp.s
+CMakeFiles/testing_tool.dir/tests/tests_main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testing_tool.dir/tests/tests_main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/magnustymoteus/projects/MetroSimulatie/tests/tests_main.cpp -o CMakeFiles/testing_tool.dir/tests/tests_main.cpp.s
 
 # Object files for target testing_tool
 testing_tool_OBJECTS = \
-"CMakeFiles/testing_tool.dir/tests/Tests.cpp.o"
+"CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o"
 
 # External object files for target testing_tool
 testing_tool_EXTERNAL_OBJECTS =
 
-testing_tool: CMakeFiles/testing_tool.dir/tests/Tests.cpp.o
+testing_tool: CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o
 testing_tool: CMakeFiles/testing_tool.dir/build.make
 testing_tool: lib/libgtest.a
 testing_tool: CMakeFiles/testing_tool.dir/link.txt

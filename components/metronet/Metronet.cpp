@@ -3,14 +3,26 @@
 //
 
 #include "Metronet.h"
+#include "../../DesignByContract.h"
 #include <fstream>
 #include <iostream>
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
 fTrams(newTrams)
-{}
+{
+    _initCheck = this;
+    ENSURE(properlyInitialized(), "Expected metronet to be properly initialized in constructor!");
+}
+Metronet::Metronet() {
+    _initCheck = this;
+    ENSURE(properlyInitialized(), "Expected metronet to be properly initialized in constructor!");
+}
+bool Metronet::properlyInitialized() const {
+    return _initCheck == this;
+}
 
 Metronet::~Metronet() {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in destructor!");
     for(std::map<int, Station*>::const_iterator iter = fSporen.begin(); iter!=fSporen.end();iter++) {
         Station* endStation = iter->second->getVorige();
         Station* currentStation = iter->second;
@@ -26,6 +38,7 @@ Metronet::~Metronet() {
 }
 
 void Metronet::pushStation(Station* station) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in pushStation!");
     int spoorNr = station->getSpoorNr();
     std::map<int, Station*>::const_iterator stationFind = fSporen.find(spoorNr);
     if(stationFind == fSporen.end()) {
@@ -44,12 +57,15 @@ void Metronet::pushStation(Station* station) {
     }
 }
 void Metronet::pushTram(Tram* tram) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in pushTram!");
     fTrams.insert(std::make_pair(tram->getLijnNr(), tram));
 }
 bool Metronet::spoorExists(const int &spoorNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in spoorExists!");
     return fSporen.find(spoorNr) != fSporen.end();
 }
 Station* Metronet::retrieveStation(const int &spoorNr, const std::string &naam) const {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in retrieveStation!");
     std::map<int, Station*>::const_iterator stationFind = fSporen.find(spoorNr);
     if(stationFind != fSporen.end()) {
         Station* endStation = stationFind->second->getVorige();
@@ -65,6 +81,7 @@ Station* Metronet::retrieveStation(const int &spoorNr, const std::string &naam) 
     return 0;
 }
 void Metronet::insertAfterStation(const std::string &vorigeNaam, Station *station) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in insertAfterStation!");
     int spoorNr = station->getSpoorNr();
     Station* currentStation = retrieveStation(spoorNr, vorigeNaam);
     if(currentStation) {
@@ -85,8 +102,9 @@ void Metronet::outputFile() const {
     3. WHILE Nog trams beschikbaar
     3.1. Schrijf tram-gegevens uit naar bestand
     4. Sluit uitvoerbestand*/
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in outputFile!");
     std::ofstream outputFile;
-    outputFile.open("output.txt");
+    outputFile.open("output/output.txt");
     // Write all stations to file
     for(std::map<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
         Station* beginStation = iteratorIntStation->second;

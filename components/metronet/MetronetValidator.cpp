@@ -3,9 +3,19 @@
 //
 
 #include "MetronetValidator.h"
+#include "../../DesignByContract.h"
 #include <iostream>
 
 std::string kNotConsistent = "The metronet is not consistent!: ";
+
+MetronetValidator::MetronetValidator() {
+    _initCheck = this;
+    ENSURE(properlyInitialized(), "Expected MetronetValidator to be properly initialized in constructor!");
+}
+
+bool MetronetValidator::properlyInitialized() const {
+    return _initCheck == this;
+}
 
 void MetronetValidator::stationsLinkCheck(const Metronet &metronet) {
     for(std::map<int, Station*>::const_iterator iter = metronet.fSporen.begin();iter!=metronet.fSporen.end();iter++) {

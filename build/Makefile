@@ -386,29 +386,29 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_executable.dir/build.make CMakeFiles/main_executable.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-tests/Tests.o: tests/Tests.cpp.o
-.PHONY : tests/Tests.o
+tests/tests_main.o: tests/tests_main.cpp.o
+.PHONY : tests/tests_main.o
 
 # target to build an object file
-tests/Tests.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/Tests.cpp.o
-.PHONY : tests/Tests.cpp.o
+tests/tests_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/tests_main.cpp.o
+.PHONY : tests/tests_main.cpp.o
 
-tests/Tests.i: tests/Tests.cpp.i
-.PHONY : tests/Tests.i
+tests/tests_main.i: tests/tests_main.cpp.i
+.PHONY : tests/tests_main.i
 
 # target to preprocess a source file
-tests/Tests.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/Tests.cpp.i
-.PHONY : tests/Tests.cpp.i
+tests/tests_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/tests_main.cpp.i
+.PHONY : tests/tests_main.cpp.i
 
-tests/Tests.s: tests/Tests.cpp.s
-.PHONY : tests/Tests.s
+tests/tests_main.s: tests/tests_main.cpp.s
+.PHONY : tests/tests_main.s
 
 # target to generate assembly for a file
-tests/Tests.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/Tests.cpp.s
-.PHONY : tests/Tests.cpp.s
+tests/tests_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/testing_tool.dir/build.make CMakeFiles/testing_tool.dir/tests/tests_main.cpp.s
+.PHONY : tests/tests_main.cpp.s
 
 tools/tinyxml/tinystr.o: tools/tinyxml/tinystr.cpp.o
 .PHONY : tools/tinyxml/tinystr.o
@@ -542,9 +542,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... tests/Tests.o"
-	@echo "... tests/Tests.i"
-	@echo "... tests/Tests.s"
+	@echo "... tests/tests_main.o"
+	@echo "... tests/tests_main.i"
+	@echo "... tests/tests_main.s"
 	@echo "... tools/tinyxml/tinystr.o"
 	@echo "... tools/tinyxml/tinystr.i"
 	@echo "... tools/tinyxml/tinystr.s"

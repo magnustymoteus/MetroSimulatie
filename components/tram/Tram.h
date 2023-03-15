@@ -18,11 +18,17 @@ class Station; // forward declaration
 
 class Tram {
 private:
+    Tram* _initCheck;
+
     int fLijnNr;
     int fSnelheid;
     Station* fBeginStation;
     Station* fHuidigeStation;
+
+    bool properlyInitialized() const;
 public:
+    Tram();
+
     int getLijnNr() const;
     int getSnelheid() const;
     Station* getBeginStation() const;

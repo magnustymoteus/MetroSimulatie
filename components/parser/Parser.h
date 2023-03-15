@@ -21,7 +21,11 @@
 
 class Parser {
 private:
+     Parser* _initCheck;
+
      std::map<std::string, std::vector<std::string> > fSupportedTags;
+
+     bool properlyInitialized() const;
 
      bool isTagSupported(const std::string &tagName) const;
      bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
