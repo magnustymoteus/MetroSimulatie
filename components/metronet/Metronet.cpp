@@ -4,8 +4,6 @@
 
 #include "Metronet.h"
 #include <fstream>
-#include <list>
-#include <algorithm>
 #include <iostream>
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
@@ -92,18 +90,19 @@ void Metronet::outputFile() const {
     // Write all stations to file
     for(std::map<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
         Station* beginStation = iteratorIntStation->second;
-        std::list<Station*> visitedStations;
-        for(Station* current = beginStation; std::find(visitedStations.begin(), visitedStations.end(), current) != visitedStations.end(); current = current->getVolgende()){
-            outputFile << "Station " << current->getNaam() << "\n";
-            outputFile << "<- Station " << current->getVorige()->getNaam() << "\n";
-            outputFile << "-> Station " << current->getVolgende()->getNaam() << "\n";
-            outputFile << "Spoor " << current->getSpoorNr() << "\n\n";
-        }
+        Station* currentStation = iteratorIntStation->second;
+        do {
+            outputFile << "Station " << currentStation->getNaam() << "\n";
+            outputFile << "<- Station " << currentStation->getVorige()->getNaam() << "\n";
+            outputFile << "-> Station " << currentStation->getVolgende()->getNaam() << "\n";
+            outputFile << "Spoor " << currentStation->getSpoorNr() << "\n\n";
+            currentStation = currentStation->getVolgende();
+        } while(currentStation != beginStation);
     }
 
     for(std::map<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
-        outputFile << "Tram " << current->getLijnNr() << "in Station " << current->getHuidigeStation()->getNaam() << "\n";
+        outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
     }
 
     outputFile.close();
