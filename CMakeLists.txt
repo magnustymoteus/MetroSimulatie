@@ -19,7 +19,7 @@ FILE(GLOB SOURCES "components/*/*.cpp")
 FILE(GLOB TINYXML "tools/tinyxml/*")
 
 set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp)
-set(DEBUG_SOURCE_FILES tests/Tests.cpp)
+set(DEBUG_SOURCE_FILES tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
 add_executable(testing_tool ${DEBUG_SOURCE_FILES})

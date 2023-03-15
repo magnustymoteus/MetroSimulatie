@@ -17,11 +17,16 @@
 
 class Station {
 private:
+    Station* _initCheck;
+
     std::string fNaam;
     int fSpoorNr;
     Station *fVorige;
     Station *fVolgende;
+
+    bool properlyInitialized() const;
 public:
+    Station();
     // getters
     std::string getNaam() const;
     int getSpoorNr () const;

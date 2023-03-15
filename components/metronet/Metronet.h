@@ -9,6 +9,9 @@
 #include "../station/Station.h"
 #include "../tram/Tram.h"
 
+
+class MetronetValidator; // forward declaration
+
 /**
  * This serves as the metronet, containing all information about the stations and trams.
  * @author Patryk Pilichowski
@@ -17,13 +20,14 @@
  * @version 0.1
  */
 
-class MetronetValidator; // forward declaration
-
 class Metronet {
 private:
     friend class MetronetValidator;
+    Metronet* _initCheck;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)
     std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
+
+    bool properlyInitialized() const;
 public:
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
     ~Metronet();
@@ -32,7 +36,7 @@ public:
     Station* retrieveStation(const int &spoorNr, const std::string &naam) const;
     void insertAfterStation(const std::string &vorigeNaam, Station* station);
     bool spoorExists(const int &spoorNr) const;
-    Metronet() {}
+    Metronet();
     void outputFile() const;
 };
 
