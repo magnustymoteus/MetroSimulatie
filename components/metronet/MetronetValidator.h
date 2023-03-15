@@ -16,12 +16,12 @@
  */
 
 class MetronetValidator {
-private:
+protected:
     MetronetValidator* _initCheck;
 
-    bool properlyInitialized() const;
 public:
     MetronetValidator();
+    bool properlyInitialized() const;
     static void stationsLinkCheck(const Metronet &metronet);
     static void lijnNrExistsCheck(const Metronet &metronet);
     static void tramForSpoorCheck(const Metronet &metronet);

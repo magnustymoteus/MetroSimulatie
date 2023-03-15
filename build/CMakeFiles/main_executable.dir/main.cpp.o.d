@@ -1,7 +1,7 @@
 CMakeFiles/main_executable.dir/main.cpp.o: \
  /home/magnustymoteus/projects/MetroSimulatie/main.cpp \
  /usr/include/stdc-predef.h \
- /home/magnustymoteus/projects/MetroSimulatie/DesignByContract.h \
+ /home/magnustymoteus/projects/MetroSimulatie/tools/DesignByContract.h \
  /usr/include/c++/11/cassert \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -104,8 +104,8 @@ CMakeFiles/main_executable.dir/main.cpp.o: \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/Metronet.h \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/../station/Station.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/metronet/Metronet.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/station/Station.h \
  /usr/include/c++/11/string /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/char_traits.h \
  /usr/include/c++/11/bits/postypes.h /usr/include/c++/11/cwchar \
@@ -137,6 +137,6 @@ CMakeFiles/main_executable.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/../tram/Tram.h \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/MetronetValidator.h \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/Metronet.h
+ /home/magnustymoteus/projects/MetroSimulatie/components/tram/Tram.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetValidator.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/metronet/Metronet.h

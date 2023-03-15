@@ -13,13 +13,15 @@ include_directories(gtest/googletest/include)
 
 #include the googlemock/include dir
 include_directories(gtest/googlemock/include)
-include_directories(tools/tinyxml)
+include_directories(tools)
+include_directories(components)
 
 FILE(GLOB SOURCES "components/*/*.cpp")
 FILE(GLOB TINYXML "tools/tinyxml/*")
+FILE(GLOB TESTS "tests/*/*/*.cpp")
 
 set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp)
-set(DEBUG_SOURCE_FILES tests/tests_main.cpp)
+set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TINYXML} tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
 add_executable(testing_tool ${DEBUG_SOURCE_FILES})

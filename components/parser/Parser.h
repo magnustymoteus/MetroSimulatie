@@ -13,28 +13,28 @@
  * @version 0.1
  */
 
-#include "tinyxml.h"
+#include "tinyxml/tinyxml.h"
 #include <map>
 #include <vector>
-#include "../metronet/Metronet.h"
-#include "../metronet/MetronetValidator.h"
+#include "metronet/Metronet.h"
+#include "metronet/MetronetValidator.h"
 
 class Parser {
-private:
-     Parser* _initCheck;
-
-     std::map<std::string, std::vector<std::string> > fSupportedTags;
-
-     bool properlyInitialized() const;
-
-     bool isTagSupported(const std::string &tagName) const;
-     bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
-     void setSupportedTags();
-     Station* parseStation(TiXmlElement* stationElem) const;
-     Tram* parseTram(TiXmlElement* tramElem) const;
+protected:
+    Parser* _initCheck;
+     std::string configPath = "components/parser/config.xml";
+    std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
-     Parser();
+    Parser();
+    Parser(const std::string &configFile);
+    bool properlyInitialized() const;
      Metronet parseFile(const std::string &relativeFilePath);
+    bool isTagSupported(const std::string &tagName) const;
+    bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
+    std::map<std::string, std::vector<std::string> > getSupportedTags() const;
+    void setSupportedTags();
+    Station* parseStation(TiXmlElement* stationElem) const;
+    Tram* parseTram(TiXmlElement* tramElem) const;
 };
 
 

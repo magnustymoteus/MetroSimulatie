@@ -17,7 +17,7 @@ class Station; // forward declaration
  */
 
 class Tram {
-private:
+protected:
     Tram* _initCheck;
 
     int fLijnNr;
@@ -25,9 +25,10 @@ private:
     Station* fBeginStation;
     Station* fHuidigeStation;
 
-    bool properlyInitialized() const;
+
 public:
     Tram();
+    bool properlyInitialized() const;
 
     int getLijnNr() const;
     int getSnelheid() const;
