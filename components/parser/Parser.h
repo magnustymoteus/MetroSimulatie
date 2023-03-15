@@ -17,6 +17,7 @@
 #include <map>
 #include <vector>
 #include "../metronet/Metronet.h"
+#include "../metronet/MetronetValidator.h"
 
 class Parser {
 private:
