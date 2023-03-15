@@ -162,34 +162,6 @@ CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.o: ../components
   /usr/include/asm-generic/errno.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
-  /usr/include/c++/11/list \
-  /usr/include/c++/11/bits/stl_list.h \
-  /usr/include/c++/11/bits/list.tcc \
-  /usr/include/c++/11/algorithm \
-  /usr/include/c++/11/utility \
-  /usr/include/c++/11/bits/stl_relops.h \
-  /usr/include/c++/11/bits/stl_algo.h \
-  /usr/include/c++/11/cstdlib \
-  /usr/include/stdlib.h \
-  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
-  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
-  /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
-  /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/bits/select.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/select2.h \
-  /usr/include/alloca.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
-  /usr/include/c++/11/bits/std_abs.h \
-  /usr/include/c++/11/bits/algorithmfwd.h \
-  /usr/include/c++/11/bits/stl_heap.h \
-  /usr/include/c++/11/bits/stl_tempbuf.h \
   /usr/include/c++/11/iostream
 
 CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o: ../components/parser/Parser.cpp \
@@ -911,6 +883,8 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 ../main.cpp:
 
+/usr/include/c++/11/cassert:
+
 /usr/include/c++/11/sstream:
 
 /usr/include/c++/11/bits/stl_bvector.h:
@@ -920,14 +894,6 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 /usr/include/c++/11/bits/stl_uninitialized.h:
 
 /usr/include/c++/11/vector:
-
-/usr/include/c++/11/stdlib.h:
-
-../tools/tinyxml/tinyxml.h:
-
-/usr/include/c++/11/bits/stl_heap.h:
-
-/usr/include/c++/11/bits/algorithmfwd.h:
 
 /usr/include/c++/11/bits/std_abs.h:
 
@@ -951,21 +917,13 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/stdlib.h:
 
-/usr/include/c++/11/cassert:
+/usr/include/c++/11/stdlib.h:
 
-/usr/include/c++/11/bits/stl_algo.h:
-
-/usr/include/c++/11/bits/stl_relops.h:
-
-/usr/include/c++/11/bits/stl_list.h:
-
-/usr/include/c++/11/list:
+../tools/tinyxml/tinyxml.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/asm-generic/errno.h:
-
-/usr/include/c++/11/utility:
 
 /usr/include/errno.h:
 
@@ -996,8 +954,6 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 
 /usr/include/c++/11/bits/locale_facets.tcc:
-
-/usr/include/c++/11/bits/list.tcc:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 
@@ -1035,11 +991,9 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 
 /usr/include/c++/11/bits/stl_construct.h:
 
-/usr/include/c++/11/iostream:
-
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
-/usr/include/c++/11/algorithm:
+/usr/include/c++/11/iostream:
 
 /usr/include/c++/11/backward/binders.h:
 
@@ -1200,8 +1154,6 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyx
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
-/usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
