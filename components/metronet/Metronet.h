@@ -22,6 +22,12 @@ private:
     std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
 public:
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
+    ~Metronet();
+    void pushStation(Station* station);
+    void pushTram(Tram* tram);
+    Station* retrieveStation(const int &spoorNr, const std::string &naam) const;
+    void insertAfterStation(const std::string &vorigeNaam, Station* station);
+    bool spoorExists(const int &spoorNr) const;
     Metronet() {}
     void outputFile() const;
 };

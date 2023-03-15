@@ -2,6 +2,7 @@
 #include "components/parser/Parser.h"
 int main() {
     Parser parser;
-    parser.parseFile("input/input.xml");
+    Metronet metronet = parser.parseFile("input/input.xml");
+    metronet.outputFile();
     return 0;
 }
