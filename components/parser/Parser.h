@@ -20,13 +20,13 @@
 
 class Parser {
 private:
+     std::map<std::string, std::vector<std::string> > fSupportedTags;
+
      bool isTagSupported(const std::string &tagName) const;
      bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
      void setSupportedTags();
-     std::pair<std::string,std::pair<Station*, std::pair<std::string, std::string> > >
-     parseStation(TiXmlElement* stationElem) const;
-     std::pair<Tram*, std::string> parseTram(TiXmlElement* tramElem) const;
-     std::map<std::string, std::vector<std::string> > fSupportedTags;
+     Station* parseStation(TiXmlElement* stationElem) const;
+     Tram* parseTram(TiXmlElement* tramElem) const;
 public:
      Parser();
      Metronet parseFile(const std::string &relativeFilePath);
