@@ -108,6 +108,7 @@ Metronet Parser::parseFile(const std::string &relativeFilePath_str) {
                 Station* beginStation = metronet.retrieveStation(tram->getLijnNr(), beginStationNaam);
                 if(beginStation) {
                     tram->setBeginStation(beginStation);
+                    tram->setHuidigeStation(beginStation);
                     metronet.pushTram(tram);
                 }
                 else std::cerr << "Could not find begin station " << beginStationNaam << " for tram "
