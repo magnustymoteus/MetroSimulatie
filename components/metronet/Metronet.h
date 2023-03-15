@@ -16,8 +16,12 @@
  * @date 12/03/2023
  * @version 0.1
  */
+
+class MetronetValidator; // forward declaration
+
 class Metronet {
 private:
+    friend class MetronetValidator;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)
     std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
 public:

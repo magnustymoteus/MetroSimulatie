@@ -13,14 +13,14 @@
  * Ongeldige informatie: unsupported property
  */
 
-std::string CONFIGPATH = "components/parser/config.xml";
+const std::string kConfigPath = "components/parser/config.xml";
 
 Parser::Parser() {
     setSupportedTags();
 }
 void Parser::setSupportedTags() {
     TiXmlDocument doc;
-    REQUIRE(doc.LoadFile(CONFIGPATH.c_str()), "Config file expected to be loaded!");
+    REQUIRE(doc.LoadFile(kConfigPath.c_str()), "Config file expected to be loaded!");
     TiXmlElement* currentElem = doc.FirstChildElement()->FirstChildElement();
     while(currentElem) {
         TiXmlElement* currentSupportedTag = currentElem->FirstChildElement();
@@ -117,5 +117,6 @@ Metronet Parser::parseFile(const std::string &relativeFilePath_str) {
         } else std::cerr << "Tag not supported: " << name << "\n";
         currentElem = currentElem->NextSiblingElement();
     }
+    MetronetValidator::consistencyCheck(metronet);
     return metronet;
 }

@@ -137,4 +137,6 @@ CMakeFiles/main_executable.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/../tram/Tram.h
+ /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/../tram/Tram.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/MetronetValidator.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/parser/../metronet/Metronet.h
