@@ -16,7 +16,7 @@
  */
 
 class Station {
-private:
+protected:
     Station* _initCheck;
 
     std::string fNaam;
@@ -24,8 +24,8 @@ private:
     Station *fVorige;
     Station *fVolgende;
 
-    bool properlyInitialized() const;
 public:
+    bool properlyInitialized() const;
     Station();
     // getters
     std::string getNaam() const;

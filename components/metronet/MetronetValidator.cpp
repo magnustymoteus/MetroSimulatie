@@ -3,7 +3,7 @@
 //
 
 #include "MetronetValidator.h"
-#include "../../DesignByContract.h"
+#include "DesignByContract.h"
 #include <iostream>
 
 std::string kNotConsistent = "The metronet is not consistent!: ";

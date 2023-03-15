@@ -5,17 +5,21 @@
 #include "Parser.h"
 #include <iostream>
 #include <sstream>
-#include "../../DesignByContract.h"
+#include "DesignByContract.h"
 
 /*
  * Onherkenbaar element: unsupported tag
  * Ongeldige informatie: unsupported property
  */
 
-const std::string kConfigPath = "components/parser/config.xml";
-
 Parser::Parser() {
     _initCheck = this;
+    setSupportedTags();
+    ENSURE(properlyInitialized(), "Expected parser to be properly initialized in constructor!");
+}
+Parser::Parser(const std::string &configFile){
+    _initCheck = this;
+    configPath = configFile;
     setSupportedTags();
     ENSURE(properlyInitialized(), "Expected parser to be properly initialized in constructor!");
 }
@@ -24,10 +28,14 @@ bool Parser::properlyInitialized() const {
     return _initCheck == this;
 }
 
+std::map<std::string, std::vector<std::string> > Parser::getSupportedTags() const {
+    REQUIRE(this->properlyInitialized(), "Expected parser to be properly initialized in getSupportedTags!");
+    return fSupportedTags;
+}
 void Parser::setSupportedTags() {
     REQUIRE(this->properlyInitialized(), "Expected parser to be properly initialized in setSupportedTags!");
     TiXmlDocument doc;
-    REQUIRE(doc.LoadFile(kConfigPath.c_str()), "Config file expected to be loaded!");
+    REQUIRE(doc.LoadFile(configPath.c_str()), "Config file expected to be loaded!");
     TiXmlElement* currentElem = doc.FirstChildElement()->FirstChildElement();
     while(currentElem) {
         TiXmlElement* currentSupportedTag = currentElem->FirstChildElement();

@@ -3,7 +3,7 @@
 //
 
 #include "Metronet.h"
-#include "../../DesignByContract.h"
+#include "DesignByContract.h"
 #include <fstream>
 #include <iostream>
 

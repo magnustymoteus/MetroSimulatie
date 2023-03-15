@@ -6,8 +6,8 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONET_H
 
 #include <map>
-#include "../station/Station.h"
-#include "../tram/Tram.h"
+#include "station/Station.h"
+#include "tram/Tram.h"
 
 
 class MetronetValidator; // forward declaration
@@ -21,14 +21,14 @@ class MetronetValidator; // forward declaration
  */
 
 class Metronet {
-private:
+protected:
     friend class MetronetValidator;
     Metronet* _initCheck;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)
     std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
 
-    bool properlyInitialized() const;
 public:
+    bool properlyInitialized() const;
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
     ~Metronet();
     void pushStation(Station* station);

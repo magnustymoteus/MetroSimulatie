@@ -3,7 +3,7 @@
 //
 
 #include "Tram.h"
-#include "../../DesignByContract.h"
+#include "DesignByContract.h"
 
 Tram::Tram() {
     _initCheck = this;

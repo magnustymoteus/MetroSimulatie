@@ -3,7 +3,7 @@
 //
 
 #include "Station.h"
-#include "../../DesignByContract.h"
+#include "DesignByContract.h"
 
 Station::Station() {
     _initCheck = this;
