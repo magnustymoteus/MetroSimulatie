@@ -1,4 +1,5 @@
 #include "parser/Parser.h"
+#include "tinyxml/tinyxml.h"
 #include <gtest/gtest.h>
 
 class ParserTest: public ::testing::Test {
@@ -14,7 +15,11 @@ TEST_F(ParserTest, DefaultConstructor) {
 }
 TEST_F(ParserTest, HappyDay) {
    EXPECT_TRUE(parserHappyDay_.properlyInitialized());
-   EXPECT_FALSE(parserHappyDay_.getSupportedTags().empty());
-   // ... to do
+    std::map<std::string, std::vector<std::string> > expectedSupportedTags =
+        {{"STATION", {"naam", "volgende", "vorige", "spoorNr"}},
+        {"TRAM", {"lijnNr", "snelheid", "beginStation"}}};
+    EXPECT_EQ(parserHappyDay_.getSupportedTags(), expectedSupportedTags);
+
+    // ... to do
 }
 
