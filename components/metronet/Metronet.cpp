@@ -6,6 +6,8 @@
 #include "DesignByContract.h"
 #include <fstream>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
 fTrams(newTrams)
@@ -36,7 +38,20 @@ Metronet::~Metronet() {
         delete iter->second;
     }
 }
-
+void sleep(const long &durationInSeconds) {
+    clock_t now = clock();
+    while(clock()-now < durationInSeconds*CLOCKS_PER_SEC);
+}
+void Metronet::autoSimulate(const int &durationInSeconds) {
+    // too simple, needs more parallelism in the future
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in autoSimulate!");
+    std::map<int, Tram*>::iterator iter = fTrams.begin();
+    for(int i =0;i<durationInSeconds;i++) {
+        sleep(1);
+        std::advance(iter, rand() % fTrams.size());
+        moveTram(iter->second->getLijnNr());
+    }
+}
 void Metronet::pushStation(Station* station) {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in pushStation!");
     int spoorNr = station->getSpoorNr();
@@ -63,6 +78,23 @@ void Metronet::pushTram(Tram* tram) {
 bool Metronet::spoorExists(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in spoorExists!");
     return fSporen.find(spoorNr) != fSporen.end();
+}
+bool Metronet::tramExists(const int &lijnNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in tramExists!");
+    return fTrams.find(lijnNr) != fTrams.end();
+}
+void Metronet::moveTram(const int &lijnNr, const int &steps) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in moveTram!");
+    REQUIRE(tramExists(lijnNr), "Expected to-be-moved tram to exist!");
+    REQUIRE(spoorExists(lijnNr), "Expected the spoor of the corresponding to-be-moved tram to exist!");
+
+    Tram* &tram = fTrams.find(lijnNr)->second;
+    for(int i=0;i<steps;i++) {
+        Station *huidigeStation = tram->getHuidigeStation();
+        tram->setHuidigeStation(huidigeStation->getVolgende());
+        std::cout << "Tram " << lijnNr << " reed van station " << huidigeStation->getNaam() << " naar station " <<
+                  tram->getHuidigeStation()->getNaam() << ".\n";
+    }
 }
 Station* Metronet::retrieveStation(const int &spoorNr, const std::string &naam) const {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in retrieveStation!");

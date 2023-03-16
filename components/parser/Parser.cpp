@@ -12,8 +12,11 @@
  * Ongeldige informatie: unsupported property
  */
 
+const std::string defaultConfigPath = "components/parser/config.xml";
+
 Parser::Parser() {
     _initCheck = this;
+    configPath = defaultConfigPath;
     setSupportedTags();
     ENSURE(properlyInitialized(), "Expected parser to be properly initialized in constructor!");
 }
@@ -66,7 +69,9 @@ bool Parser::isPropertySupported(const std::string &tagName, const std::string &
     return false;
 }
 Station* Parser::parseStation(TiXmlElement* stationElem) const {
+    const std::string stationStr = "STATION";
     REQUIRE(this->properlyInitialized(), "Expected parser to be properly initialized in parseStation!");
+    REQUIRE(stationElem->Value() == stationStr, "Expected stationElem to be station tag!");
     TiXmlElement* currentElem = stationElem->FirstChildElement();
     Station* station = new Station();
     while(currentElem) {
@@ -88,7 +93,9 @@ Station* Parser::parseStation(TiXmlElement* stationElem) const {
     return station;
 }
 Tram* Parser::parseTram(TiXmlElement *tramElem) const {
+    const std::string tramStr = "TRAM";
     REQUIRE(this->properlyInitialized(), "Expected parser to be properly initialized in parseTram!");
+    REQUIRE(tramElem->Value() == tramStr, "Expected tramElem to be tram tag!");
     TiXmlElement* currentElem = tramElem->FirstChildElement();
     Tram* tram = new Tram();
     while(currentElem) {

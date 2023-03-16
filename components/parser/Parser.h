@@ -22,7 +22,7 @@
 class Parser {
 protected:
     Parser* _initCheck;
-     std::string configPath = "components/parser/config.xml";
+     std::string configPath;
     std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
     Parser();

@@ -29,15 +29,23 @@ protected:
 
 public:
     bool properlyInitialized() const;
+
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
+    Metronet();
     ~Metronet();
+
+    void moveTram(const int &lijnNr, const int &steps=1);
+
     void pushStation(Station* station);
     void pushTram(Tram* tram);
-    Station* retrieveStation(const int &spoorNr, const std::string &naam) const;
     void insertAfterStation(const std::string &vorigeNaam, Station* station);
+
+    Station* retrieveStation(const int &spoorNr, const std::string &naam) const;
     bool spoorExists(const int &spoorNr) const;
-    Metronet();
+    bool tramExists(const int &lijnNr) const;
+
     void outputFile() const;
+    void autoSimulate(const int &durationInSeconds);
 };
 
 
