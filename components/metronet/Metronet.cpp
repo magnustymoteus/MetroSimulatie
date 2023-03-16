@@ -6,7 +6,6 @@
 #include "DesignByContract.h"
 #include <fstream>
 #include <iostream>
-#include <ctime>
 #include <cstdlib>
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
