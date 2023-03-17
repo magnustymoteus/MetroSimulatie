@@ -5,7 +5,6 @@
 #include "MetronetExporter.h"
 #include "DesignByContract.h"
 #include <fstream>
-
 MetronetExporter::MetronetExporter() {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected MetronetExporter to be properly initialized in constructor!");
@@ -43,6 +42,5 @@ void MetronetExporter::outputMetronet(const Metronet &metronet) {
         Tram* current = iteratorIntTrams->second;
         outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
     }
-
     outputFile.close();
 }

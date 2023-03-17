@@ -37,6 +37,8 @@ public:
     std::map<std::string, std::vector<std::string> > getSupportedTags() const;
     void loadSupportedTags();
     Station* parseStation(TiXmlElement* stationElem) const;
+    void parseStations(TiXmlDocument &doc, Metronet &metronet) const;
+    void parseTrams(TiXmlDocument &doc, Metronet &metronet) const;
     Tram* parseTram(TiXmlElement* tramElem) const;
 };
 

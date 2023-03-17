@@ -123,38 +123,67 @@ Tram* MetronetImporter::parseTram(TiXmlElement *tramElem) const {
 }
 
 
+TiXmlElement* findStationTag(TiXmlDocument &doc, const std::string &stationName, const std::string &spoorNr) {
+    TiXmlElement* currentElem = doc.FirstChildElement("STATION");
+    const std::string stationTag = "STATION";
+    bool found = false;
+    while(currentElem)
+    {
+        bool nameEquality = currentElem->FirstChildElement("naam")->GetText() == stationName;
+        bool spoorNrEquality = currentElem->FirstChildElement("spoorNr")->GetText() == spoorNr;
+        if(nameEquality && spoorNrEquality) {
+            found = true;
+            break;
+        }
+        currentElem = currentElem->NextSiblingElement("STATION");
+    }
+    if(found) return currentElem;
+    return 0;
+}
+void MetronetImporter::parseTrams(TiXmlDocument &doc, Metronet &metronet) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTrams!");
+    TiXmlElement* currentElem = doc.FirstChildElement("TRAM");
+    while(currentElem) {
+        Tram* tram = parseTram(currentElem);
+        metronet.pushTram(tram);
+        Station* beginStation = metronet.retrieveStation(tram->getLijnNr(),
+                                         currentElem->FirstChildElement("beginStation")->GetText());
+        if(beginStation) {
+            tram->setBeginStation(beginStation);
+            tram->setHuidigeStation(beginStation);
+        }
+        else std::cerr << "Could not find station " << currentElem->FirstChildElement("beginStation")->GetText()
+        << " for tram " << tram->getLijnNr() << "!\n";
+        currentElem = currentElem->NextSiblingElement("TRAM");
+    }
+}
+void MetronetImporter::parseStations(TiXmlDocument &doc, Metronet &metronet) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStations!");
+    TiXmlElement* currentElem = doc.FirstChildElement("STATION");
+    while(currentElem) {
+        TiXmlElement* nextStationElem = currentElem;
+        const std::string firstElemName = currentElem->FirstChildElement("naam")->GetText();
+        while(nextStationElem) {
+            Station* nextStation = parseStation(nextStationElem);
+            metronet.pushStation(nextStation);
+            std::string volgende = nextStationElem->FirstChildElement("volgende")->GetText();
+            std::string spoorNr = nextStationElem->FirstChildElement("spoorNr")->GetText();
+            doc.RemoveChild(nextStationElem);
+            nextStationElem = findStationTag(doc, volgende, spoorNr);
+            if(!nextStationElem && volgende != firstElemName)
+                std::cerr << "Could not find station " << volgende << "!\n";
+        }
+        currentElem = doc.FirstChildElement("STATION");
+    }
+}
 Metronet MetronetImporter::parseFile(const std::string &relativeFilePath_str) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseFile!");
     const char *relativeFilePath = relativeFilePath_str.c_str();
     TiXmlDocument doc;
     REQUIRE(doc.LoadFile(relativeFilePath), "File expected to be loaded!");
     Metronet metronet;
-    TiXmlElement *currentElem = doc.FirstChildElement();
-    while (currentElem) {
-        std::string name = currentElem->Value();
-        if (isTagSupported(name)) {
-            if (name == "STATION") {
-                Station* station = parseStation(currentElem);
-                if(metronet.spoorExists(station->getSpoorNr())) {
-                    std::string vorigeStationNaam = currentElem->FirstChildElement("vorige")->GetText();
-                    metronet.insertAfterStation(vorigeStationNaam,station);
-                }
-                else metronet.pushStation(station);
-            } else if (name == "TRAM") {
-                Tram* tram = parseTram(currentElem);
-                std::string beginStationNaam = currentElem->FirstChildElement("beginStation")->GetText();
-                Station* beginStation = metronet.retrieveStation(tram->getLijnNr(), beginStationNaam);
-                if(beginStation) {
-                    tram->setBeginStation(beginStation);
-                    tram->setHuidigeStation(beginStation);
-                    metronet.pushTram(tram);
-                }
-                else std::cerr << "Could not find begin station " << beginStationNaam << " for tram "
-                << tram->getLijnNr();
-            }
-        } else std::cerr << "Tag not supported: " << name << "\n";
-        currentElem = currentElem->NextSiblingElement();
-    }
+    parseStations(doc, metronet);
+    parseTrams(doc, metronet);
     MetronetValidator::consistencyCheck(metronet);
     return metronet;
 }
