@@ -67,10 +67,8 @@ TEST_F(MetronetInputTest, XMLSyntaxErrors) {
     EXPECT_DEATH(importer_.setConfigPath(configPath), "Config file expected to be loaded!");
     EXPECT_TRUE(importer_.properlyInitialized());
 }
-TEST_F(MetronetInputTest, StationsDifferentOrder) {
-    /* When you put stations in a different order than how they are linked then the metronet importer will not parse
-     * the xml file correctly, this is to be fixed in the future. */
+TEST_F(MetronetInputTest, DifferentTagsOrder) {
     EXPECT_TRUE(importer_.properlyInitialized());
-    EXPECT_ANY_THROW(importer_.parseFile(filePath+"input/stationsDifferentOrderTest.xml"));
+    EXPECT_NO_THROW(importer_.parseFile(filePath+"input/differentTagsOrderTest.xml"));
     EXPECT_TRUE(importer_.properlyInitialized());
 }
