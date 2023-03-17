@@ -139,4 +139,5 @@ CMakeFiles/main_executable.dir/main.cpp.o: \
  /usr/include/c++/11/bits/basic_string.tcc \
  /home/magnustymoteus/projects/MetroSimulatie/components/tram/Tram.h \
  /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetValidator.h \
- /home/magnustymoteus/projects/MetroSimulatie/components/metronet/Metronet.h
+ /home/magnustymoteus/projects/MetroSimulatie/components/metronet/Metronet.h \
+ /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetExporter.h

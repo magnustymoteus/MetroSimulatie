@@ -4,7 +4,6 @@
 
 #include "Metronet.h"
 #include "DesignByContract.h"
-#include <fstream>
 #include <iostream>
 #include <cstdlib>
 
@@ -126,33 +125,20 @@ void Metronet::insertAfterStation(const std::string &vorigeNaam, Station *statio
     else std::cerr << "Cannot insert station " << station->getNaam() << " after station " << vorigeNaam << "!\n";
 }
 
-void Metronet::outputFile() const {
-    /*1. Maak uitvoerbestand
-    2. WHILE Nog stations beschikbaar
-    2.1. Schrijf station-gegevens uit naar bestand
-    3. WHILE Nog trams beschikbaar
-    3.1. Schrijf tram-gegevens uit naar bestand
-    4. Sluit uitvoerbestand*/
-    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in outputFile!");
-    std::ofstream outputFile;
-    outputFile.open("output/output.txt");
-    // Write all stations to file
-    for(std::map<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
-        Station* beginStation = iteratorIntStation->second;
-        Station* currentStation = iteratorIntStation->second;
-        do {
-            outputFile << "Station " << currentStation->getNaam() << "\n";
-            outputFile << "<- Station " << currentStation->getVorige()->getNaam() << "\n";
-            outputFile << "-> Station " << currentStation->getVolgende()->getNaam() << "\n";
-            outputFile << "Spoor " << currentStation->getSpoorNr() << "\n\n";
-            currentStation = currentStation->getVolgende();
-        } while(currentStation != beginStation);
-    }
+std::map<int, Tram*> Metronet::getTrams() const {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in getTrams!");
+    return fTrams;
+}
+void Metronet::setTrams(std::map<int, Tram*> &newTrams) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in setTrams!");
+    fTrams = newTrams;
+}
 
-    for(std::map<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
-        Tram* current = iteratorIntTrams->second;
-        outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
-    }
-
-    outputFile.close();
+std::map<int, Station *> Metronet::getSporen() const {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in getSporen!");
+    return fSporen;
+}
+void Metronet::setSporen(std::map<int, Station *> &newSporen) {
+    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in setSporen!");
+    fSporen=newSporen;
 }
