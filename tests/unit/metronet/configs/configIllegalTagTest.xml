@@ -1,0 +1,9 @@
+<SUPPORTED_TAGS>
+    <tag>
+        <name>LEGAL_TAG</name>
+        <properties>
+            <property>legal_property_1</property>
+            <property>legal_property_2</property>
+        </properties>
+    </tag>
+</SUPPORTED_TAGS>
