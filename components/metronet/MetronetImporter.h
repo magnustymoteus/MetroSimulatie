@@ -29,6 +29,7 @@ public:
     void setConfigPath(const std::string &configFilePath);
     std::string getConfigPath() const;
 
+
     bool properlyInitialized() const;
      Metronet parseFile(const std::string &relativeFilePath);
     bool isTagSupported(const std::string &tagName) const;
