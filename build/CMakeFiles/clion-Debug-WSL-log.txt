@@ -1,4 +1,0 @@
-C:\Windows\system32\wsl.exe --distribution Ubuntu --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /home/magnustymoteus/projects/MetroSimulatie/build && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -S /home/magnustymoteus/projects/MetroSimulatie -B /home/magnustymoteus/projects/MetroSimulatie/build"
--- Configuring done
--- Generating done
--- Build files have been written to: /home/magnustymoteus/projects/MetroSimulatie/build
