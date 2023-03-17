@@ -35,8 +35,6 @@ void MetronetImporter::setConfigPath(const std::string &configFilePath) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in setConfigPath!");
     configPath = configFilePath;
     loadSupportedTags();
-    TiXmlDocument doc;
-    ENSURE(doc.LoadFile(configPath.c_str()), "Expected new configPath to load!");
 }
 
 std::map<std::string, std::vector<std::string> > MetronetImporter::getSupportedTags() const {
