@@ -86,10 +86,24 @@ CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/magnustymoteus/projects/MetroSimulatie/components/metronet/Metronet.cpp -o CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.s
 
+CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o: CMakeFiles/main_executable.dir/flags.make
+CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o: ../components/metronet/MetronetExporter.cpp
+CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o -MF CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o.d -o CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetExporter.cpp
+
+CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetExporter.cpp > CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.i
+
+CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetExporter.cpp -o CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.s
+
 CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o: ../components/metronet/MetronetValidator.cpp
 CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o -MF CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o.d -o CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/components/metronet/MetronetValidator.cpp
 
 CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.i: cmake_force
@@ -103,7 +117,7 @@ CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.s: cmak
 CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o: ../components/parser/Parser.cpp
 CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o -MF CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o.d -o CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/components/parser/Parser.cpp
 
 CMakeFiles/main_executable.dir/components/parser/Parser.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/main_executable.dir/components/parser/Parser.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/components/station/Station.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/components/station/Station.cpp.o: ../components/station/Station.cpp
 CMakeFiles/main_executable.dir/components/station/Station.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main_executable.dir/components/station/Station.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main_executable.dir/components/station/Station.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/components/station/Station.cpp.o -MF CMakeFiles/main_executable.dir/components/station/Station.cpp.o.d -o CMakeFiles/main_executable.dir/components/station/Station.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/components/station/Station.cpp
 
 CMakeFiles/main_executable.dir/components/station/Station.cpp.i: cmake_force
@@ -131,7 +145,7 @@ CMakeFiles/main_executable.dir/components/station/Station.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o: ../components/tram/Tram.cpp
 CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o -MF CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o.d -o CMakeFiles/main_executable.dir/components/tram/Tram.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/components/tram/Tram.cpp
 
 CMakeFiles/main_executable.dir/components/tram/Tram.cpp.i: cmake_force
@@ -145,7 +159,7 @@ CMakeFiles/main_executable.dir/components/tram/Tram.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o: ../tools/tinyxml/tinystr.cpp
 CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o -MF CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o.d -o CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml/tinystr.cpp
 
 CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.i: cmake_force
@@ -159,7 +173,7 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinystr.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o: ../tools/tinyxml/tinyxml.cpp
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o -MF CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o.d -o CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml/tinyxml.cpp
 
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.i: cmake_force
@@ -173,7 +187,7 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxml.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o: ../tools/tinyxml/tinyxmlerror.cpp
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o -MF CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o.d -o CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml/tinyxmlerror.cpp
 
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.i: cmake_force
@@ -187,7 +201,7 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlerror.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: ../tools/tinyxml/tinyxmlparser.cpp
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o -MF CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o.d -o CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/tools/tinyxml/tinyxmlparser.cpp
 
 CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.i: cmake_force
@@ -201,7 +215,7 @@ CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.s: cmake_force
 CMakeFiles/main_executable.dir/main.cpp.o: CMakeFiles/main_executable.dir/flags.make
 CMakeFiles/main_executable.dir/main.cpp.o: ../main.cpp
 CMakeFiles/main_executable.dir/main.cpp.o: CMakeFiles/main_executable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main_executable.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main_executable.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main_executable.dir/main.cpp.o -MF CMakeFiles/main_executable.dir/main.cpp.o.d -o CMakeFiles/main_executable.dir/main.cpp.o -c /home/magnustymoteus/projects/MetroSimulatie/main.cpp
 
 CMakeFiles/main_executable.dir/main.cpp.i: cmake_force
@@ -215,6 +229,7 @@ CMakeFiles/main_executable.dir/main.cpp.s: cmake_force
 # Object files for target main_executable
 main_executable_OBJECTS = \
 "CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.o" \
+"CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o" \
 "CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o" \
 "CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o" \
 "CMakeFiles/main_executable.dir/components/station/Station.cpp.o" \
@@ -229,6 +244,7 @@ main_executable_OBJECTS = \
 main_executable_EXTERNAL_OBJECTS =
 
 main_executable: CMakeFiles/main_executable.dir/components/metronet/Metronet.cpp.o
+main_executable: CMakeFiles/main_executable.dir/components/metronet/MetronetExporter.cpp.o
 main_executable: CMakeFiles/main_executable.dir/components/metronet/MetronetValidator.cpp.o
 main_executable: CMakeFiles/main_executable.dir/components/parser/Parser.cpp.o
 main_executable: CMakeFiles/main_executable.dir/components/station/Station.cpp.o
@@ -240,7 +256,7 @@ main_executable: CMakeFiles/main_executable.dir/tools/tinyxml/tinyxmlparser.cpp.
 main_executable: CMakeFiles/main_executable.dir/main.cpp.o
 main_executable: CMakeFiles/main_executable.dir/build.make
 main_executable: CMakeFiles/main_executable.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable main_executable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/magnustymoteus/projects/MetroSimulatie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable main_executable"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main_executable.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

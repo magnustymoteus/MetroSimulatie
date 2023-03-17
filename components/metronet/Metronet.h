@@ -22,13 +22,18 @@ class MetronetValidator; // forward declaration
 
 class Metronet {
 protected:
-    friend class MetronetValidator;
     Metronet* _initCheck;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)
     std::map<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
 
 public:
     bool properlyInitialized() const;
+
+    std::map<int, Tram*> getTrams() const;
+    void setTrams(std::map<int, Tram*> &newTrams);
+
+    std::map<int, Station*> getSporen() const;
+    void setSporen(std::map<int, Station*> &newSporen);
 
     Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams);
     Metronet();
