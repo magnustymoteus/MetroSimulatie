@@ -110,21 +110,6 @@ Station* Metronet::retrieveStation(const int &spoorNr, const std::string &naam) 
     else std::cerr << "Cannot find spoorNr " << spoorNr << "!\n";
     return 0;
 }
-void Metronet::insertAfterStation(const std::string &vorigeNaam, Station *station) {
-    REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in insertAfterStation!");
-    int spoorNr = station->getSpoorNr();
-    Station* currentStation = retrieveStation(spoorNr, vorigeNaam);
-    if(currentStation) {
-        Station *rightStation = currentStation->getVolgende();
-
-        station->setVorige(currentStation);
-        station->setVolgende(rightStation);
-        currentStation->setVolgende(station);
-        rightStation->setVorige(station);
-    }
-    else std::cerr << "Cannot insert station " << station->getNaam() << " after station " << vorigeNaam << "!\n";
-}
-
 std::map<int, Tram*> Metronet::getTrams() const {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in getTrams!");
     return fTrams;

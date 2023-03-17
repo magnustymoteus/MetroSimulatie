@@ -49,7 +49,6 @@ public:
     bool spoorExists(const int &spoorNr) const;
     bool tramExists(const int &lijnNr) const;
 
-    void outputFile() const;
     void autoSimulate(const int &durationInSeconds);
 };
 
