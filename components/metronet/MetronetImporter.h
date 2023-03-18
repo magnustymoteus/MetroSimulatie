@@ -5,19 +5,21 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_METRONETIMPORTER_H
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONETIMPORTER_H
 
-/**
- * This serves as a parser which processes XML files containing information about the metro.
- * @author Patryk Pilichowski
- * @author Daria Matviichuk
- * @date 06/03/2023
- * @version 0.1
- */
 
 #include "tinyxml/tinyxml.h"
 #include <map>
 #include <vector>
 #include "metronet/Metronet.h"
 #include "metronet/MetronetValidator.h"
+
+/**
+ * This serves as a parser which processes XML files containing information about the metro and
+ * returns Metronet instance back.
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
 
 class MetronetImporter {
 protected:
