@@ -7,6 +7,10 @@
 
 Tram::Tram() {
     _initCheck = this;
+    fSnelheid=0;
+    fLijnNr=0;
+    fBeginStation=0;
+    fHuidigeStation=0;
     ENSURE(properlyInitialized(), "Expected tram to be properly initialized in constructor!");
 }
 bool Tram::properlyInitialized() const {

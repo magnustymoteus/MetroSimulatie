@@ -7,6 +7,9 @@
 
 Station::Station() {
     _initCheck = this;
+    fSpoorNr=0;
+    fVorige=0;
+    fVolgende=0;
     ENSURE(properlyInitialized(), "Expected station to be properly initialized in constructor!");
 }
 bool Station::properlyInitialized() const {
