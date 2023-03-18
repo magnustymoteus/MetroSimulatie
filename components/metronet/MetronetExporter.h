@@ -6,7 +6,13 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONETEXPORTER_H
 
 #include "metronet/Metronet.h"
-
+/**
+ * This serves as the MetronetExporter, it outputs an instance of Metronet to a text file.
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 17/03/2023
+ * @version 0.1
+ */
 class MetronetExporter {
 private:
     MetronetExporter* _initCheck;
