@@ -4,7 +4,7 @@
 int main() {
     MetronetImporter parser;
     Metronet metronet = parser.parseFile("input/input.xml");
-    MetronetExporter::outputMetronet(metronet);
+    MetronetExporter::outputMetronet(metronet, "output/output.txt");
     metronet.autoSimulate(5);
     return 0;
 }

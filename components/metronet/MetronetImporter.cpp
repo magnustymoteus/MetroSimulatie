@@ -7,11 +7,6 @@
 #include <sstream>
 #include "DesignByContract.h"
 
-/*
- * Onherkenbaar element: unsupported tag
- * Ongeldige informatie: unsupported property
- */
-
 const std::string defaultConfigPath = "components/metronet/config.xml";
 
 MetronetImporter::MetronetImporter() {
@@ -41,6 +36,10 @@ std::map<std::string, std::vector<std::string> > MetronetImporter::getSupportedT
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getSupportedTags!");
     return fSupportedTags;
 }
+/*
+ * This function parses config.xml file to get all supported tags
+ * All supported tags are saved to fSupportedTags (protected variable of MetronetImporter class)
+ */
 void MetronetImporter::loadSupportedTags() {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in loadSupportedTags!");
     TiXmlDocument doc;
@@ -140,6 +139,12 @@ TiXmlElement* findStationTag(TiXmlDocument &doc, const std::string &stationName,
     if(found) return currentElem;
     return 0;
 }
+/*
+ * This function retrieves information about trams from the given XML file to the metro system
+ * @param doc The parsed file
+ * @param metronet The given metro network
+ * @return nothing (void function)
+ */
 void MetronetImporter::parseTrams(TiXmlDocument &doc, Metronet &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTrams!");
     TiXmlElement* currentElem = doc.FirstChildElement("TRAM");
@@ -157,6 +162,12 @@ void MetronetImporter::parseTrams(TiXmlDocument &doc, Metronet &metronet) const 
         currentElem = currentElem->NextSiblingElement("TRAM");
     }
 }
+/*
+ * This function retrieves information about stations from the given XML file to the metro system
+ * @param doc The parsed file
+ * @param metronet The given metro network
+ * @return nothing (void function)
+ */
 void MetronetImporter::parseStations(TiXmlDocument &doc, Metronet &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStations!");
     TiXmlElement* currentElem = doc.FirstChildElement("STATION");
@@ -176,6 +187,11 @@ void MetronetImporter::parseStations(TiXmlDocument &doc, Metronet &metronet) con
         currentElem = doc.FirstChildElement("STATION");
     }
 }
+/*
+ * This function retrieves information from the given XML file to the metro system
+ * @param relativeFilePath_str The relative path to the parsed file
+ * @return The resulted metro network
+ */
 Metronet MetronetImporter::parseFile(const std::string &relativeFilePath_str) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseFile!");
     const char *relativeFilePath = relativeFilePath_str.c_str();

@@ -5,6 +5,7 @@
 #include "MetronetExporter.h"
 #include "DesignByContract.h"
 #include <fstream>
+
 MetronetExporter::MetronetExporter() {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected MetronetExporter to be properly initialized in constructor!");
@@ -14,19 +15,18 @@ bool MetronetExporter::properlyInitialized() const {
     return _initCheck == this;
 }
 
-void MetronetExporter::outputMetronet(const Metronet &metronet) {
-    /*1. Maak uitvoerbestand
-   2. WHILE Nog stations beschikbaar
-   2.1. Schrijf station-gegevens uit naar bestand
-   3. WHILE Nog trams beschikbaar
-   3.1. Schrijf tram-gegevens uit naar bestand
-   4. Sluit uitvoerbestand*/
+void MetronetExporter::outputMetronet(const Metronet &metronet, const char* pathFile) {
+    /*This function exports metronet information to output.txt file
+     * @param metronet The metronetwork to save in txt-file
+     * @param pathFile The relative path of the output file
+     * @return nothing (void functcion) */
     std::ofstream outputFile;
-    outputFile.open("output/output.txt");
+    outputFile.open(pathFile);
     // Write all stations to file
     std::map<int, Station*> fSporen = metronet.getSporen();
     std::map<int, Tram*> fTrams = metronet.getTrams();
     for(std::map<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
+        // Save begin station for further comparison
         Station* beginStation = iteratorIntStation->second;
         Station* currentStation = iteratorIntStation->second;
         do {
@@ -37,10 +37,11 @@ void MetronetExporter::outputMetronet(const Metronet &metronet) {
             currentStation = currentStation->getVolgende();
         } while(currentStation != beginStation);
     }
-
+    // Iterate over all trams in the metronet
     for(std::map<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
         outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
     }
+    // Close file
     outputFile.close();
 }

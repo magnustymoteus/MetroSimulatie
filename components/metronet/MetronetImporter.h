@@ -24,7 +24,7 @@
 class MetronetImporter {
 protected:
     MetronetImporter* _initCheck;
-     std::string configPath;
+    std::string configPath;
     std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
     MetronetImporter();
@@ -33,7 +33,7 @@ public:
 
 
     bool properlyInitialized() const;
-     Metronet parseFile(const std::string &relativeFilePath);
+    Metronet parseFile(const std::string &relativeFilePath);
     bool isTagSupported(const std::string &tagName) const;
     bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
     std::map<std::string, std::vector<std::string> > getSupportedTags() const;

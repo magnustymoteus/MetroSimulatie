@@ -6,6 +6,7 @@
 #include "DesignByContract.h"
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
 fTrams(newTrams)
@@ -41,6 +42,12 @@ void sleep(const long &durationInSeconds) {
     while(clock()-now < durationInSeconds*CLOCKS_PER_SEC);
 }
 void Metronet::autoSimulate(const int &durationInSeconds) {
+    /*
+     * This function simulates circulating of trams on the metro network
+     * @param durationInSeconds number of steps (1 step/sec) made by all trams
+     * @return nothing (void function)
+     * */
+
     // too simple, needs more parallelism in the future
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in autoSimulate!");
     std::map<int, Tram*>::iterator iter = fTrams.begin();
