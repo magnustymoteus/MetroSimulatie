@@ -15,13 +15,13 @@ bool MetronetExporter::properlyInitialized() const {
     return _initCheck == this;
 }
 
-void MetronetExporter::outputMetronet(const Metronet &metronet, const char* pathFile) {
+void MetronetExporter::outputMetronet(const Metronet &metronet, const std::string &pathFile) {
     /*This function exports metronet information to output.txt file
      * @param metronet The metronetwork to save in txt-file
      * @param pathFile The relative path of the output file
      * @return nothing (void functcion) */
     std::ofstream outputFile;
-    outputFile.open(pathFile);
+    outputFile.open(pathFile.c_str());
     // Write all stations to file
     std::map<int, Station*> fSporen = metronet.getSporen();
     std::map<int, Tram*> fTrams = metronet.getTrams();
