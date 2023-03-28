@@ -3,6 +3,7 @@
         <name>STATION</name>
         <properties>
             <property>naam</property>
+            <property>type</property>
             <property>volgende</property>
             <property>vorige</property>
             <property>spoorNr</property>
@@ -12,7 +13,7 @@
         <name>TRAM</name>
         <properties>
             <property>lijnNr</property>
-            <property>snelheid</property>
+            <property>type</property>
             <property>beginStation</property>
         </properties>
     </tag>

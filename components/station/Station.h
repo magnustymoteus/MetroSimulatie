@@ -18,8 +18,8 @@
 class Station {
 protected:
     Station* _initCheck;
-
     std::string fNaam;
+    std::string fType;
     int fSpoorNr;
     Station *fVorige;
     Station *fVolgende;
@@ -32,12 +32,14 @@ public:
     int getSpoorNr () const;
     Station* getVorige() const;
     Station* getVolgende() const;
+    const std::string &getType() const;
 
     // setters
     void setNaam(const std::string &newNaam);
     void setSpoorNr(const int &newSpoorNr);
     void setVorige(Station* const &newVorige);
     void setVolgende(Station* const &newVolgende);
+    void setType(const std::string &type);
 };
 
 
