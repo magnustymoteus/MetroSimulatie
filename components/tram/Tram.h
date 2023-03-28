@@ -39,6 +39,9 @@ public:
     void setSnelheid(const int &newSnelheid);
     void setBeginStation(Station* const &newBeginStation);
     void setHuidigeStation(Station* newHuidigeStation);
+    Station* getVolgendeStation() const;
+    Station* getVorigeStation() const;
+    void moveNaarVolgendeStation();
 };
 
 

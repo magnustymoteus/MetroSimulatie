@@ -96,7 +96,7 @@ void Metronet::moveTram(const int &lijnNr, const int &steps) {
     Tram* &tram = fTrams.find(lijnNr)->second;
     for(int i=0;i<steps;i++) {
         Station *huidigeStation = tram->getHuidigeStation();
-        tram->setHuidigeStation(huidigeStation->getVolgende());
+        tram->moveNaarVolgendeStation();
         std::cout << "Tram " << lijnNr << " reed van station " << huidigeStation->getNaam() << " naar station " <<
                   tram->getHuidigeStation()->getNaam() << ".\n";
     }

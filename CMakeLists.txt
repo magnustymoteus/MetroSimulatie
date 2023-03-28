@@ -15,6 +15,7 @@ include_directories(gtest/googletest/include)
 include_directories(gtest/googlemock/include)
 include_directories(tools)
 include_directories(components)
+include_directories(components/station)
 
 FILE(GLOB SOURCES "components/*/*.cpp")
 FILE(GLOB TINYXML "tools/tinyxml/*")
