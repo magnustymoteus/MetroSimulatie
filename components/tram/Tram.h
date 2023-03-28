@@ -4,7 +4,7 @@
 
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
-
+#include <string>
 
 class Station; // forward declaration
 
@@ -22,6 +22,7 @@ protected:
 
     int fLijnNr;
     int fSnelheid;
+    std::string fType;
     Station* fBeginStation;
     Station* fHuidigeStation;
 
@@ -34,11 +35,16 @@ public:
     int getSnelheid() const;
     Station* getBeginStation() const;
     Station* getHuidigeStation() const;
+    const std::string &getType() const;
 
+    void setType(const std::string &type);
     void setLijnNr(const int &newLijnNr);
     void setSnelheid(const int &newSnelheid);
     void setBeginStation(Station* const &newBeginStation);
     void setHuidigeStation(Station* newHuidigeStation);
+    Station* getVolgendeStation() const;
+    Station* getVorigeStation() const;
+    void moveNaarVolgendeStation();
 };
 
 

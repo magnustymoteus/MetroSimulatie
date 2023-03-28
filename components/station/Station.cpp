@@ -51,3 +51,11 @@ void Station::setVorige(Station *const &newVorige) {
     REQUIRE(this->properlyInitialized(), "Expected station to be properly initialized in setVorige!");
     fVorige = newVorige;
 }
+
+const std::string &Station::getType() const {
+    return fType;
+}
+
+void Station::setType(const std::string &type) {
+    Station::fType = type;
+}

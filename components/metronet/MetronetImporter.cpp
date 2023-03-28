@@ -89,6 +89,9 @@ Station* MetronetImporter::parseStation(TiXmlElement* stationElem) const {
                 std::istringstream(currentElem->GetText()) >> spoorNr;
                 station->setSpoorNr(spoorNr);
             }
+            else if(currentPropertyName == "type"){
+                station->setType(currentElem->GetText());
+            }
         }
         else std::cerr << "Property not supported for tag " << stationElem->Value() << ": " << currentElem->Value()
                        << "\n";
@@ -96,6 +99,7 @@ Station* MetronetImporter::parseStation(TiXmlElement* stationElem) const {
     }
     ENSURE(station->getNaam().c_str(), "Station expected to have a name!");
     ENSURE(station->getSpoorNr(), "Station expected to have spoorNr!");
+    ENSURE(station->getType().c_str(), "Station expected to have type!");
     return station;
 }
 Tram* MetronetImporter::parseTram(TiXmlElement *tramElem) const {
@@ -110,14 +114,14 @@ Tram* MetronetImporter::parseTram(TiXmlElement *tramElem) const {
             int currentPropertyValue;
             std::istringstream(currentElem->GetText()) >> currentPropertyValue;
             if(currentPropertyName == "lijnNr") tram->setLijnNr(currentPropertyValue);
-            else if(currentPropertyName == "snelheid") tram->setSnelheid(currentPropertyValue);
+            else if(currentPropertyName == "type") tram->setType(currentElem->GetText());
         }
         else std::cerr << "Property not supported for tag " << tramElem->Value() << ": " << currentElem->Value()
                        << "\n";
         currentElem = currentElem->NextSiblingElement();
     }
     ENSURE(tram->getLijnNr(), "Tram expected to have lijnNr!");
-    ENSURE(tram->getSnelheid(), "Tram expected to have snelheid!");
+    ENSURE(tram->getType().c_str(), "Tram expected to have type!");
     return tram;
 }
 

@@ -2,7 +2,10 @@
 // Created by gruzi on 06/03/2023.
 //
 
+#include <algorithm>
+#include <vector>
 #include "Tram.h"
+#include "Station.h"
 #include "DesignByContract.h"
 
 Tram::Tram() {
@@ -53,5 +56,37 @@ Station *Tram::getHuidigeStation() const {
 void Tram::setHuidigeStation(Station* newHuidigeStation) {
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setHuidigeStation!");
     Tram::fHuidigeStation = newHuidigeStation;
+}
+Station* Tram::getVolgendeStation() const{
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getVolgendeStation!");
+    return fHuidigeStation->getVolgende();
+}
+Station* Tram::getVorigeStation() const{
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getVorigeStation!");
+    return fHuidigeStation->getVorige();
+}
+void Tram::moveNaarVolgendeStation(){
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in moveNaarVolgendeStation!");
+    fHuidigeStation = getVolgendeStation();
+}
+
+const std::string &Tram::getType() const {
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getType!");
+    return fType;
+}
+
+void Tram::setType(const std::string &type) {
+    // TODO: Relocate supportedTramTypes
+    const char* supportedTramTypes[3] = {"PCC", "Albatros", "Stadslijner"};
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setType!");
+    REQUIRE(std::find(supportedTramTypes, supportedTramTypes + sizeof(supportedTramTypes)/8, type), "Tram type is not supported in setType!");
+    Tram::fType = type;
+    if(type == "PCC"){
+        fSnelheid = 40;
+    } else if (type == "Albatros"){
+        fSnelheid = 70;
+    } else if (type == "Stadslijner"){
+        fSnelheid = 70;
+    }
 }
 

@@ -29,6 +29,8 @@ void MetronetExporter::outputMetronet(const Metronet &metronet, const std::strin
         // Save begin station for further comparison
         Station* beginStation = iteratorIntStation->second;
         Station* currentStation = iteratorIntStation->second;
+        outputFile << "--== STATIONS ==--" << "\n";
+        // Iterate over all stations in the metronet
         do {
             outputFile << "Station " << currentStation->getNaam() << "\n";
             outputFile << "<- Station " << currentStation->getVorige()->getNaam() << "\n";
@@ -37,6 +39,7 @@ void MetronetExporter::outputMetronet(const Metronet &metronet, const std::strin
             currentStation = currentStation->getVolgende();
         } while(currentStation != beginStation);
     }
+    outputFile << "--== TRAMS ==--" << "\n";
     // Iterate over all trams in the metronet
     for(std::map<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
