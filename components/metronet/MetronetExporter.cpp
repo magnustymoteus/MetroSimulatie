@@ -24,8 +24,8 @@ void MetronetExporter::outputMetronet(const Metronet &metronet, const std::strin
     outputFile.open(pathFile.c_str());
     // Write all stations to file
     std::map<int, Station*> fSporen = metronet.getSporen();
-    std::map<int, Tram*> fTrams = metronet.getTrams();
-    for(std::map<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
+    std::multimap<int, Tram*> fTrams = metronet.getTrams();
+    for(std::multimap<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
         // Save begin station for further comparison
         Station* beginStation = iteratorIntStation->second;
         Station* currentStation = iteratorIntStation->second;
@@ -41,7 +41,7 @@ void MetronetExporter::outputMetronet(const Metronet &metronet, const std::strin
     }
     outputFile << "--== TRAMS ==--" << "\n";
     // Iterate over all trams in the metronet
-    for(std::map<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
+    for(std::multimap<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
         outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
     }

@@ -103,6 +103,7 @@ Station* MetronetImporter::parseStation(TiXmlElement* stationElem) const {
     return station;
 }
 Tram* MetronetImporter::parseTram(TiXmlElement *tramElem) const {
+    //TODO: ensure tram to have voertuigNr?
     const std::string tramStr = "TRAM";
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTram!");
     REQUIRE(tramElem->Value() == tramStr, "Expected tramElem to be tram tag!");
@@ -115,6 +116,7 @@ Tram* MetronetImporter::parseTram(TiXmlElement *tramElem) const {
             std::istringstream(currentElem->GetText()) >> currentPropertyValue;
             if(currentPropertyName == "lijnNr") tram->setLijnNr(currentPropertyValue);
             else if(currentPropertyName == "type") tram->setType(currentElem->GetText());
+            else if(currentPropertyName == "voertuigNr") tram->setVoertuigNr(currentPropertyValue);
         }
         else std::cerr << "Property not supported for tag " << tramElem->Value() << ": " << currentElem->Value()
                        << "\n";

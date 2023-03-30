@@ -14,6 +14,8 @@
         <properties>
             <property>lijnNr</property>
             <property>type</property>
+           <!-- <property>snelheid</property> -->
+            <property>voertuigNr</property>
             <property>beginStation</property>
         </properties>
     </tag>

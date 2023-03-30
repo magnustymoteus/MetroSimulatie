@@ -22,6 +22,7 @@ protected:
 
     int fLijnNr;
     int fSnelheid;
+    int fVoertuigNr;
     std::string fType;
     Station* fBeginStation;
     Station* fHuidigeStation;
@@ -36,7 +37,9 @@ public:
     Station* getBeginStation() const;
     Station* getHuidigeStation() const;
     const std::string &getType() const;
+    int getVoertuigNr() const;
 
+    void setVoertuigNr(const int &voertuigNr);
     void setType(const std::string &type);
     void setLijnNr(const int &newLijnNr);
     void setSnelheid(const int &newSnelheid);
