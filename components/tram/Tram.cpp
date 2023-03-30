@@ -90,3 +90,11 @@ void Tram::setType(const std::string &type) {
     }
 }
 
+int Tram::getVoertuigNr() const {
+    return fVoertuigNr;
+}
+
+void Tram::setVoertuigNr(const int& voertuigNr) {
+    Tram::fVoertuigNr = voertuigNr;
+}
+

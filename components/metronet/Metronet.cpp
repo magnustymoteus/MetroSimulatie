@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 
-Metronet::Metronet(std::map<int, Station*> &newSporen, std::map<int, Tram*> &newTrams) : fSporen(newSporen),
+Metronet::Metronet(std::map<int, Station*> &newSporen, std::multimap<int, Tram*> &newTrams) : fSporen(newSporen),
 fTrams(newTrams)
 {
     _initCheck = this;
@@ -33,7 +33,7 @@ Metronet::~Metronet() {
         }
         delete currentStation;
     }
-    for(std::map<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+    for(std::multimap<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
         delete iter->second;
     }
 }
@@ -50,11 +50,13 @@ void Metronet::autoSimulate(const int &durationInSeconds) {
 
     // too simple, needs more parallelism in the future
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in autoSimulate!");
-    std::map<int, Tram*>::iterator iter = fTrams.begin();
+    std::multimap<int, Tram*>::iterator iter = fTrams.begin();
     for(int i =0;i<durationInSeconds;i++) {
         sleep(1);
-        std::advance(iter, rand() % fTrams.size());
-        moveTram(iter->second->getLijnNr());
+        //std::advance(iter, rand() % fTrams.size());
+        for(iter = fTrams.begin(); iter != fTrams.end(); iter++){
+            moveTram(iter->second->getLijnNr(), iter->second->getVoertuigNr());
+        }
     }
 }
 void Metronet::pushStation(Station* station) {
@@ -88,16 +90,15 @@ bool Metronet::tramExists(const int &lijnNr) const {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in tramExists!");
     return fTrams.find(lijnNr) != fTrams.end();
 }
-void Metronet::moveTram(const int &lijnNr, const int &steps) {
+void Metronet::moveTram(const int &lijnNr, const int &voertuigNr, const int &steps) {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in moveTram!");
     REQUIRE(tramExists(lijnNr), "Expected to-be-moved tram to exist!");
     REQUIRE(spoorExists(lijnNr), "Expected the spoor of the corresponding to-be-moved tram to exist!");
-
-    Tram* &tram = fTrams.find(lijnNr)->second;
+    Tram* tram = getTram(lijnNr, voertuigNr);
     for(int i=0;i<steps;i++) {
         Station *huidigeStation = tram->getHuidigeStation();
         tram->moveNaarVolgendeStation();
-        std::cout << "Tram " << lijnNr << " reed van station " << huidigeStation->getNaam() << " naar station " <<
+        std::cout << "Tram " << lijnNr << "(" << voertuigNr << ")" << " reed van station " << huidigeStation->getNaam() << " naar station " <<
                   tram->getHuidigeStation()->getNaam() << ".\n";
     }
 }
@@ -117,11 +118,11 @@ Station* Metronet::retrieveStation(const int &spoorNr, const std::string &naam) 
     else std::cerr << "Cannot find spoorNr " << spoorNr << "!\n";
     return 0;
 }
-std::map<int, Tram*> Metronet::getTrams() const {
+std::multimap<int, Tram*> Metronet::getTrams() const {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in getTrams!");
     return fTrams;
 }
-void Metronet::setTrams(std::map<int, Tram*> &newTrams) {
+void Metronet::setTrams(std::multimap<int, Tram*> &newTrams) {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in setTrams!");
     fTrams = newTrams;
 }
@@ -133,4 +134,18 @@ std::map<int, Station *> Metronet::getSporen() const {
 void Metronet::setSporen(std::map<int, Station *> &newSporen) {
     REQUIRE(this->properlyInitialized(), "Expected metronet to be properly initialized in setSporen!");
     fSporen=newSporen;
+}
+
+Tram* Metronet::getTram(const int &lijnNr, const int &voertuigNr) const{
+    if(_isnan(voertuigNr)){
+        return fTrams.find(lijnNr)->second;
+    } else{
+        std::pair <std::multimap<int, Tram*>::const_iterator, std::multimap<int,Tram*>::const_iterator> range = fTrams.equal_range(lijnNr);
+        for(std::_Rb_tree_const_iterator<std::pair<const int, Tram *> > i = range.first; i != range.second; i++){
+            if(i->second->getVoertuigNr() == voertuigNr){
+                return i->second;
+            }
+        }
+        return 0;
+    }
 }

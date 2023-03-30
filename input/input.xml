@@ -18,6 +18,13 @@
 </STATION>
 <TRAM>
 <lijnNr>12</lijnNr>
-<snelheid>60</snelheid>
+<type>PCC</type>
+<voertuigNr>1</voertuigNr>
 <beginStation>A</beginStation>
+</TRAM>
+<TRAM>
+<lijnNr>12</lijnNr>
+<type>Albatros</type>
+<voertuigNr>2</voertuigNr>
+<beginStation>B</beginStation>
 </TRAM>

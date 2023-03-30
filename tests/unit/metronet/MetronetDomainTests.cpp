@@ -59,7 +59,7 @@ TEST_F(MetronetDomainTest, Push) {
     EXPECT_TRUE(metronet.getTrams().empty());
     metronet.pushTram(tram1);
     EXPECT_EQ(metronet.getTrams().size(), 1);
-    std::map<int, Tram*> trammen;
+    std::multimap<int, Tram*> trammen;
     trammen.insert(std::make_pair(1, tram1));
     trammen.insert(std::make_pair(2, tram2));
     metronet.setTrams(trammen);
