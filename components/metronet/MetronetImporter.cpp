@@ -7,7 +7,7 @@
 #include <sstream>
 #include "DesignByContract.h"
 
-const std::string defaultConfigPath = "components/metronet/config.xml";
+const std::string defaultConfigPath = "components/metronet/supportedTags.xml";
 
 MetronetImporter::MetronetImporter() {
     _initCheck = this;
@@ -37,7 +37,7 @@ std::map<std::string, std::vector<std::string> > MetronetImporter::getSupportedT
     return fSupportedTags;
 }
 /*
- * This function parses config.xml file to get all supported tags
+ * This function parses supportedTags.xml file to get all supported tags
  * All supported tags are saved to fSupportedTags (protected variable of MetronetImporter class)
  */
 void MetronetImporter::loadSupportedTags() {

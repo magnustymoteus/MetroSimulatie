@@ -8,17 +8,6 @@
 
 #include <cassert>
 
+#define REQUIRE(assertion, what) if (!(assertion)) __assert (what, __FILE__, __LINE__)
 
-#ifdef _assert
-#define REQUIRE(assertion, what) \
-	if (!(assertion)) _assert (what, __FILE__, __LINE__)
-
-#define ENSURE(assertion, what) \
-	if (!(assertion)) _assert (what, __FILE__, __LINE__)
-#else
-#define REQUIRE(assertion, what) \
-	if (!(assertion)) _assert (what, __FILE__, __LINE__)
-
-#define ENSURE(assertion, what) \
-	if (!(assertion)) _assert (what, __FILE__, __LINE__)
-#endif
+#define ENSURE(assertion, what) if (!(assertion)) __assert (what, __FILE__, __LINE__)

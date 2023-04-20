@@ -137,7 +137,7 @@ void Metronet::setSporen(std::map<int, Station *> &newSporen) {
 }
 
 Tram* Metronet::getTram(const int &lijnNr, const int &voertuigNr) const{
-    if(_isnan(voertuigNr)){
+    if(__isnan(voertuigNr)){
         return fTrams.find(lijnNr)->second;
     } else{
         std::pair <std::multimap<int, Tram*>::const_iterator, std::multimap<int,Tram*>::const_iterator> range = fTrams.equal_range(lijnNr);

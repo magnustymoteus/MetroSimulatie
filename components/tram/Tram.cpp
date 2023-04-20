@@ -2,11 +2,11 @@
 // Created by gruzi on 06/03/2023.
 //
 
-#include <algorithm>
 #include <vector>
 #include "Tram.h"
 #include "Station.h"
 #include "DesignByContract.h"
+#include "TramImporter.h"
 
 Tram::Tram() {
     _initCheck = this;
@@ -76,25 +76,19 @@ const std::string &Tram::getType() const {
 }
 
 void Tram::setType(const std::string &type) {
-    // TODO: Relocate supportedTramTypes
-    const char* supportedTramTypes[3] = {"PCC", "Albatros", "Stadslijner"};
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setType!");
-    REQUIRE(std::find(supportedTramTypes, supportedTramTypes + sizeof(supportedTramTypes)/8, type), "Tram type is not supported in setType!");
-    Tram::fType = type;
-    if(type == "PCC"){
-        fSnelheid = 40;
-    } else if (type == "Albatros"){
-        fSnelheid = 70;
-    } else if (type == "Stadslijner"){
-        fSnelheid = 70;
-    }
+    TramImporter tramImporter;
+    REQUIRE(tramImporter.isTramTypeSupported(type), "Expected tram type to be supported!");
+    fType = type;
 }
 
 int Tram::getVoertuigNr() const {
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getVoertuigNr!");
     return fVoertuigNr;
 }
 
 void Tram::setVoertuigNr(const int& voertuigNr) {
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setVoertuigNr!");
     Tram::fVoertuigNr = voertuigNr;
 }
 
