@@ -5,11 +5,11 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_STATIONIMPORTER_H
 #define PROJECT_SOFTWARE_PRACTICUM2_STATIONIMPORTER_H
 
-#include "utils/VTagImporter.h"
+#include "utils/VMetroObjectImporter.h"
 
 #include "Station.h"
 
-class StationImporter :  protected VTagImporter {
+class StationImporter :  protected VMetroObjectImporter {
     StationImporter* _initCheck;
 public:
     StationImporter();

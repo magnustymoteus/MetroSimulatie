@@ -23,7 +23,7 @@ class MetronetValidator; // forward declaration
  * @version 0.1
  */
 
-class Metronet : public IMetroObject {
+class Metronet {
 protected:
     Metronet* _initCheck;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)

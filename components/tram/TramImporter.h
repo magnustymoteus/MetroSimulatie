@@ -9,11 +9,11 @@
 #include <string>
 
 #include <tinyxml/tinyxml.h>
-#include "utils/VTagImporter.h"
+#include "utils/VMetroObjectImporter.h"
 
 #include "tram/Tram.h"
 
-class TramImporter : protected VTagImporter {
+class TramImporter : protected VMetroObjectImporter {
 protected:
     std::vector<std::string> fSupportedTramTypes;
     TramImporter* _initCheck;

@@ -11,7 +11,7 @@
 
 const std::string configFilePath = "components/station/config_station.xml";
 
-StationImporter::StationImporter() : VTagImporter(configFilePath) {
+StationImporter::StationImporter() : VMetroObjectImporter(configFilePath) {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected MetronetImporter to be properly initialized in constructor!");
 }

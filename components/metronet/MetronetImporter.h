@@ -11,7 +11,7 @@
 
 #include "tinyxml/tinyxml.h"
 
-#include "utils/VTagImporter.h"
+#include "utils/VMetroObjectImporter.h"
 
 #include "metronet/Metronet.h"
 #include "metronet/MetronetValidator.h"

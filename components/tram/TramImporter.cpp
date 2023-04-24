@@ -11,7 +11,7 @@
 
 const std::string configFilePath = "components/tram/config_tram.xml";
 
-TramImporter::TramImporter() : VTagImporter(configFilePath) {
+TramImporter::TramImporter() : VMetroObjectImporter(configFilePath) {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected TramImporter to be properly initialized in constructor!");
 }

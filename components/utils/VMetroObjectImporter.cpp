@@ -2,11 +2,11 @@
 // Created by gruzi on 24/04/2023.
 //
 
-#include "VTagImporter.h"
+#include "VMetroObjectImporter.h"
 
 #include "DesignByContract.h"
 
-VTagImporter::VTagImporter(const std::string &configFilePath) {
+VMetroObjectImporter::VMetroObjectImporter(const std::string &configFilePath) {
     _initCheck = this;
     configPath = configFilePath;
     loadSupportedTags();
@@ -15,32 +15,32 @@ VTagImporter::VTagImporter(const std::string &configFilePath) {
     ENSURE(doc.LoadFile(configPath.c_str()), "Expected configPath to load!");
 }
 
-bool VTagImporter::properlyInitialized() const {
+bool VMetroObjectImporter::properlyInitialized() const {
     return _initCheck == this;
 }
 
-std::map<std::string, std::vector<std::string> > VTagImporter::getSupportedTags() const {
+std::map<std::string, std::vector<std::string> > VMetroObjectImporter::getSupportedTags() const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getSupportedTags!");
     return fSupportedTags;
 }
-std::string VTagImporter::getConfigPath() const {
+std::string VMetroObjectImporter::getConfigPath() const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getConfigPath!");
     return configPath;
 }
-void VTagImporter::setConfigPath(const std::string &configFilePath) {
+void VMetroObjectImporter::setConfigPath(const std::string &configFilePath) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in setConfigPath!");
     configPath = configFilePath;
     loadSupportedTags();
 }
-bool VTagImporter::isTagSupported(const std::string &tagName) const {
+bool VMetroObjectImporter::isTagSupported(const std::string &tagName) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in isTagSupported!");
     return fSupportedTags.find(tagName) != fSupportedTags.end();
 }
 /*
  * This function parses a config.xml file to get all supported tags
- * All supported tags are saved to fSupportedTags (protected variable of VTagImporter class)
+ * All supported tags are saved to fSupportedTags (protected variable of VMetroObjectImporter class)
  */
-void VTagImporter::loadSupportedTags(const std::string &configFilePath) {
+void VMetroObjectImporter::loadSupportedTags(const std::string &configFilePath) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in loadSupportedTags!");
     TiXmlDocument doc;
     REQUIRE(doc.LoadFile(configFilePath.c_str()), "Config file expected to be loaded!");
@@ -60,11 +60,11 @@ void VTagImporter::loadSupportedTags(const std::string &configFilePath) {
         currentElem = currentElem->NextSiblingElement();
     }
 }
-void VTagImporter::loadSupportedTags() {
+void VMetroObjectImporter::loadSupportedTags() {
     loadSupportedTags(configPath);
 }
 
-bool VTagImporter::isPropertySupported(const std::string &tagName, const std::string &propertyName) const {
+bool VMetroObjectImporter::isPropertySupported(const std::string &tagName, const std::string &propertyName) const {
     REQUIRE(isTagSupported(tagName), "Tag name expected to be supported!");
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in isPropertySupported!");
     const std::vector<std::string> &properties = fSupportedTags.at(tagName);

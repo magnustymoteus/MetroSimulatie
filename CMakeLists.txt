@@ -21,7 +21,7 @@ FILE(GLOB SOURCES "components/*/*.cpp")
 FILE(GLOB TINYXML "tools/tinyxml/*")
 FILE(GLOB TESTS "tests/*/*/*.cpp")
 
-set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp components/utils/VTagImporter.cpp components/utils/VTagImporter.h components/utils/IMetroObject.h components/station/StationImporter.cpp components/station/StationImporter.h)
+set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp components/utils/VMetroObjectImporter.cpp components/utils/VMetroObjectImporter.h components/utils/IMetroObject.h components/station/StationImporter.cpp components/station/StationImporter.h)
 set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TINYXML} tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})

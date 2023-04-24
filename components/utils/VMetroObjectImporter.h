@@ -2,8 +2,8 @@
 // Created by gruzi on 24/04/2023.
 //
 
-#ifndef PROJECT_SOFTWARE_PRACTICUM2_VTAGIMPORTER_H
-#define PROJECT_SOFTWARE_PRACTICUM2_VTAGIMPORTER_H
+#ifndef PROJECT_SOFTWARE_PRACTICUM2_VMETROOBJECTIMPORTER_H
+#define PROJECT_SOFTWARE_PRACTICUM2_VMETROOBJECTIMPORTER_H
 
 #include <string>
 #include <vector>
@@ -13,13 +13,13 @@
 
 #include "utils/IMetroObject.h"
 
-class VTagImporter {
+class VMetroObjectImporter {
 protected:
     std::map<std::string, std::vector<std::string> > fSupportedTags;
     std::string configPath;
-    VTagImporter* _initCheck;
+    VMetroObjectImporter* _initCheck;
 public:
-    VTagImporter(const std::string &configFilePath);
+    VMetroObjectImporter(const std::string &configFilePath);
     bool properlyInitialized() const;
 
     void setConfigPath(const std::string &configFilePath);
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //PROJECT_SOFTWARE_PRACTICUM2_VTAGIMPORTER_H
+#endif //PROJECT_SOFTWARE_PRACTICUM2_VMETROOBJECTIMPORTER_H
