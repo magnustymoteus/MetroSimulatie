@@ -6,11 +6,13 @@
 
 #include "DesignByContract.h"
 
-Station::Station() {
+Station::Station(const std::string &naam, const std::string &type, const int &spoorNr) : fNaam(naam), fType(type),
+fSpoorNr(spoorNr) {
     _initCheck = this;
-    fSpoorNr=0;
+
     fVorige=0;
     fVolgende=0;
+
     ENSURE(properlyInitialized(), "Expected station to be properly initialized in constructor!");
 }
 bool Station::properlyInitialized() const {

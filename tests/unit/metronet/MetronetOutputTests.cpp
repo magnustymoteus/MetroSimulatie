@@ -9,28 +9,14 @@
 class MetronetOutputTest: public ::testing::Test {
 protected:
     Metronet metronet;
-    Station* stationA = new Station;
-    Station* stationB = new Station;
-    Station* stationC = new Station;
-    Station* stationD = new Station;
-    Station* stationE = new Station;
-    Tram* tram = new Tram;
+    Station* stationA = new Station("A", "type", 314);
+    Station* stationB = new Station("B", "type", 314);
+    Station* stationC = new Station("C", "type", 314);
+    Station* stationD = new Station("D", "type", 314);
+    Station* stationE = new Station("E", "type", 314);
+    Tram* tram = new Tram(314, 1, "type");
 
     void setStations() {
-        stationA->setNaam("A");
-        stationA->setSpoorNr(314);
-
-        stationB->setNaam("B");
-        stationB->setSpoorNr(314);
-
-        stationC->setNaam("C");
-        stationC->setSpoorNr(314);
-
-        stationD->setNaam("D");
-        stationD->setSpoorNr(314);
-
-        stationE->setNaam("E");
-        stationE->setSpoorNr(314);
         stationA->setVolgende(stationB);
         stationB->setVolgende(stationC);
         stationC->setVolgende(stationD);
@@ -45,8 +31,6 @@ protected:
     void setTram() {
         tram->setBeginStation(stationB);
         tram->setHuidigeStation(stationD);
-        tram->setLijnNr(314);
-        metronet.pushTram(tram);
     }
 };
 

@@ -28,7 +28,7 @@ protected:
 
 public:
     bool properlyInitialized() const;
-    Station();
+    Station(const std::string &naam, const std::string &type, const int &spoorNr);
     // getters
     std::string getNaam() const;
     int getSpoorNr () const;

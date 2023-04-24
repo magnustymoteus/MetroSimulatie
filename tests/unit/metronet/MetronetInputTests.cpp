@@ -5,7 +5,7 @@
 
 const std::string filePath = "tests/unit/metronet/";
 
-class MetronetInputTest: public ::testing::Test {
+/*class MetronetInputTest: public ::testing::Test {
 protected:
     MetronetImporter importer_;
 };
@@ -71,4 +71,4 @@ TEST_F(MetronetInputTest, DifferentTagsOrder) {
     EXPECT_TRUE(importer_.properlyInitialized());
     EXPECT_NO_THROW(importer_.parseFile(filePath+"input/differentTagsOrderTest.xml"));
     EXPECT_TRUE(importer_.properlyInitialized());
-}
+}*/

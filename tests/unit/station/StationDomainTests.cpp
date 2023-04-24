@@ -6,19 +6,21 @@
 
 class StationDomainTest: public ::testing::Test {
 protected:
-    Station station_;
 };
 
 TEST_F(StationDomainTest, DefaultConstructor) {
+    Station station_("test_naam", "test_type", 12);
     EXPECT_TRUE(station_.properlyInitialized());
-    EXPECT_TRUE(station_.getNaam().empty());
+    EXPECT_EQ(station_.getNaam(), "test_naam");
     EXPECT_FALSE(station_.getVolgende());
     EXPECT_FALSE(station_.getVorige());
-    EXPECT_EQ(station_.getSpoorNr(), 0);
+    EXPECT_EQ(station_.getSpoorNr(), 12);
+    EXPECT_EQ(station_.getType(), "test_type");
 }
 TEST_F(StationDomainTest, SettersGetters) {
-    EXPECT_TRUE(station_.properlyInitialized());
+    Station station_("test_naam", "test_type", 11);
     const std::string name="naamTest";
+    EXPECT_TRUE(station_.properlyInitialized());
     const int spoorNr = 17;
     EXPECT_NO_FATAL_FAILURE(station_.setNaam(name));
     EXPECT_NO_FATAL_FAILURE(station_.setSpoorNr(spoorNr));

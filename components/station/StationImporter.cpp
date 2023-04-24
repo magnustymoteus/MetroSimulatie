@@ -24,24 +24,26 @@ Station* StationImporter::parse(TiXmlElement *stationElem) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStation!");
     REQUIRE(stationElem->Value() == stationStr, "Expected stationElem to be station tag!");
     TiXmlElement* currentElem = stationElem->FirstChildElement();
-    Station* station = new Station();
+
+    std::string naam, type;
+    int spoorNr;
+
     while(currentElem) {
         std::string currentPropertyName = currentElem->Value();
         if(isPropertySupported(stationElem->Value(), currentPropertyName)) {
-            if(currentPropertyName == "naam") station->setNaam(currentElem->GetText());
+            if(currentPropertyName == "naam") naam = currentElem->GetText();
             else if(currentPropertyName == "spoorNr"){
-                int spoorNr;
                 std::istringstream(currentElem->GetText()) >> spoorNr;
-                station->setSpoorNr(spoorNr);
             }
             else if(currentPropertyName == "type"){
-                station->setType(currentElem->GetText());
+                type = currentElem->GetText();
             }
         }
         else std::cerr << "Property not supported for tag " << stationElem->Value() << ": " << currentElem->Value()
                        << "\n";
         currentElem = currentElem->NextSiblingElement();
     }
+    Station* station = new Station(naam, type, spoorNr);
     ENSURE(station->getNaam().c_str(), "Station expected to have a name!");
     ENSURE(station->getSpoorNr(), "Station expected to have spoorNr!");
     ENSURE(station->getType().c_str(), "Station expected to have type!");
