@@ -3,42 +3,20 @@
 //
 
 #include "TramImporter.h"
+
+#include <iostream>
+#include <sstream>
+
 #include "DesignByContract.h"
 
-const std::string defaultConfigPath = "components/tram/supportedTramTypes.xml";
+const std::string configFilePath = "components/tram/config_tram.xml";
 
-TramImporter::TramImporter() {
+TramImporter::TramImporter() : VTagImporter(configFilePath) {
     _initCheck = this;
-    configPath = defaultConfigPath;
-    loadSupportedTramTypes();
-    TiXmlDocument doc;
     ENSURE(properlyInitialized(), "Expected TramImporter to be properly initialized in constructor!");
-    ENSURE(doc.LoadFile(configPath.c_str()), "Expected default configPath to load!");
 }
 bool TramImporter::properlyInitialized() const {
     return _initCheck == this;
-}
-void TramImporter::setConfigPath(const std::string &configFilePath) {
-    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in setConfigPath!");
-    configPath = configFilePath;
-}
-std::string TramImporter::getConfigPath() const {
-    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getConfigPath!");
-    return configPath;
-}
-void TramImporter::loadSupportedTramTypes() {
-    REQUIRE(this->properlyInitialized(),
-            "Expected MetronetImporter to be properly initialized in loadSupportedTramTypes!");
-    TiXmlDocument doc;
-    REQUIRE(doc.LoadFile(configPath.c_str()), "Config file expected to be loaded!");
-    fSupportedTramTypes.clear();
-    TiXmlElement* currentElem = doc.FirstChildElement()->FirstChildElement();
-    while(currentElem) {
-        TiXmlElement* currentSupportedTag = currentElem->FirstChildElement();
-        std::string currentSupportedTramType = currentSupportedTag->GetText();
-        fSupportedTramTypes.push_back(currentSupportedTramType);
-        currentElem = currentElem->NextSiblingElement();
-    }
 }
 std::vector<std::string> TramImporter::getSupportedTramTypes() const {
     REQUIRE(this->properlyInitialized(),
@@ -52,4 +30,31 @@ bool TramImporter::isTramTypeSupported(const std::string &tramType) const {
         if(fSupportedTramTypes[i] == tramType) return true;
     }
     return false;
+}
+Tram * TramImporter::parse(TiXmlElement *tramElem) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTram!");
+    const std::string tramStr = "TRAM";
+    REQUIRE(tramElem->Value() == tramStr, "Expected tramElem to be tram tag!");
+    TiXmlElement* currentElem = tramElem->FirstChildElement();
+    int lijnNr, voertuigNr;
+    std::string type;
+    while(currentElem) {
+        std::string currentPropertyName = currentElem->Value();
+        if(isPropertySupported(tramElem->Value(), currentPropertyName)) {
+            int currentPropertyValue;
+            std::istringstream(currentElem->GetText()) >> currentPropertyValue;
+            if(currentPropertyName == "lijnNr") lijnNr = currentPropertyValue;
+            else if(currentPropertyName == "type") type = currentElem->GetText();
+            else if(currentPropertyName == "voertuigNr") voertuigNr = currentPropertyValue;
+        }
+        else std::cerr << "Property not supported for tag " << tramElem->Value() << ": " << currentElem->Value()
+                       << "\n";
+        currentElem = currentElem->NextSiblingElement();
+    }
+    Tram* tram = new Tram(lijnNr, voertuigNr, type);
+
+    ENSURE(tram->getLijnNr(), "Tram expected to have lijnNr!");
+    ENSURE(tram->getType().c_str(), "Tram expected to have type!");
+    ENSURE(tram->getVoertuigNr(), "Tram expected to have voertuigNr!");
+    return tram;
 }

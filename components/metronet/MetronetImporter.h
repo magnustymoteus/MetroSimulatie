@@ -6,9 +6,13 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONETIMPORTER_H
 
 
-#include "tinyxml/tinyxml.h"
 #include <map>
 #include <vector>
+
+#include "tinyxml/tinyxml.h"
+
+#include "utils/VTagImporter.h"
+
 #include "metronet/Metronet.h"
 #include "metronet/MetronetValidator.h"
 
@@ -24,24 +28,15 @@
 class MetronetImporter {
 protected:
     MetronetImporter* _initCheck;
-    std::string configPath;
-    std::map<std::string, std::vector<std::string> > fSupportedTags;
 public:
     MetronetImporter();
-    void setConfigPath(const std::string &configFilePath);
-    std::string getConfigPath() const;
-
 
     bool properlyInitialized() const;
+
     Metronet parseFile(const std::string &relativeFilePath);
-    bool isTagSupported(const std::string &tagName) const;
-    bool isPropertySupported(const std::string &tagName, const std::string &propertyName) const;
-    std::map<std::string, std::vector<std::string> > getSupportedTags() const;
-    void loadSupportedTags();
-    Station* parseStation(TiXmlElement* stationElem) const;
+
     void parseStations(TiXmlDocument &doc, Metronet &metronet) const;
     void parseTrams(TiXmlDocument &doc, Metronet &metronet) const;
-    Tram* parseTram(TiXmlElement* tramElem) const;
 };
 
 

@@ -5,11 +5,15 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAMIMPORTER_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAMIMPORTER_H
 
-#include <tinyxml/tinyxml.h>
 #include <vector>
 #include <string>
 
-class TramImporter {
+#include <tinyxml/tinyxml.h>
+#include "utils/VTagImporter.h"
+
+#include "tram/Tram.h"
+
+class TramImporter : protected VTagImporter {
 protected:
     std::vector<std::string> fSupportedTramTypes;
     TramImporter* _initCheck;
@@ -18,12 +22,11 @@ public:
     TramImporter();
     bool properlyInitialized() const;
 
-    void setConfigPath(const std::string &configFilePath);
-    std::string getConfigPath() const;
     std::vector<std::string> getSupportedTramTypes() const;
 
-    void loadSupportedTramTypes();
     bool isTramTypeSupported(const std::string &tramType) const;
+
+    Tram * parse(TiXmlElement *tramElem) const;
 };
 
 

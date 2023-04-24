@@ -1,0 +1,19 @@
+<SUPPORTED_TAGS>
+    <tag>
+        <name>TRAM</name>
+        <properties>
+            <property>lijnNr</property>
+            <property>type</property>
+            <property>voertuigNr</property>
+            <property>beginStation</property>
+        </properties>
+    </tag>
+    <tag>
+        <name>TRAM_TYPE</name>
+        <properties>
+            <property>naam</property>
+            <property>snelheid</property>
+            <property>bedient</property>
+        </properties>
+    </tag>
+</SUPPORTED_TAGS>

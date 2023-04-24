@@ -6,10 +6,11 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONET_H
 
 #include <map>
+#include <limits>
+#include <cmath>
+
 #include "station/Station.h"
 #include "tram/Tram.h"
-#include <limits>
-#include <math.h>
 
 
 class MetronetValidator; // forward declaration
@@ -22,7 +23,7 @@ class MetronetValidator; // forward declaration
  * @version 0.1
  */
 
-class Metronet {
+class Metronet : public IMetroObject {
 protected:
     Metronet* _initCheck;
     std::map<int, Station*> fSporen; // a map that holds begin stations for each tram path (spoorNr : Station*)

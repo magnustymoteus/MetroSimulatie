@@ -3,10 +3,11 @@
 //
 
 #include "Metronet.h"
-#include "DesignByContract.h"
+
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
+
+#include "DesignByContract.h"
 
 Metronet::Metronet(std::map<int, Station*> &newSporen, std::multimap<int, Tram*> &newTrams) : fSporen(newSporen),
 fTrams(newTrams)
@@ -53,7 +54,6 @@ void Metronet::autoSimulate(const int &durationInSeconds) {
     std::multimap<int, Tram*>::iterator iter = fTrams.begin();
     for(int i =0;i<durationInSeconds;i++) {
         sleep(1);
-        //std::advance(iter, rand() % fTrams.size());
         for(iter = fTrams.begin(); iter != fTrams.end(); iter++){
             moveTram(iter->second->getLijnNr(), iter->second->getVoertuigNr());
         }

@@ -17,7 +17,7 @@ TEST_F(MetronetInputTest, DefaultConstructor) {
 TEST_F(MetronetInputTest, ConfigPath) {
     const std::string configPath = filePath+"configs/configConfigPathTest.xml";
     EXPECT_TRUE(importer_.properlyInitialized());
-    EXPECT_EQ(importer_.getConfigPath(), "components/metronet/supportedTags.xml");
+    EXPECT_EQ(importer_.getConfigPath(), "components/metronet/config_metronet.xml");
     EXPECT_NO_THROW(importer_.setConfigPath(configPath));
     EXPECT_EQ(importer_.getConfigPath(), configPath);
     EXPECT_TRUE(importer_.properlyInitialized());

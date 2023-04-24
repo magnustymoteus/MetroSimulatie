@@ -3,6 +3,7 @@
 //
 
 #include "Station.h"
+
 #include "DesignByContract.h"
 
 Station::Station() {
@@ -53,9 +54,11 @@ void Station::setVorige(Station *const &newVorige) {
 }
 
 const std::string &Station::getType() const {
+    REQUIRE(this->properlyInitialized(), "Expected station to be properly initialized in getType!");
     return fType;
 }
 
 void Station::setType(const std::string &type) {
-    Station::fType = type;
+    REQUIRE(this->properlyInitialized(), "Expected station to be properly initialized in setType!");
+    fType = type;
 }

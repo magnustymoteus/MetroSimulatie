@@ -2,18 +2,19 @@
 // Created by gruzi on 06/03/2023.
 //
 
-#include <vector>
 #include "Tram.h"
 #include "Station.h"
 #include "DesignByContract.h"
-#include "TramImporter.h"
 
-Tram::Tram() {
+Tram::Tram(const int &lijnNr, const int &voertuigNr, const std::string &type) : fLijnNr(lijnNr),
+fVoertuigNr(voertuigNr), fType(type)
+{
     _initCheck = this;
-    fSnelheid=0;
-    fLijnNr=0;
-    fBeginStation=0;
-    fHuidigeStation=0;
+    fBeginStation = 0;
+    fHuidigeStation = 0;
+    fSnelheid = 0;
+    fBediendeStationTypes = std::vector<std::string>();
+
     ENSURE(properlyInitialized(), "Expected tram to be properly initialized in constructor!");
 }
 bool Tram::properlyInitialized() const {
@@ -52,7 +53,6 @@ Station *Tram::getHuidigeStation() const {
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getHuidigeStation!");
     return fHuidigeStation;
 }
-
 void Tram::setHuidigeStation(Station* newHuidigeStation) {
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setHuidigeStation!");
     Tram::fHuidigeStation = newHuidigeStation;
@@ -77,8 +77,6 @@ const std::string &Tram::getType() const {
 
 void Tram::setType(const std::string &type) {
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setType!");
-    TramImporter tramImporter;
-    REQUIRE(tramImporter.isTramTypeSupported(type), "Expected tram type to be supported!");
     fType = type;
 }
 
@@ -91,4 +89,11 @@ void Tram::setVoertuigNr(const int& voertuigNr) {
     REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setVoertuigNr!");
     Tram::fVoertuigNr = voertuigNr;
 }
-
+std::vector<std::string> Tram::getBediendeStationTypes() const {
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in getBediendeStationTypes!");
+    return fBediendeStationTypes;
+}
+void Tram::setBediendeStationTypes(const std::vector<std::string> &newBediendeStationTypes) {
+    REQUIRE(this->properlyInitialized(), "Expected tram to be properly initialized in setBediendeStationTypes!");
+    fBediendeStationTypes = newBediendeStationTypes;
+}

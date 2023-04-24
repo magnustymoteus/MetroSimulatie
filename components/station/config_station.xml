@@ -10,13 +10,9 @@
         </properties>
     </tag>
     <tag>
-        <name>TRAM</name>
+        <name>STATION_TYPE</name>
         <properties>
-            <property>lijnNr</property>
-            <property>type</property>
-           <!-- <property>snelheid</property> -->
-            <property>voertuigNr</property>
-            <property>beginStation</property>
+            <property>naam</property>
         </properties>
     </tag>
 </SUPPORTED_TAGS>

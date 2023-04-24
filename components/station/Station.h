@@ -7,6 +7,8 @@
 
 #include <string>
 
+#include "utils/IMetroObject.h"
+
 /**
  * This serves as a metro station.
  * @author Patryk Pilichowski
@@ -15,7 +17,7 @@
  * @version 0.1
  */
 
-class Station {
+class Station : public IMetroObject {
 protected:
     Station* _initCheck;
     std::string fNaam;

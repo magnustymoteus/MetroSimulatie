@@ -4,7 +4,11 @@
 
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
+
+#include <vector>
 #include <string>
+
+#include "utils/IMetroObject.h"
 
 class Station; // forward declaration
 
@@ -16,7 +20,7 @@ class Station; // forward declaration
  * @version 0.1
  */
 
-class Tram {
+class Tram : public IMetroObject {
 protected:
     Tram* _initCheck;
 
@@ -26,10 +30,10 @@ protected:
     std::string fType;
     Station* fBeginStation;
     Station* fHuidigeStation;
-
+    std::vector<std::string> fBediendeStationTypes;
 
 public:
-    Tram();
+    Tram(const int &lijnNr, const int &voertuigNr, const std::string &type);
     bool properlyInitialized() const;
 
     int getLijnNr() const;
@@ -37,10 +41,12 @@ public:
     Station* getBeginStation() const;
     Station* getHuidigeStation() const;
     const std::string &getType() const;
+    std::vector<std::string> getBediendeStationTypes() const;
     int getVoertuigNr() const;
 
     void setVoertuigNr(const int &voertuigNr);
     void setType(const std::string &type);
+    void setBediendeStationTypes(const std::vector<std::string> &newBediendeStationTypes);
     void setLijnNr(const int &newLijnNr);
     void setSnelheid(const int &newSnelheid);
     void setBeginStation(Station* const &newBeginStation);

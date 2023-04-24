@@ -3,8 +3,10 @@
 //
 
 #include "MetronetExporter.h"
-#include "DesignByContract.h"
+
 #include <fstream>
+
+#include "DesignByContract.h"
 
 MetronetExporter::MetronetExporter() {
     _initCheck = this;
