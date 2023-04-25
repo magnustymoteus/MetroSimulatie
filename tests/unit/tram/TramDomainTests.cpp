@@ -2,7 +2,7 @@
 // Created by gruzi on 18/03/2023.
 //
 #include <gtest/gtest.h>
-#include "tram/Tram.h"
+#include "Tram/Tram.h"
 
 class TramDomainTest: public ::testing::Test {
 protected:

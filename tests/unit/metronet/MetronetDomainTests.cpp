@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <metronet/Metronet.h>
+#include <Metronet/Metronet.h>
 
 class MetronetDomainTest: public ::testing::Test {
 protected:
@@ -14,8 +14,8 @@ protected:
     Station* station3 = new Station("C", "type", 1);
     Station* station4 = new Station("D", "type", 1);
 
-    Tram* tram1 = new Tram(1,1, "type");
-    Tram* tram2 = new Tram(1,2,"type");
+    Tram* tram1 = new Tram(1,1, 0);
+    Tram* tram2 = new Tram(1,2, 0);
 
     void setStations() {
         station1->setVolgende(station2);

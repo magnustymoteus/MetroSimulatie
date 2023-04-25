@@ -2,7 +2,7 @@
 // Created by gruzi on 18/03/2023.
 //
 #include <gtest/gtest.h>
-#include "station/Station.h"
+#include "Station/Station.h"
 
 class StationDomainTest: public ::testing::Test {
 protected:

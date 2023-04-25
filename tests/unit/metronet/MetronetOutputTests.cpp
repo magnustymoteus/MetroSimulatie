@@ -2,8 +2,8 @@
 // Created by gruzi on 17/03/2023.
 //
 #include <gtest/gtest.h>
-#include <metronet/Metronet.h>
-#include <metronet/MetronetExporter.h>
+#include "Metronet/Metronet.h"
+#include "Metronet/MetronetExporter.h"
 #include <fstream>
 
 class MetronetOutputTest: public ::testing::Test {

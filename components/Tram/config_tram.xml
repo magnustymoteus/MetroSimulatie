@@ -1,0 +1,11 @@
+<SUPPORTED_TAGS>
+    <tag>
+        <name>TRAM</name>
+        <properties>
+            <property>lijnNr</property>
+            <property>type</property>
+            <property>voertuigNr</property>
+            <property>beginStation</property>
+        </properties>
+    </tag>
+</SUPPORTED_TAGS>
