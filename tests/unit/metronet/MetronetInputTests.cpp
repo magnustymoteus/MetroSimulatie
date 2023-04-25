@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-const std::string filePath = "tests/unit/metronet/";
+const std::string filePath = "tests/unit/Metronet/";
 
 /*class MetronetInputTest: public ::testing::Test {
 protected:
@@ -17,7 +17,7 @@ TEST_F(MetronetInputTest, DefaultConstructor) {
 TEST_F(MetronetInputTest, ConfigPath) {
     const std::string configPath = filePath+"configs/configConfigPathTest.xml";
     EXPECT_TRUE(importer_.properlyInitialized());
-    EXPECT_EQ(importer_.getConfigPath(), "components/metronet/config_metronet.xml");
+    EXPECT_EQ(importer_.getConfigPath(), "components/Metronet/config_metronet.xml");
     EXPECT_NO_THROW(importer_.setConfigPath(configPath));
     EXPECT_EQ(importer_.getConfigPath(), configPath);
     EXPECT_TRUE(importer_.properlyInitialized());
@@ -31,13 +31,13 @@ TEST_F(MetronetInputTest, HappyDay) {
         {{"STATION", {"naam", "volgende", "vorige", "spoorNr"}},
         {"TRAM", {"lijnNr", "snelheid", "beginStation"}}};
     EXPECT_EQ(importer_.getSupportedTags(), expectedSupportedTags);
-    Metronet metronet = importer_.parseFile(filePath+"input/happydayTest.xml");
-    EXPECT_TRUE(metronet.spoorExists(12));
-    EXPECT_TRUE(metronet.tramExists(12));
+    Metronet Metronet = importer_.parseFile(filePath+"input/happydayTest.xml");
+    EXPECT_TRUE(Metronet.spoorExists(12));
+    EXPECT_TRUE(Metronet.tramExists(12));
 
-    EXPECT_TRUE(metronet.retrieveStation(12, "A"));
-    EXPECT_TRUE(metronet.retrieveStation(12, "B"));
-    EXPECT_TRUE(metronet.retrieveStation(12, "C"));
+    EXPECT_TRUE(Metronet.retrieveStation(12, "A"));
+    EXPECT_TRUE(Metronet.retrieveStation(12, "B"));
+    EXPECT_TRUE(Metronet.retrieveStation(12, "C"));
     EXPECT_TRUE(importer_.properlyInitialized());
 }
 TEST_F(MetronetInputTest, IllegalTag) {

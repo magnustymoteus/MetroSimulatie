@@ -1,0 +1,10 @@
+<SUPPORTED_TAGS>
+    <tag>
+        <name>TRAM_TYPE</name>
+        <properties>
+            <property>naam</property>
+            <property>snelheid</property>
+            <property>bedient</property>
+        </properties>
+    </tag>
+</SUPPORTED_TAGS>

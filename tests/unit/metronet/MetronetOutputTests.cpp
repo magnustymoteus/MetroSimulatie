@@ -43,8 +43,8 @@ std::string fileToString(const std::string &filePath) {
 }
 
 TEST_F(MetronetOutputTest, ShowMeYourTrains){
-    const std::string outputPath = "tests/unit/metronet/output/ShowMeYourTrains.txt";
-    const std::string referencePath = "tests/unit/metronet/output/ShowMeYourTrainsReference.txt";
+    const std::string outputPath = "tests/unit/Metronet/output/ShowMeYourTrains.txt";
+    const std::string referencePath = "tests/unit/Metronet/output/ShowMeYourTrainsReference.txt";
 
     setStations();
     setTram();

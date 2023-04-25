@@ -1,6 +1,6 @@
-#include "tools/DesignByContract.h"
-#include "metronet/MetronetImporter.h"
-#include "components/metronet/MetronetExporter.h"
+#include "DesignByContract.h"
+#include "Metronet/MetronetImporter.h"
+#include "components/Metronet/MetronetExporter.h"
 int main() {
     MetronetImporter parser;
     Metronet metronet = parser.parseFile("input/input.xml");
