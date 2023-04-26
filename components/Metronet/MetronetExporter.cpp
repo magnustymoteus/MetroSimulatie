@@ -45,7 +45,10 @@ void MetronetExporter::outputMetronet(Metronet* const metronet, const std::strin
     // Iterate over all trams in the Metronet
     for(std::multimap<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
-        outputFile << "Tram " << current->getLijnNr() << " in Station " << current->getHuidigeStation()->getNaam() << "\n";
+        outputFile << "Tram " << current->getLijnNr() << " nr " << current->getVoertuigNr() << "\n";
+        outputFile << "\ttype: " << current->getType()->getNaam() << "\n";
+        outputFile << "\tsnelheid: " << current->getType()->getSnelheid() << "\n";
+        outputFile << "\thuidig station: " << current->getHuidigeStation()->getNaam() << "\n";
     }
     // Close file
     outputFile.close();
