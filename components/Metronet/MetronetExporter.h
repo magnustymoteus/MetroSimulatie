@@ -22,7 +22,7 @@ public:
     MetronetExporter();
     bool properlyInitialized() const;
 
-    static void outputMetronet(const Metronet &metronet, const std::string &pathFile);
+    static void outputMetronet(Metronet* const metronet, const std::string &pathFile);
 };
 
 

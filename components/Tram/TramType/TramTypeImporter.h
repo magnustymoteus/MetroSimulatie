@@ -5,26 +5,25 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAMTYPEIMPORTER_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAMTYPEIMPORTER_H
 
-#include "Utils/VMetroObjectImporter.h"
+#include "MetroObject/VMetroObjectImporter.h"
 #include "Tram/TramType/TramType.h"
 
-
-const std::string tramType_defaultConfigPath = "components/Tram/TramType/config_tramType.xml";
 const std::string defaultTramTypesPath = "components/Tram/TramType/tramTypes.xml";
 
 class TramTypeImporter : protected VMetroObjectImporter {
 private:
     TramTypeImporter* _initCheck;
-    std::vector<TramType*> fSupportedTramTypes;
+protected:
+    std::map<std::string, TramType*> fSupportedTramTypes;
     std::string fTramTypesPath;
 public:
-    TramTypeImporter(const std::string &configPath=tramType_defaultConfigPath,
+    TramTypeImporter(const std::string &configPath=ConfigManager::TramTypeConfig(),
                      const std::string &tramTypesPath=defaultTramTypesPath);
     bool properlyInitialized() const;
 
     void loadSupportedTramTypes();
 
-    TramType* getSupportedTramTypeByName(const std::string &tramTypeName) const;
+    std::map<std::string, TramType*> getSupportedTramTypes() const;
 
     TramType* parse(TiXmlElement* tramTypeElem) const;
 };

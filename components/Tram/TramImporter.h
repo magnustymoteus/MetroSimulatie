@@ -9,17 +9,15 @@
 #include <string>
 
 #include <tinyxml/tinyxml.h>
-#include "Utils/VMetroObjectImporter.h"
+#include "MetroObject/VMetroObjectImporter.h"
 
 #include "Tram/Tram.h"
 
-const std::string tram_defaultConfigPath = "components/Tram/config_tram.xml";
-
 class TramImporter : protected VMetroObjectImporter {
-protected:
+private:
     TramImporter* _initCheck;
 public:
-    TramImporter(const std::string &configPath=tram_defaultConfigPath);
+    TramImporter(const std::string &configPath=ConfigManager::TramConfig());
     bool properlyInitialized() const;
 
     Tram * parse(TiXmlElement *tramElem) const;

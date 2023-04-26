@@ -15,14 +15,13 @@ include_directories(gtest/googletest/include)
 include_directories(gtest/googlemock/include)
 include_directories(tools)
 include_directories(components)
-include_directories(components/Station)
 
-FILE(GLOB SOURCES "components/*/*.cpp" "components/*/*/*.cpp")
-FILE(GLOB TINYXML "tools/tinyxml/*")
+FILE(GLOB SOURCES "components/*/*.cpp" "components/*/*/*.cpp" "main.cpp")
+FILE(GLOB TOOLS "tools/*" "tools/*/*")
 FILE(GLOB TESTS "tests/*/*/*.cpp")
 
-set(RELEASE_SOURCE_FILES ${SOURCES} ${TINYXML} tools/tinyxml main.cpp)
-set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TINYXML} tests/tests_main.cpp)
+set(RELEASE_SOURCE_FILES ${SOURCES} ${TOOLS})
+set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TOOLS} tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
 add_executable(testing_tool ${DEBUG_SOURCE_FILES})

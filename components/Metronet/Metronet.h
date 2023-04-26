@@ -6,12 +6,10 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONET_H
 
 #include <map>
-#include <limits>
 #include <cmath>
 
 #include "Station/Station.h"
 #include "Tram/Tram.h"
-
 
 class MetronetValidator; // forward declaration
 
@@ -24,30 +22,33 @@ class MetronetValidator; // forward declaration
  */
 
 class Metronet : IMetroObject {
-protected:
+private:
     Metronet* _initCheck;
+protected:
     std::map<int, Station*> fSporen; // a map that holds begin stations for each Tram path (spoorNr : Station*)
     std::multimap<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
-
+    std::map<std::string, TramType*> fTramTypes;
 public:
     bool properlyInitialized() const;
 
     std::multimap<int, Tram*> getTrams() const;
-    Tram* getTram(const int &lijnNr, const int &voertuigNr=std::numeric_limits<int>::quiet_NaN()) const;
-    void setTrams(std::multimap<int, Tram*> &newTrams);
-
+    Tram* getTram(const int &lijnNr, const int &voertuigNr) const;
     std::map<int, Station*> getSporen() const;
+    std::map<std::string, TramType*> getTramTypes() const;
+
+    void setTrams(std::multimap<int, Tram*> &newTrams);
     void setSporen(std::map<int, Station*> &newSporen);
+    void setTramTypes(std::map<std::string, TramType *> newTramTypes);
+
 
     Metronet(std::map<int, Station*> &newSporen, std::multimap<int, Tram*> &newTrams);
     Metronet();
     ~Metronet();
 
-    void moveTram(const int &lijnNr, const int &voertuigNr=std::numeric_limits<int>::quiet_NaN(), const int &steps=1);
+    void moveTram(const int &lijnNr, const int &voertuigNr, const int &steps=1);
 
     void pushStation(Station* station);
     void pushTram(Tram* tram);
-    void insertAfterStation(const std::string &vorigeNaam, Station* station);
 
     Station* retrieveStation(const int &spoorNr, const std::string &naam) const;
     bool spoorExists(const int &spoorNr) const;

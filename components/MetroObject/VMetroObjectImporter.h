@@ -8,21 +8,21 @@
 #include <string>
 #include <vector>
 #include <map>
-
 #include <iostream>
 #include <sstream>
 
-#include <tinyxml/tinyxml.h>
+#include "tinyxml/tinyxml.h"
 
-#include "Utils/IMetroObject.h"
+#include "IMetroObject.h"
 
 #include "DesignByContract.h"
 
 class VMetroObjectImporter {
+private:
+    VMetroObjectImporter* _initCheck;
 protected:
     std::map<std::string, std::vector<std::string> > fSupportedTags;
     std::string configPath;
-    VMetroObjectImporter* _initCheck;
 public:
     VMetroObjectImporter(const std::string &configFilePath);
     bool properlyInitialized() const;

@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-#include "Utils/IMetroObject.h"
+#include "MetroObject/IMetroObject.h"
 #include "Station/Station.h"
 #include "Tram/TramType/TramType.h"
 
@@ -21,9 +21,9 @@
  */
 
 class Tram : public IMetroObject {
-protected:
+private:
     Tram* _initCheck;
-
+protected:
     int fLijnNr;
     int fVoertuigNr;
     TramType* fType;
@@ -31,7 +31,7 @@ protected:
     Station* fHuidigeStation;
 
 public:
-    Tram(const int &lijnNr, const int &voertuigNr, TramType* &type);
+    Tram(const int &lijnNr, const int &voertuigNr);
     bool properlyInitialized() const;
 
     int getLijnNr() const;

@@ -5,6 +5,7 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_IMETROOBJECT_H
 #define PROJECT_SOFTWARE_PRACTICUM2_IMETROOBJECT_H
 
+#include "ConfigManager/ConfigManager.h"
 
 class IMetroObject {};
 

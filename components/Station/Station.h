@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "Utils/IMetroObject.h"
+#include "MetroObject/IMetroObject.h"
 
 /**
  * This serves as a metro Station.
@@ -18,8 +18,9 @@
  */
 
 class Station : public IMetroObject {
-protected:
+private:
     Station* _initCheck;
+protected:
     std::string fNaam;
     std::string fType;
     int fSpoorNr;

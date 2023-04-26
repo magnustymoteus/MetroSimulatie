@@ -5,16 +5,16 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_STATIONIMPORTER_H
 #define PROJECT_SOFTWARE_PRACTICUM2_STATIONIMPORTER_H
 
-#include "Utils/VMetroObjectImporter.h"
+#include "MetroObject/VMetroObjectImporter.h"
 
 #include "Station.h"
 
-const std::string station_defaultConfigPath = "components/Station/config_station.xml";
 
 class StationImporter :  protected VMetroObjectImporter {
+private:
     StationImporter* _initCheck;
 public:
-    StationImporter(const std::string &configPath=station_defaultConfigPath);
+    StationImporter(const std::string &configPath=ConfigManager::StationConfig());
 
     bool properlyInitialized() const;
 

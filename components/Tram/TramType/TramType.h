@@ -8,15 +8,15 @@
 #include <string>
 #include <vector>
 
-#include "Utils/IMetroObject.h"
+#include "MetroObject/IMetroObject.h"
 
 class TramType : public IMetroObject {
 private:
+    TramType* _initCheck;
+protected:
     std::string fNaam;
     int fSnelheid;
     std::vector<std::string> fBediendeStationTypes;
-
-    TramType* _initCheck;
 public:
     TramType(const std::string &newNaam, const int &newSnelheid,
              const std::vector<std::string> &newBediendeStationTypes);

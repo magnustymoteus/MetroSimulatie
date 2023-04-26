@@ -17,7 +17,7 @@ bool MetronetExporter::properlyInitialized() const {
     return _initCheck == this;
 }
 
-void MetronetExporter::outputMetronet(const Metronet &metronet, const std::string &pathFile) {
+void MetronetExporter::outputMetronet(Metronet* const metronet, const std::string &pathFile) {
     /*This function exports Metronet information to output.txt file
      * @param Metronet The metronetwork to save in txt-file
      * @param pathFile The relative path of the output file
@@ -25,8 +25,8 @@ void MetronetExporter::outputMetronet(const Metronet &metronet, const std::strin
     std::ofstream outputFile;
     outputFile.open(pathFile.c_str());
     // Write all stations to file
-    std::map<int, Station*> fSporen = metronet.getSporen();
-    std::multimap<int, Tram*> fTrams = metronet.getTrams();
+    std::map<int, Station*> fSporen = metronet->getSporen();
+    std::multimap<int, Tram*> fTrams = metronet->getTrams();
     for(std::multimap<int,Station*>::const_iterator iteratorIntStation = fSporen.begin(); iteratorIntStation != fSporen.end(); iteratorIntStation++){
         // Save begin Station for further comparison
         Station* beginStation = iteratorIntStation->second;

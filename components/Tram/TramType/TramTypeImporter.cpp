@@ -5,7 +5,12 @@
 #include "TramTypeImporter.h"
 
 #include "DesignByContract.h"
-
+\
+std::map<std::string, TramType *> TramTypeImporter::getSupportedTramTypes() const {
+    REQUIRE(this->properlyInitialized(),
+            "Expected MetronetImporter to be properly initialized!");
+    return fSupportedTramTypes;
+}
 TramTypeImporter::TramTypeImporter(const std::string &configPath, const std::string &tramTypesPath) :
 VMetroObjectImporter(configPath){
     _initCheck = this;
@@ -23,7 +28,8 @@ void TramTypeImporter::loadSupportedTramTypes() {
     REQUIRE(doc.LoadFile(fTramTypesPath.c_str()), "Expected tramTypes file to load!");
     TiXmlElement* currentElem = doc.FirstChildElement("TRAM_TYPE");
     while(currentElem) {
-        fSupportedTramTypes.push_back(parse(currentElem));
+        TramType* tramType = parse(currentElem);
+        fSupportedTramTypes.insert(std::make_pair(tramType->getNaam(), tramType));
         currentElem = currentElem->NextSiblingElement("TRAM_TYPE");
     }
 }
@@ -43,11 +49,4 @@ TramType* TramTypeImporter::parse(TiXmlElement *tramTypeElem) const {
     }
     TramType* tramType = new TramType(naam, snelheid, bediendeStationTypes);
     return tramType;
-}
-
-TramType* TramTypeImporter::getSupportedTramTypeByName(const std::string &tramTypeName) const {
-    for(size_t i=0;i<fSupportedTramTypes.size();i++) {
-        if(fSupportedTramTypes[i]->getNaam() == tramTypeName) return fSupportedTramTypes[i];
-    }
-    return 0;
 }

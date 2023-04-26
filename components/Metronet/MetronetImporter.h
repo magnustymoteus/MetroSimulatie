@@ -11,10 +11,14 @@
 
 #include "tinyxml/tinyxml.h"
 
-#include "Utils/VMetroObjectImporter.h"
+#include "MetroObject/VMetroObjectImporter.h"
 
 #include "Metronet/Metronet.h"
 #include "Metronet/MetronetValidator.h"
+
+#include "Tram/TramImporter.h"
+#include "Station/StationImporter.h"
+#include "Tram/TramType/TramTypeImporter.h"
 
 /**
  * This serves as a parser which processes XML files containing information about the metro and
@@ -26,14 +30,18 @@
  */
 
 class MetronetImporter {
-protected:
+private:
     MetronetImporter* _initCheck;
+protected:
+    TramImporter fTramImporter;
+    StationImporter fStationImporter;
+    TramTypeImporter fTramTypeImporter;
 public:
     MetronetImporter();
 
     bool properlyInitialized() const;
 
-    Metronet parseFile(const std::string &relativeFilePath);
+    Metronet* parseFile(const std::string &relativeFilePath);
 
     void parseStations(TiXmlDocument &doc, Metronet &metronet) const;
     void parseTrams(TiXmlDocument &doc, Metronet &metronet) const;

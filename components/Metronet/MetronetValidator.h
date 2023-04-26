@@ -5,6 +5,7 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_METRONETVALIDATOR_H
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONETVALIDATOR_H
 
+#include "MetroObject/IMetroObjectValidator.h"
 #include "Metronet.h"
 
 /**
@@ -15,18 +16,23 @@
  * @version 0.1
  */
 
-class MetronetValidator {
-protected:
+class MetronetValidator : IMetroObjectValidator {
+private:
     MetronetValidator* _initCheck;
+protected:
+    const Metronet* const fMetronet;
 
+    void stationsLinkCheck() const;
+    void lijnNrExistsCheck() const;
+    void tramForSpoorCheck() const;
+    void duplicateTramsCheck() const;
 public:
-    MetronetValidator();
+    MetronetValidator(const Metronet* const &metronet);
+
     bool properlyInitialized() const;
-    static void stationsLinkCheck(const Metronet &metronet);
-    static void lijnNrExistsCheck(const Metronet &metronet);
-    static void tramForSpoorCheck(const Metronet &metronet);
-    static void duplicateTramsCheck(const Metronet &metronet);
-    static void consistencyCheck(const Metronet &metronet);
+
+    std::string getInvalidationMessage(const std::string &error) const;
+    void validate() const;
 };
 
 

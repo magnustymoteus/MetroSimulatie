@@ -3,8 +3,9 @@
 #include "components/Metronet/MetronetExporter.h"
 int main() {
     MetronetImporter parser;
-    Metronet metronet = parser.parseFile("input/input.xml");
+    Metronet* metronet = parser.parseFile("input/input.xml");
     MetronetExporter::outputMetronet(metronet, "output/output.txt");
-    metronet.autoSimulate(5);
+    metronet->autoSimulate(5);
+    delete metronet;
     return 0;
 }

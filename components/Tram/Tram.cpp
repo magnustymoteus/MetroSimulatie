@@ -6,8 +6,8 @@
 #include "Station/Station.h"
 #include "DesignByContract.h"
 
-Tram::Tram(const int &lijnNr, const int &voertuigNr, TramType* &type) : fLijnNr(lijnNr),
-fVoertuigNr(voertuigNr), fType(type)
+Tram::Tram(const int &lijnNr, const int &voertuigNr) : fLijnNr(lijnNr),
+fVoertuigNr(voertuigNr)
 {
     _initCheck = this;
     fBeginStation = 0;
