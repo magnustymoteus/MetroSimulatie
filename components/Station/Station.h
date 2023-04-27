@@ -23,28 +23,32 @@ private:
 protected:
     std::string fNaam;
     std::string fType;
-    int fSpoorNr;
+
+    std::map<int, std::pair<Station*, Station*> > fSporen; // spoorNr : (vorige, volgende)
+
     Station *fVorige;
     Station *fVolgende;
 
 public:
     bool properlyInitialized() const;
 
-    Station(const std::string &naam, const std::string &type, const int &spoorNr);
+    Station(const std::string &naam, const std::string &type);
 
     // getters
     std::string getNaam() const;
-    int getSpoorNr () const;
-    Station* getVorige() const;
-    Station* getVolgende() const;
+    Station* getVorige(const int &spoorNr) const;
+    Station* getVolgende(const int &spoorNr) const;
     const std::string &getType() const;
+    std::map<int, std::pair<Station*, Station*> > getSporen() const;
+    std::pair<Station*, Station*> getSpoor(const int &spoorNr) const;
 
     // setters
     void setNaam(const std::string &newNaam);
-    void setSpoorNr(const int &newSpoorNr);
-    void setVorige(Station* const &newVorige);
-    void setVolgende(Station* const &newVolgende);
+    void setVorige(const int &spoorNr, Station* const &newVorige);
+    void setVolgende(const int &spoorNr, Station* const &newVolgende);
     void setType(const std::string &type);
+    void setSporen(const std::map<int, std::pair<Station*, Station*> > &newSporen);
+    void setSpoor(const int &spoorNr, const std::pair<Station*, Station*> &newSpoor);
 };
 
 

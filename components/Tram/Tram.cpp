@@ -4,7 +4,6 @@
 
 #include "Tram.h"
 #include "Station/Station.h"
-#include "DesignByContract.h"
 
 Tram::Tram(const int &lijnNr, const int &voertuigNr) : fLijnNr(lijnNr),
 fVoertuigNr(voertuigNr)
@@ -49,13 +48,13 @@ void Tram::setHuidigeStation(Station* newHuidigeStation) {
 }
 Station* Tram::getVolgendeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVolgendeStation!");
-    return fHuidigeStation->getVolgende();
+    return fHuidigeStation->getSpoor(fLijnNr).second;
 }
 Station* Tram::getVorigeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVorigeStation!");
-    return fHuidigeStation->getVorige();
+    return fHuidigeStation->getSpoor(fLijnNr).first;
 }
-void Tram::moveNaarVolgendeStation(){
+void Tram::moveNaarVolgendeStation() {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in moveNaarVolgendeStation!");
     fHuidigeStation = getVolgendeStation();
 }

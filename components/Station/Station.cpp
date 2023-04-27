@@ -4,14 +4,8 @@
 
 #include "Station.h"
 
-#include "DesignByContract.h"
-
-Station::Station(const std::string &naam, const std::string &type, const int &spoorNr) : fNaam(naam), fType(type),
-fSpoorNr(spoorNr) {
+Station::Station(const std::string &naam, const std::string &type) : fNaam(naam), fType(type){
     _initCheck = this;
-
-    fVorige=0;
-    fVolgende=0;
 
     ENSURE(properlyInitialized(), "Expected Station to be properly initialized in constructor!");
 }
@@ -23,36 +17,42 @@ std::string Station::getNaam() const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getNaam!");
     return fNaam;
 }
-int Station::getSpoorNr() const {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getSpoorNr!");
-    return fSpoorNr;
-}
-Station* Station::getVolgende() const {
+Station* Station::getVolgende(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getVolgende!");
-    return fVolgende;
+    return fSporen.at(spoorNr).second;
 }
-Station* Station::getVorige() const {
+Station* Station::getVorige(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getVorige!");
-    return fVorige;
+    return fSporen.at(spoorNr).first;
+}
+
+std::pair<Station *, Station *> Station::getSpoor(const int &spoorNr) const {
+    return fSporen.find(spoorNr)->second;
+}
+std::map<int, std::pair<Station *, Station *> > Station::getSporen() const {
+    return fSporen;
 }
 
 // setters
 
+
+void Station::setSpoor(const int &spoorNr, const std::pair<Station *, Station *> &newSpoor) {
+    fSporen.at(spoorNr) = newSpoor;
+}
+void Station::setSporen(const std::map<int, std::pair<Station *, Station *> > &newSporen) {
+    fSporen = newSporen;
+}
 void Station::setNaam(const std::string &newNaam) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setNaam!");
     fNaam = newNaam;
 }
-void Station::setSpoorNr(const int &newSpoorNr) {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setSpoorNr!");
-    fSpoorNr = newSpoorNr;
-}
-void Station::setVolgende(Station *const &newVolgende) {
+void Station::setVolgende(const int &spoorNr, Station *const &newVolgende) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVolgende!");
-    fVolgende = newVolgende;
+    fSporen.at(spoorNr).second = newVolgende;
 }
-void Station::setVorige(Station *const &newVorige) {
+void Station::setVorige(const int &spoorNr, Station *const &newVorige) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVorige!");
-    fVorige = newVorige;
+    fSporen.at(spoorNr).first = newVorige;
 }
 
 const std::string &Station::getType() const {

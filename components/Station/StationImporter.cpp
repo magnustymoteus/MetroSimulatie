@@ -21,14 +21,10 @@ Station* StationImporter::parse(TiXmlElement *stationElem) const {
 
     std::string naam = stationElem->FirstChildElement("naam")->GetText();
     std::string type = stationElem->FirstChildElement("type")->GetText();
-
-    int spoorNr;
-    std::istringstream(stationElem->FirstChildElement("spoorNr")->GetText()) >> spoorNr;
-
-    Station* station = new Station(naam, type, spoorNr);
+    Station* station = new Station(naam, type);
 
     ENSURE(station->getNaam().c_str(), "Station expected to have a name!");
-    ENSURE(station->getSpoorNr(), "Station expected to have spoorNr!");
+    ENSURE(!station->getSporen().empty(), "Station expected to have non-empty sporen!");
     ENSURE(station->getType().c_str(), "Station expected to have type!");
     return station;
 }

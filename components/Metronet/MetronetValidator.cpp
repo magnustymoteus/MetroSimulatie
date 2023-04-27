@@ -19,36 +19,17 @@ bool MetronetValidator::properlyInitialized() const {
 
 void MetronetValidator::stationsLinkCheck() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    std::map<int, Station*> sporen = fMetronet->getSporen();
-    for(std::map<int, Station*>::const_iterator iter = sporen.begin();iter!=sporen.end();iter++) {
-        Station* beginStation = iter->second;
-        Station* currentStation = iter->second;
-        do {
-            if(!currentStation || !currentStation->getVorige() || !currentStation->getVolgende())
-                std::cerr << kNotConsistent << "Station " << currentStation->getNaam() << " is not properly linked!\n";
-            currentStation = currentStation->getVolgende();
-        } while(currentStation != beginStation);
-    }
+    // TODO
 }
 
 void MetronetValidator::lijnNrExistsCheck() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    std::multimap<int, Tram*> trams = fMetronet->getTrams();
-    std::map<int, Station*> sporen = fMetronet->getSporen();
-    for(std::multimap<int, Tram*>::const_iterator iter = trams.begin();iter!=trams.end();iter++) {
-        if(sporen.find(iter->second->getLijnNr()) == sporen.end())
-            std::cerr << kNotConsistent << "there is no spoor for lijnNr " << iter->second->getLijnNr() << "\n";
-    }
+    // TODO
 }
 
 void MetronetValidator::tramForSpoorCheck() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    std::map<int, Station*> sporen = fMetronet->getSporen();
-    std::multimap<int, Tram*> trams = fMetronet->getTrams();
-    for(std::map<int, Station*>::const_iterator iter = sporen.begin();iter!=sporen.end();iter++) {
-        if(trams.find(iter->second->getSpoorNr()) == trams.end())
-            std::cerr << kNotConsistent << "there is no Tram for spoor " << iter->second->getSpoorNr() << "\n";
-    }
+    // TODO
 }
 void MetronetValidator::duplicateTramsCheck() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");

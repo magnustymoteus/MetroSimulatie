@@ -5,9 +5,6 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAMTYPE_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAMTYPE_H
 
-#include <string>
-#include <vector>
-
 #include "MetroObject/IMetroObject.h"
 
 class TramType : public IMetroObject {

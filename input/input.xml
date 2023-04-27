@@ -1,24 +1,46 @@
-<STATION>
-    <naam>A</naam>
-    <type>Metrostation</type>
-    <volgende>B</volgende>
-    <vorige>C</vorige>
-    <spoorNr>12</spoorNr>
-</STATION>
-<STATION>
-<naam>B</naam>
-<type>Halte</type>
-<volgende>C</volgende>
-<vorige>A</vorige>
-<spoorNr>12</spoorNr>
-</STATION>
-<STATION>
-<naam>C</naam>
-<type>Metrostation</type>
-<volgende>A</volgende>
-<vorige>B</vorige>
-<spoorNr>12</spoorNr>
-</STATION>
+<METRONET>
+    <STATION>
+        <naam>A</naam>
+        <type>Metrostation</type>
+        <SPOOR>
+            <spoorNr>12</spoorNr>
+            <volgende>B</volgende>
+            <vorige>C</vorige>
+        </SPOOR>
+        <SPOOR>
+            <spoorNr>21</spoorNr>
+            <volgende>C</volgende>
+            <vorige>B</vorige>
+        </SPOOR>
+    </STATION>
+    <STATION>
+        <naam>B</naam>
+        <type>Metrostation</type>
+        <SPOOR>
+            <spoorNr>12</spoorNr>
+            <volgende>C</volgende>
+            <vorige>A</vorige>
+        </SPOOR>
+        <SPOOR>
+            <spoorNr>21</spoorNr>
+            <volgende>A</volgende>
+            <vorige>C</vorige>
+        </SPOOR>
+    </STATION>
+    <STATION>
+        <naam>C</naam>
+        <type>Metrostation</type>
+        <SPOOR>
+            <spoorNr>12</spoorNr>
+            <volgende>A</volgende>
+            <vorige>B</vorige>
+        </SPOOR>
+        <SPOOR>
+            <spoorNr>21</spoorNr>
+            <volgende>B</volgende>
+            <vorige>A</vorige>
+        </SPOOR>
+    </STATION>
 <TRAM>
 <lijnNr>12</lijnNr>
 <type>Stadslijner</type>
@@ -26,8 +48,9 @@
 <beginStation>A</beginStation>
 </TRAM>
 <TRAM>
-<lijnNr>12</lijnNr>
+<lijnNr>21</lijnNr>
 <type>Albatros</type>
-<voertuigNr>2</voertuigNr>
+<voertuigNr>1</voertuigNr>
 <beginStation>B</beginStation>
 </TRAM>
+</METRONET>

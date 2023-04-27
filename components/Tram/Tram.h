@@ -5,9 +5,6 @@
 #ifndef PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
 #define PROJECT_SOFTWARE_PRACTICUM2_TRAM_H
 
-#include <vector>
-#include <string>
-
 #include "MetroObject/IMetroObject.h"
 #include "Station/Station.h"
 #include "Tram/TramType/TramType.h"

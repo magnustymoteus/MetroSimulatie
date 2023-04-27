@@ -3,7 +3,6 @@
 //
 
 #include "TramType.h"
-#include "DesignByContract.h"
 
 TramType::TramType(const std::string &newNaam, const int &newSnelheid,
                    const std::vector<std::string> &newBediendeStationTypes) : fNaam(newNaam), fSnelheid(newSnelheid),
