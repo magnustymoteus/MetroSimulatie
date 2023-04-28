@@ -20,6 +20,8 @@ public:
 
     bool properlyInitialized() const;
 
+    bool supportsStationType(const std::string &stationType) const;
+
     std::string getNaam() const;
     int getSnelheid() const;
     std::vector<std::string> getBediendeStationTypes();

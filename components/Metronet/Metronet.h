@@ -22,32 +22,33 @@ class Metronet : IMetroObject {
 private:
     Metronet* _initCheck;
 protected:
-    std::map<std::string, Station*> fStations; // a map that holds begin stations for each Tram path (spoorNr : Station*)
+    std::map<std::string, Station*> fStations; // stations (name : Station*)
     std::multimap<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
     std::map<std::string, TramType*> fTramTypes;
 public:
     bool properlyInitialized() const;
 
     std::multimap<int, Tram*> getTrams() const;
-    Tram* getTram(const int &lijnNr, const int &voertuigNr) const;
     std::map<std::string, Station*> getStations() const;
-    std::map<std::string, TramType*> getTramTypes () const;
+    std::map<std::string, TramType*> getTramTypes() const;
 
     void setTrams(std::multimap<int, Tram*> &newTrams);
     void setStations(std::map<std::string, Station*> &newStations);
     void setTramTypes(std::map<std::string, TramType *> newTramTypes);
 
+    bool isTramOnStation(const std::string &stationName, const int &spoorNr) const;
 
     Metronet(std::map<std::string, Station*> &newStations, std::multimap<int, Tram*> &newTrams);
     Metronet();
     ~Metronet();
 
-    void moveTram(const int &lijnNr, const int &voertuigNr, const int &steps=1);
+    void moveTram(Tram* &tram, const int &steps=1) const;
 
     void pushStation(Station* station);
     void pushTram(Tram* tram);
 
     Station* retrieveStation(const std::string &naam) const;
+    Tram* retrieveTram(const int &lijnNr, const int &voertuigNr) const;
     bool tramExists(const int &lijnNr) const;
 
     void autoSimulate(const int &durationInSeconds);

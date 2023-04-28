@@ -54,9 +54,26 @@ Station* Tram::getVorigeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVorigeStation!");
     return fHuidigeStation->getSpoor(fLijnNr).first;
 }
-void Tram::moveNaarVolgendeStation() {
+unsigned int Tram::move() {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in moveNaarVolgendeStation!");
-    fHuidigeStation = getVolgendeStation();
+    Station* nextStation = getVolgendeStation();
+    unsigned int skippedStations = 0;
+    while(!supportsStation(nextStation)) {
+        skippedStations++;
+        nextStation = nextStation->getVolgende(fLijnNr);
+    }
+    fHuidigeStation = nextStation;
+    return skippedStations;
+}
+unsigned int Tram::move(const int &steps) {
+    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in moveNaarVolgendeStation!");
+    REQUIRE(steps >= 0, "Expected steps >= 0 in move!");
+    unsigned int skippedStations = 0;
+    for(int i=0;i<steps;i++) skippedStations += move();
+    return skippedStations;
+}
+bool Tram::supportsStation(const Station *const &station) const {
+    return fType->supportsStationType(station->getType());
 }
 
 TramType* Tram::getType() const {

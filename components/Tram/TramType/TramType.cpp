@@ -14,7 +14,12 @@ TramType::TramType(const std::string &newNaam, const int &newSnelheid,
 bool TramType::properlyInitialized() const {
     return _initCheck == this;
 }
-
+bool TramType::supportsStationType(const std::string &stationType) const {
+    for(size_t i = 0; i<fBediendeStationTypes.size(); i++) {
+        if(fBediendeStationTypes[i] == stationType) return true;
+    }
+    return false;
+}
 std::string TramType::getNaam() const {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized getNaam!");
     return fNaam;

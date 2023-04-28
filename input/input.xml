@@ -29,7 +29,7 @@
     </STATION>
     <STATION>
         <naam>C</naam>
-        <type>Metrostation</type>
+        <type>Halte</type>
         <SPOOR>
             <spoorNr>12</spoorNr>
             <volgende>A</volgende>
@@ -48,9 +48,9 @@
 <beginStation>A</beginStation>
 </TRAM>
 <TRAM>
-<lijnNr>21</lijnNr>
-<type>Albatros</type>
-<voertuigNr>1</voertuigNr>
-<beginStation>B</beginStation>
+<lijnNr>12</lijnNr>
+<type>PCC</type>
+<voertuigNr>2</voertuigNr>
+<beginStation>C</beginStation>
 </TRAM>
 </METRONET>

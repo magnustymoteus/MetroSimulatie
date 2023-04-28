@@ -35,4 +35,9 @@ void TramValidator::validate() const {
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram volgendeStation is null").c_str()));
     EXPECT(tram->getVorigeStation(),
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram vorigeStation is null").c_str()));
+
+    EXPECT(tram->supportsStation(tram->getBeginStation()), VUnhandleableMetroObjectException(
+            getInvalidationMessage("Tram beginStation is not supported").c_str()));
+    EXPECT(tram->supportsStation(tram->getHuidigeStation()), VUnhandleableMetroObjectException(
+            getInvalidationMessage("Tram huidigeStation is not supported").c_str()));
 }

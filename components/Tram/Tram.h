@@ -44,7 +44,10 @@ public:
     void setHuidigeStation(Station* newHuidigeStation);
     Station* getVolgendeStation() const;
     Station* getVorigeStation() const;
-    void moveNaarVolgendeStation();
+
+    unsigned int move();
+    unsigned int move(const int &steps);
+    bool supportsStation(const Station* const &station) const;
 };
 
 

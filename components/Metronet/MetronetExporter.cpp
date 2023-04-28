@@ -58,5 +58,23 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
 void MetronetExporter::outputAdvanced(const Metronet *const &metronet, const std::string &pathFile) {
     std::ofstream outputFile;
     outputFile.open(pathFile.c_str());
-    // TODO
+    std::multimap<int, Tram*> trams = metronet->getTrams();
+    std::map<int, bool> visitedSpoor;
+    for(std::multimap<int, Tram*>::const_iterator tramIter = trams.begin(); tramIter != trams.end(); tramIter++){
+        if(visitedSpoor.find(tramIter->second->getLijnNr()) == visitedSpoor.end()) {
+            visitedSpoor.insert(std::make_pair(tramIter->second->getLijnNr(), true));
+        }
+        else if(visitedSpoor.at(tramIter->second->getLijnNr())) continue;
+        Station* currentStation = tramIter->second->getBeginStation();
+        Station* beginStation = currentStation;
+        std::string stationsStr, tramsStr;
+        do {
+            stationsStr+="="+currentStation->getNaam()+"=";
+            if(metronet->isTramOnStation(currentStation->getNaam(), tramIter->second->getLijnNr()))
+                tramsStr += " T ";
+            else tramsStr += "   ";
+            currentStation = currentStation->getVolgende(tramIter->first);
+        } while(currentStation != beginStation);
+        outputFile << stationsStr << "\n" << tramsStr << "\n\n";
+    }
 }
