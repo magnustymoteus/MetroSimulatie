@@ -8,10 +8,8 @@
 #include "IMetroObjectException.h"
 
 class VUnhandleableMetroObjectException : public IMetroObjectException {
-protected:
-    const char* message;
 public:
-    VUnhandleableMetroObjectException(const char * msg) : message(msg) {}
+    VUnhandleableMetroObjectException(const char* msg) {message=msg;}
     virtual const char* what() const throw() {
         return message;
     }

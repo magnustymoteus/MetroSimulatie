@@ -7,6 +7,8 @@
 #include <iostream>
 #include <ctime>
 
+#include "Exceptions/MetronetInconsistentException.h"
+
 Metronet::Metronet(std::map<std::string, Station*> &newStations, std::multimap<int, Tram*> &newTrams) :
 fStations(newStations), fTrams(newTrams)
 {
@@ -33,7 +35,7 @@ Metronet::~Metronet() {
         delete iter->second;
     }
 }
-void sleep(const long &durationInSeconds) {
+void wait(const long &durationInSeconds) {
     clock_t now = clock();
     while(clock()-now < durationInSeconds*CLOCKS_PER_SEC);
 }
@@ -48,7 +50,7 @@ void Metronet::autoSimulate(const int &durationInSeconds) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     std::multimap<int, Tram*>::iterator iter = fTrams.begin();
     for(int i =0;i<durationInSeconds;i++) {
-        sleep(1);
+        wait(1);
         std::cout << "Step " << i+1 << ":\n";
         for(iter = fTrams.begin(); iter != fTrams.end(); iter++){
             std::cout << "\t";

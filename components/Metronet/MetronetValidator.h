@@ -6,6 +6,8 @@
 #define PROJECT_SOFTWARE_PRACTICUM2_METRONETVALIDATOR_H
 
 #include "MetroObject/IMetroObjectValidator.h"
+#include "Exceptions/MetronetInconsistentException.h"
+
 #include "Metronet.h"
 
 /**
@@ -22,10 +24,7 @@ private:
 protected:
     const Metronet* const fMetronet;
 
-    void stationsLinkCheck() const;
-    void lijnNrExistsCheck() const;
-    void tramForSpoorCheck() const;
-    void duplicateTramsCheck() const;
+    void noDuplicateTramsValidation() const;
 public:
     MetronetValidator(const Metronet* const &metronet);
 

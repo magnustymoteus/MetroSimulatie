@@ -8,8 +8,10 @@
 #include <exception>
 
 class IMetroObjectException : public std::exception {
+protected:
+    const char* message;
 public:
-    virtual const char* what() const throw() = 0;
+    virtual const char * what() const throw() = 0;
 };
 
 

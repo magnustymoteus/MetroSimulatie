@@ -6,8 +6,6 @@
 
 #include "Tram/TramValidator.h"
 
-std::string kNotConsistent = "The Metronet is not consistent!: ";
-
 MetronetValidator::MetronetValidator(const Metronet* const &metronet) : fMetronet(metronet) {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected MetronetValidator to be properly initialized in constructor!");
@@ -17,39 +15,24 @@ bool MetronetValidator::properlyInitialized() const {
     return _initCheck == this;
 }
 
-void MetronetValidator::stationsLinkCheck() const {
-    REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    // TODO
-}
-
-void MetronetValidator::lijnNrExistsCheck() const {
-    REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    // TODO
-}
-
-void MetronetValidator::tramForSpoorCheck() const {
-    REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    // TODO
-}
-void MetronetValidator::duplicateTramsCheck() const {
+void MetronetValidator::noDuplicateTramsValidation() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
     std::multimap<int, Tram*> trams = fMetronet->getTrams();
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin();iter!=trams.end();iter++) {
         for(std::multimap<int, Tram*>::const_iterator iter2 = trams.begin();iter2!=trams.end();iter2++) {
-            if(iter->second->getLijnNr() == iter2->second->getLijnNr()
-            && iter->second->getVoertuigNr() == iter2->second->getVoertuigNr() && iter->second != iter2->second)
-                std::cerr << kNotConsistent << "found duplicate Tram for "
-                << iter->second->getLijnNr() << "(" << iter->second->getVoertuigNr() << ")" << "\n";
+            const Tram* const tram1 = iter->second;
+            const Tram* const tram2 = iter2->second;
+            if(tram1 != tram2 && tram1->getLijnNr() == tram2->getLijnNr()) {
+                EXPECT_NOTHROW(tram1->getVoertuigNr() != tram2->getVoertuigNr(),
+                       MetronetInconsistentException("Duplicate trams found!"));
+                return;
+            }
         }
     }
 }
 void MetronetValidator::validate() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    duplicateTramsCheck();
-    tramForSpoorCheck();
-    lijnNrExistsCheck();
-    stationsLinkCheck();
-
+    noDuplicateTramsValidation();
     std::multimap<int, Tram*> trams = fMetronet->getTrams();
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin(); iter != trams.end(); iter++) {
         const Tram* const currentTram = iter->second;

@@ -7,7 +7,10 @@
 
 #include <iostream>
 
+
 #include "IMetroObject.h"
+
+#include "MetroObject/Exceptions/IMetroObjectException.h"
 #include "MetroObject/Exceptions/VHandleableMetroObjectException.h"
 #include "MetroObject/Exceptions/VUnhandleableMetroObjectException.h"
 
