@@ -22,7 +22,7 @@ bool MetronetImporter::properlyInitialized() const {
  * @param Metronet The given metro network
  * @return nothing (void function)
  */
-void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet &metronet) const {
+void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTrams!");
     TiXmlElement* currentElem = rootElem->FirstChildElement("TRAM");
     const std::map<std::string, TramType*> tramTypes = fTramTypeImporter.getSupportedTramTypes();
@@ -30,8 +30,8 @@ void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet &metronet) co
         Tram* tram = fTramImporter.parse(currentElem);
         TramType* tramType = tramTypes.at(currentElem->FirstChildElement("type")->GetText());
         tram->setType(tramType);
-        metronet.pushTram(tram);
-        Station* beginStation = metronet.retrieveStation(
+        metronet->pushTram(tram);
+        Station* beginStation = metronet->retrieveStation(
                 currentElem->FirstChildElement("beginStation")->GetText());
         if(beginStation) {
             tram->setBeginStation(beginStation);
@@ -48,7 +48,7 @@ void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet &metronet) co
  * @param Metronet The given metro network
  * @return nothing (void function)
  */
-void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet &metronet) const {
+void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet* &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStations!");
     TiXmlElement* currentElem = rootElem->FirstChildElement("STATION");
     std::map<std::string, Station*> stations;
@@ -59,7 +59,7 @@ void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet &metronet)
         stations.insert(std::make_pair(naam, station));
         currentElem = currentElem->NextSiblingElement("STATION");
     }
-    metronet.setStations(stations);
+    metronet->setStations(stations);
     currentElem = rootElem->FirstChildElement("STATION");
     while(currentElem) {
         TiXmlElement* currentSpoorElem = currentElem->FirstChildElement("SPOOR");
@@ -67,14 +67,18 @@ void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet &metronet)
         while(currentSpoorElem) {
             int spoorNr;
             std::istringstream(currentSpoorElem->FirstChildElement("spoorNr")->GetText()) >> spoorNr;
-            Station* vorige =
-                    metronet.retrieveStation(currentSpoorElem->FirstChildElement("vorige")->GetText());
-            Station* volgende =
-                    metronet.retrieveStation(currentSpoorElem->FirstChildElement("volgende")->GetText());
-            sporen.insert(std::make_pair(spoorNr, std::make_pair(vorige, volgende)));
+            const bool spoorNotFound = sporen.find(spoorNr) == sporen.end();
+            if(!spoorNotFound) metronet->setIsConsistent(false);
+            EXPECT_NOTHROW(spoorNotFound,
+                           MetronetInconsistentException("A station has one spoor more than once!"));
+                Station *vorige =
+                        metronet->retrieveStation(currentSpoorElem->FirstChildElement("vorige")->GetText());
+                Station *volgende =
+                        metronet->retrieveStation(currentSpoorElem->FirstChildElement("volgende")->GetText());
+                sporen.insert(std::make_pair(spoorNr, std::make_pair(vorige, volgende)));
             currentSpoorElem = currentSpoorElem->NextSiblingElement("SPOOR");
         }
-        metronet.retrieveStation(currentElem->FirstChildElement("naam")->GetText())->setSporen(
+        metronet->retrieveStation(currentElem->FirstChildElement("naam")->GetText())->setSporen(
                 sporen);
         currentElem = currentElem->NextSiblingElement("STATION");
     }
@@ -92,9 +96,9 @@ Metronet* MetronetImporter::parseFile(const std::string &relativeFilePath_str) {
     TiXmlElement* root = doc.RootElement();
     Metronet *metronet = new Metronet();
     metronet->setTramTypes(fTramTypeImporter.getSupportedTramTypes());
-    parseStations(root, *metronet);
-    parseTrams(root, *metronet);
+    parseStations(root, metronet);
+    parseTrams(root, metronet);
     MetronetValidator metronetValidator(metronet);
-    metronetValidator.validate();
+    metronet->setIsConsistent(metronetValidator.validate());
     return metronet;
 }

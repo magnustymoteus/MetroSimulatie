@@ -23,7 +23,7 @@ protected:
     std::string configPath;
 public:
     virtual std::string getInvalidationMessage(const std::string &error) const = 0;
-    virtual void validate() const = 0;
+    virtual bool validate() const = 0;
 };
 
 

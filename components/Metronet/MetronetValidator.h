@@ -24,14 +24,19 @@ private:
 protected:
     const Metronet* const fMetronet;
 
-    void noDuplicateTramsValidation() const;
+    bool noDuplicateTrams() const;
+    bool stationsLinked() const;
+    bool tramsHaveSpoor() const;
+    bool sporenHaveTrams() const;
+    bool tramsHaveValidBeginStation() const;
+    void validateTrams() const;
 public:
     MetronetValidator(const Metronet* const &metronet);
 
     bool properlyInitialized() const;
 
     std::string getInvalidationMessage(const std::string &error) const;
-    void validate() const;
+    bool validate() const;
 };
 
 

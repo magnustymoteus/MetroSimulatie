@@ -15,29 +15,49 @@ bool TramValidator::properlyInitialized() const {
 
 std::string TramValidator::getInvalidationMessage(const std::string &error) const {
     REQUIRE(properlyInitialized(), "Expected TramValidator to be properly initialized in getInvalidationMessage!");
-    return "Tram validation failed: "+error+"\n";
+    return "Tram validation failed: "+error;
 }
 
-void TramValidator::validate() const {
+bool TramValidator::validate() const {
     REQUIRE(properlyInitialized(), "Expected TramValidator to be properly initialized in validate!");
     const Tram* const &tram = fTramObject;
-    EXPECT(tram->getType(),
+    bool validated = true;
+    const bool tramHasType = tram->getType();
+    const bool tramHasVoertuigNr = tram->getVoertuigNr();
+    const bool tramHasLijnNr = tram->getLijnNr();
+    const bool tramHasHuidigeStation = tram->getHuidigeStation();
+    const bool tramHasBeginStation = tram->getBeginStation();
+
+    const bool tramHasVolgendeStation = tram->getVolgendeStation();
+    const bool tramHasVorigeStation  = tram->getVorigeStation();
+
+    const bool tramSupportsBeginStation = tram->supportsStation(tram->getBeginStation());
+    const bool tramSupportsHuidigeStation = tram->supportsStation(tram->getHuidigeStation());
+
+    EXPECT(tramHasType,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram type is null").c_str()));
-    EXPECT(tram->getVoertuigNr(),
+    EXPECT(tramHasVoertuigNr,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram voertuigNr is null").c_str()));
-    EXPECT(tram->getLijnNr(),
+    EXPECT(tramHasLijnNr,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram lijnNr is null").c_str()));
-    EXPECT(tram->getHuidigeStation(),
+    EXPECT(tramHasHuidigeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram huidigeStation is null").c_str()));
-    EXPECT(tram->getBeginStation(),
+    EXPECT(tramHasBeginStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram beginStation is null").c_str()));
-    EXPECT(tram->getVolgendeStation(),
+    EXPECT(tramSupportsBeginStation, VUnhandleableMetroObjectException(
+            getInvalidationMessage("Tram beginStation is not supported").c_str()));
+    EXPECT(tramSupportsHuidigeStation, VUnhandleableMetroObjectException(
+            getInvalidationMessage("Tram huidigeStation is not supported").c_str()));
+    EXPECT_NOTHROW(tramHasVolgendeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram volgendeStation is null").c_str()));
-    EXPECT(tram->getVorigeStation(),
+    EXPECT_NOTHROW(tramHasVorigeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram vorigeStation is null").c_str()));
 
-    EXPECT(tram->supportsStation(tram->getBeginStation()), VUnhandleableMetroObjectException(
-            getInvalidationMessage("Tram beginStation is not supported").c_str()));
-    EXPECT(tram->supportsStation(tram->getHuidigeStation()), VUnhandleableMetroObjectException(
-            getInvalidationMessage("Tram huidigeStation is not supported").c_str()));
+    const bool bools[] = {tramHasType, tramHasVoertuigNr, tramHasLijnNr, tramHasHuidigeStation,
+                           tramHasBeginStation, tramHasVolgendeStation, tramHasVorigeStation,
+                           tramSupportsBeginStation, tramSupportsHuidigeStation};
+    const unsigned int numOfBools = sizeof(bools)/sizeof(bools[0]);
+    for(unsigned int i =0;i<numOfBools;i++) validated = validated && bools[i];
+
+    return validated;
 }

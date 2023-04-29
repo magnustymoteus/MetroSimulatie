@@ -25,16 +25,19 @@ protected:
     std::map<std::string, Station*> fStations; // stations (name : Station*)
     std::multimap<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
     std::map<std::string, TramType*> fTramTypes;
+    bool isConsistent;
 public:
     bool properlyInitialized() const;
 
     std::multimap<int, Tram*> getTrams() const;
     std::map<std::string, Station*> getStations() const;
     std::map<std::string, TramType*> getTramTypes() const;
+    bool getIsConsistent() const;
 
     void setTrams(std::multimap<int, Tram*> &newTrams);
     void setStations(std::map<std::string, Station*> &newStations);
-    void setTramTypes(std::map<std::string, TramType *> newTramTypes);
+    void setTramTypes(const std::map<std::string, TramType *> &newTramTypes);
+    void setIsConsistent(const bool &newIsConsistent);
 
     bool isTramOnStation(const std::string &stationName, const int &spoorNr) const;
 

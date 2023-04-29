@@ -43,8 +43,8 @@ public:
 
     Metronet* parseFile(const std::string &relativeFilePath);
 
-    void parseStations(TiXmlElement* rootElem, Metronet &metronet) const;
-    void parseTrams(TiXmlElement* rootElem, Metronet &metronet) const;
+    void parseStations(TiXmlElement* rootElem, Metronet* &metronet) const;
+    void parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const;
 };
 
 

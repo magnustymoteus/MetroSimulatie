@@ -10,17 +10,28 @@
 #include "Exceptions/MetronetInconsistentException.h"
 
 Metronet::Metronet(std::map<std::string, Station*> &newStations, std::multimap<int, Tram*> &newTrams) :
-fStations(newStations), fTrams(newTrams)
+fStations(newStations), fTrams(newTrams), isConsistent(true)
 {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected Metronet to be properly initialized!");
 }
-Metronet::Metronet() {
+Metronet::Metronet() : isConsistent(true) {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected Metronet to be properly initialized!");
 }
 bool Metronet::properlyInitialized() const {
     return _initCheck == this;
+}
+
+void Metronet::setIsConsistent(const bool &newIsConsistent) {
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    isConsistent = newIsConsistent;
+    ENSURE(getIsConsistent() == isConsistent, "Expected isConsistent to equal to the setter value!");
+}
+
+bool Metronet::getIsConsistent() const {
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    return isConsistent;
 }
 
 Metronet::~Metronet() {
@@ -48,15 +59,18 @@ void Metronet::autoSimulate(const int &durationInSeconds) {
 
     // too simple, needs more parallelism in the future
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    std::multimap<int, Tram*>::iterator iter = fTrams.begin();
-    for(int i =0;i<durationInSeconds;i++) {
-        wait(1);
-        std::cout << "Step " << i+1 << ":\n";
-        for(iter = fTrams.begin(); iter != fTrams.end(); iter++){
-            std::cout << "\t";
-            moveTram(iter->second);
+    if(isConsistent) {
+        std::multimap<int, Tram *>::iterator iter = fTrams.begin();
+        for (int i = 0; i < durationInSeconds; i++) {
+            wait(1);
+            std::cout << "Stap " << i + 1 << ":\n";
+            for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+                std::cout << "\t";
+                moveTram(iter->second);
+            }
         }
     }
+    else std::cerr << "Cannot simulate an inconsistent metronet!" << std::endl;
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -69,10 +83,12 @@ bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorN
 void Metronet::pushStation(Station* station) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     fStations.insert(std::make_pair(station->getNaam(), station));
+    ENSURE(fStations.find(station->getNaam()) != fStations.end(), "Expected station to be pushed to fStations!");
 }
 void Metronet::pushTram(Tram* tram) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     fTrams.insert(std::make_pair(tram->getLijnNr(), tram));
+    ENSURE(fTrams.find(tram->getLijnNr()) != fTrams.end(), "Expected tram to be pushed to fTrams!");
 }
 bool Metronet::tramExists(const int &lijnNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -82,9 +98,10 @@ std::map<std::string, TramType*> Metronet::getTramTypes() const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     return fTramTypes;
 }
-void Metronet::setTramTypes(std::map<std::string, TramType *> newTramTypes) {
+void Metronet::setTramTypes(const std::map<std::string, TramType *> &newTramTypes) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     fTramTypes = newTramTypes;
+    ENSURE(getTramTypes() == newTramTypes, "Expected fTramTypes to equal to the setter value!");
 }
 void Metronet::moveTram(Tram* &tram, const int &steps) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -97,7 +114,8 @@ void Metronet::moveTram(Tram* &tram, const int &steps) const {
     " naar Station " << tram->getHuidigeStation()->getNaam() << " (" <<
     tram->getHuidigeStation()->getType() << ")" << ".\n";
 
-    if(skippedStations) std::cout << "\t\t" << skippedStations << " halte(s) genegeerd omdat tram daar niet mag stoppen.\n";
+    if(skippedStations) std::cout << "\t\t" << skippedStations <<
+    " halte(s) genegeerd omdat tram daar niet mag stoppen.\n";
 }
 Station* Metronet::retrieveStation(const std::string &naam) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -122,6 +140,7 @@ std::multimap<int, Tram*> Metronet::getTrams() const {
 void Metronet::setTrams(std::multimap<int, Tram*> &newTrams) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     fTrams = newTrams;
+    ENSURE(getTrams() == newTrams, "Expected fTrams to equal to setter value!");
 }
 
 std::map<std::string, Station *> Metronet::getStations() const {
@@ -131,4 +150,5 @@ std::map<std::string, Station *> Metronet::getStations() const {
 void Metronet::setStations(std::map<std::string, Station *> &newStations) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     fStations=newStations;
+    ENSURE(getStations() == newStations, "Expected fStations to equal to the setter value!");
 }

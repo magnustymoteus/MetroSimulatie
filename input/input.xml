@@ -48,9 +48,9 @@
 <beginStation>A</beginStation>
 </TRAM>
 <TRAM>
-<lijnNr>12</lijnNr>
+<lijnNr>21</lijnNr>
 <type>PCC</type>
 <voertuigNr>1</voertuigNr>
-<beginStation>C</beginStation>
+<beginStation>A</beginStation>
 </TRAM>
 </METRONET>

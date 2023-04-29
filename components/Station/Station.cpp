@@ -14,53 +14,61 @@ bool Station::properlyInitialized() const {
 }
 // getters
 std::string Station::getNaam() const {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getNaam!");
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     return fNaam;
 }
 Station* Station::getVolgende(const int &spoorNr) const {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getVolgende!");
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     return fSporen.at(spoorNr).second;
 }
 Station* Station::getVorige(const int &spoorNr) const {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getVorige!");
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     return fSporen.at(spoorNr).first;
 }
 
 std::pair<Station *, Station *> Station::getSpoor(const int &spoorNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     return fSporen.find(spoorNr)->second;
 }
 std::map<int, std::pair<Station *, Station *> > Station::getSporen() const {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     return fSporen;
+}
+const std::string &Station::getType() const {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getType!");
+    return fType;
 }
 
 // setters
 
 
 void Station::setSpoor(const int &spoorNr, const std::pair<Station *, Station *> &newSpoor) {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     fSporen.at(spoorNr) = newSpoor;
+    ENSURE(getSpoor(spoorNr) == newSpoor, "Expected spoor to equal to setter value!");
 }
 void Station::setSporen(const std::map<int, std::pair<Station *, Station *> > &newSporen) {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     fSporen = newSporen;
+    ENSURE(getSporen() == newSporen, "Expected getSporen() to equal to newSporen!");
 }
 void Station::setNaam(const std::string &newNaam) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setNaam!");
     fNaam = newNaam;
+    ENSURE(getNaam() == newNaam, "Expected getNaam() to equal to newNaam");
 }
 void Station::setVolgende(const int &spoorNr, Station *const &newVolgende) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVolgende!");
     fSporen.at(spoorNr).second = newVolgende;
+    ENSURE(getVolgende(spoorNr) == newVolgende, "Expected getVolgende to equal to newVolgende");
 }
 void Station::setVorige(const int &spoorNr, Station *const &newVorige) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVorige!");
     fSporen.at(spoorNr).first = newVorige;
+    ENSURE(getVorige(spoorNr) == newVorige, "Expected getVorige to equal to newVorige");
 }
-
-const std::string &Station::getType() const {
-    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getType!");
-    return fType;
-}
-
-void Station::setType(const std::string &type) {
+void Station::setType(const std::string &newType) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setType!");
-    fType = type;
+    fType = newType;
+    ENSURE(getType() == newType, "Expected getType to equal to newType");
 }

@@ -48,5 +48,8 @@ TramType* TramTypeImporter::parse(TiXmlElement *tramTypeElem) const {
         bedienden = bedienden->NextSiblingElement("bediende");
     }
     TramType* tramType = new TramType(naam, snelheid, bediendeStationTypes);
+    ENSURE(tramType->getNaam().c_str(), "Expected tramType to have a name!");
+    ENSURE(!tramType->getBediendeStationTypes().empty(), "Expected tramType to have non-empty bediendeStationTypes");
+    ENSURE(tramType->getSnelheid(), "Expected tramType to have snelheid");
     return tramType;
 }
