@@ -10,7 +10,7 @@
 #include "Tram/TramType/TramType.h"
 
 /**
- * This serves as a Tram in a metro.
+ * @brief This serves as a Tram in a metro.
  * @author Patryk Pilichowski
  * @author Daria Matviichuk
  * @date 06/03/2023

@@ -8,7 +8,7 @@
 #include "Metronet/Metronet.h"
 
 /**
- * This serves as the MetronetExporter, it outputs an instance of Metronet to a text file.
+ * @brief This serves as an exporter for an instance of Metronet which outputs information to a text file.
  * @author Patryk Pilichowski
  * @author Daria Matviichuk
  * @date 17/03/2023
@@ -19,10 +19,23 @@ class MetronetExporter {
 private:
     MetronetExporter* _initCheck;
 public:
-    MetronetExporter();
     bool properlyInitialized() const;
+    /**
+    * @brief Constructor of MetronetExporter
+    */
+    MetronetExporter();
 
+    /**
+    * @brief Outputs information of a Metronet instance to a .txt file.
+     * @param metronet The Metronet instance
+     * @param pathFile The file path where the text file must be outputted to.
+    */
     static void output(const Metronet* const &metronet, const std::string &pathFile);
+    /**
+    * @brief Outputs information of a Metronet instance in an "advanced" manner to a .txt file.
+     * @param metronet The Metronet instance
+     * @param pathFile The file path where the text file must be outputted to.
+    */
     static void outputAdvanced(const Metronet* const &metronet, const std::string &pathFile);
 };
 

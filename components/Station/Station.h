@@ -10,7 +10,7 @@
 #include "MetroObject/IMetroObject.h"
 
 /**
- * This serves as a metro Station.
+ * @brief This serves as a metro Station.
  * @author Patryk Pilichowski
  * @author Daria Matviichuk
  * @date 06/03/2023

@@ -9,7 +9,7 @@ int main() {
     // TODO: write contract description for each class and method
     // TODO: (maybe) a separate class for messages
     MetronetImporter parser;
-    Metronet* metronet = parser.parseFile("input/input.xml");
+    Metronet* metronet = parser.parseFile("input/multiple_tracks.xml");
     metronet->autoSimulate(7);
     MetronetExporter::output(metronet, "output/output.txt");
     MetronetExporter::outputAdvanced(metronet, "output/output_advanced.txt");

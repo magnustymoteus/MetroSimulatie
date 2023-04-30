@@ -51,45 +51,37 @@ void wait(const long &durationInSeconds) {
     while(clock()-now < durationInSeconds*CLOCKS_PER_SEC);
 }
 void Metronet::autoSimulate(const unsigned int &steps) {
-    /*
-     * This function simulates circulating of trams on the metro network
-     * @param durationInSeconds number of steps (1 step/sec) made by all trams
-     * @return nothing (void function)
-     * */
-
-    // too simple, needs more parallelism in the future
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     REQUIRE(steps>0, "Expected steps > 0");
-    if(isConsistent) {
-        std::multimap<int, Tram *>::iterator iter = fTrams.begin();
-        //Tram : (stepsUntilDefect, stepsUntilFixed), only stores trams of PCC type
-        std::map<Tram*, std::pair<unsigned int, unsigned int> > tramsDefectInfo;
+    REQUIRE(isConsistent, "Expected metronet to be consistent");
+    std::multimap<int, Tram *>::iterator iter = fTrams.begin();
+
+    //Tram : (stepsUntilDefect, stepsUntilFixed), only stores trams of PCC type
+    std::map<Tram*, std::pair<unsigned int, unsigned int> > tramsDefectInfo;
+    for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+        if(iter->second->getType()->getNaam() == "PCC")
+            tramsDefectInfo.insert(std::make_pair(iter->second, std::make_pair(
+                iter->second->getAantalDefecten(),iter->second->getReparatieTijd())));
+    }
+    for (unsigned int i = 0; i < steps; i++) {
+        wait(1);
+        std::cout << "Stap " << i + 1 << ":\n";
         for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
-            if(iter->second->getType()->getNaam() == "PCC")
-                tramsDefectInfo.insert(std::make_pair(iter->second, std::make_pair(
-                    iter->second->getAantalDefecten(),iter->second->getReparatieTijd())));
-        }
-        for (unsigned int i = 0; i < steps; i++) {
-            wait(1);
-            std::cout << "Stap " << i + 1 << ":\n";
-            for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
-                std::cout << "\t";
-                if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
-                    const unsigned int stepsUntilDefect =  tramsDefectInfo.at(iter->second).first;
-                    const unsigned int stepsUntilFixed =  tramsDefectInfo.at(iter->second).second;
-                    if(stepsUntilDefect) tramsDefectInfo.at(iter->second).first--;
-                    if(!tramsDefectInfo.at(iter->second).first && stepsUntilFixed) tramsDefectInfo.at(iter->second).second--;
-                    if(!stepsUntilDefect && !stepsUntilFixed) {
-                        tramsDefectInfo.at(iter->second).first = iter->second->getAantalDefecten();
-                        tramsDefectInfo.at(iter->second).second = iter->second->getReparatieTijd();
-                    }
-                    moveTram(iter->second, stepsUntilDefect>0);
+            std::cout << "\t";
+            if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
+                const unsigned int stepsUntilDefect =  tramsDefectInfo.at(iter->second).first;
+                const unsigned int stepsUntilFixed =  tramsDefectInfo.at(iter->second).second;
+                if(stepsUntilDefect) tramsDefectInfo.at(iter->second).first--;
+                if(!tramsDefectInfo.at(iter->second).first && stepsUntilFixed) tramsDefectInfo.at(iter->second).second--;
+                if(!stepsUntilDefect && !stepsUntilFixed) {
+                    tramsDefectInfo.at(iter->second).first = iter->second->getAantalDefecten();
+                    tramsDefectInfo.at(iter->second).second = iter->second->getReparatieTijd();
                 }
-                else moveTram(iter->second);
+                moveTram(iter->second, stepsUntilDefect>0);
             }
+            else moveTram(iter->second);
         }
     }
-    else std::cerr << "Cannot simulate an inconsistent metronet!" << std::endl;
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");

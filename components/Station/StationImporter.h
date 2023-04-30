@@ -9,6 +9,13 @@
 
 #include "Station.h"
 
+/**
+ * @brief An importer for Station
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
 
 class StationImporter :  protected VMetroObjectImporter {
 private:

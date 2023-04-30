@@ -10,6 +10,14 @@
 
 const std::string defaultTramTypesPath = "components/Tram/TramType/tramTypes.xml";
 
+/**
+ * @brief Importer for TramType
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
+
 class TramTypeImporter : protected VMetroObjectImporter {
 private:
     TramTypeImporter* _initCheck;

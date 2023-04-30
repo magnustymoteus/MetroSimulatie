@@ -7,6 +7,15 @@
 
 #include "MetroObject/IMetroObject.h"
 
+
+/**
+ * @brief Adds more information to Tram such as supported station types and the speed
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
+
 class TramType : public IMetroObject {
 private:
     TramType* _initCheck;

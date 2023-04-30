@@ -13,6 +13,14 @@
 
 #include "Tram/Tram.h"
 
+/**
+ * @brief Importer for Tram
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
+
 class TramImporter : protected VMetroObjectImporter {
 private:
     TramImporter* _initCheck;

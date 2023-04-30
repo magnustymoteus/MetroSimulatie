@@ -9,6 +9,14 @@
 
 #include "Tram/Tram.h"
 
+/**
+ * @brief Validator for Tram
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 06/03/2023
+ * @version 0.1
+ */
+
 class TramValidator : public IMetroObjectValidator {
 private:
     TramValidator* _initCheck;
