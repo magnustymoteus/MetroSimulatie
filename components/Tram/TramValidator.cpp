@@ -34,23 +34,23 @@ bool TramValidator::validate() const {
     const bool tramSupportsBeginStation = tram->supportsStation(tram->getBeginStation());
     const bool tramSupportsHuidigeStation = tram->supportsStation(tram->getHuidigeStation());
 
-    EXPECT(tramHasType,
+    THROW_IF_FALSE(tramHasType,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram type is null").c_str()));
-    EXPECT(tramHasVoertuigNr,
+    THROW_IF_FALSE(tramHasVoertuigNr,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram voertuigNr is null").c_str()));
-    EXPECT(tramHasLijnNr,
+    THROW_IF_FALSE(tramHasLijnNr,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram lijnNr is null").c_str()));
-    EXPECT(tramHasHuidigeStation,
+    THROW_IF_FALSE(tramHasHuidigeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram huidigeStation is null").c_str()));
-    EXPECT(tramHasBeginStation,
+    THROW_IF_FALSE(tramHasBeginStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram beginStation is null").c_str()));
-    EXPECT(tramSupportsBeginStation, VUnhandleableMetroObjectException(
+    THROW_IF_FALSE(tramSupportsBeginStation, VUnhandleableMetroObjectException(
             getInvalidationMessage("Tram beginStation is not supported").c_str()));
-    EXPECT(tramSupportsHuidigeStation, VUnhandleableMetroObjectException(
+    THROW_IF_FALSE(tramSupportsHuidigeStation, VUnhandleableMetroObjectException(
             getInvalidationMessage("Tram huidigeStation is not supported").c_str()));
-    EXPECT_NOTHROW(tramHasVolgendeStation,
+    CERR_IF_FALSE(tramHasVolgendeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram volgendeStation is null").c_str()));
-    EXPECT_NOTHROW(tramHasVorigeStation,
+    CERR_IF_FALSE(tramHasVorigeStation,
            VUnhandleableMetroObjectException(getInvalidationMessage("Tram vorigeStation is null").c_str()));
 
     const bool bools[] = {tramHasType, tramHasVoertuigNr, tramHasLijnNr, tramHasHuidigeStation,

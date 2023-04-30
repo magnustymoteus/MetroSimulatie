@@ -1,7 +1,7 @@
 //
 // Created by gruzi on 26/04/2023.
 //
-#include "Expect.h"
+#include "IfFalse.h"
 
 #include <iostream>
 
@@ -10,29 +10,29 @@
 #include "Metronet/Exceptions/MetronetInconsistentException.h"
 
 template<class ExceptionType>
-void expect(const bool &expected_condition, const ExceptionType &exception) {
+void throw_if_false(const bool &expected_condition, const ExceptionType &exception) {
     if(!expected_condition) {
         throw exception;
     }
 }
-template void expect<VUnhandleableMetroObjectException>
+template void throw_if_false<VUnhandleableMetroObjectException>
         (const bool &expected_condition, const VUnhandleableMetroObjectException &exception);
-template void expect<VHandleableMetroObjectException>
+template void throw_if_false<VHandleableMetroObjectException>
         (const bool &expected_condition, const VHandleableMetroObjectException &exception);
-template void expect<MetronetInconsistentException>
+template void throw_if_false<MetronetInconsistentException>
         (const bool &expected_condition, const MetronetInconsistentException &exception);
 
 template<class ExceptionType>
-void expect_nothrow(const bool &expected_condition, const ExceptionType &exception) {
+void cerr_if_false(const bool &expected_condition, const ExceptionType &exception) {
     if(!expected_condition) {
         std::cerr << exception.what() << std::endl;
     }
 }
-template void expect_nothrow<VUnhandleableMetroObjectException>
+template void cerr_if_false<VUnhandleableMetroObjectException>
         (const bool &expected_condition, const VUnhandleableMetroObjectException &exception);
-template void expect_nothrow<VHandleableMetroObjectException>
+template void cerr_if_false<VHandleableMetroObjectException>
         (const bool &expected_condition, const VHandleableMetroObjectException &exception);
-template void expect_nothrow<MetronetInconsistentException>
+template void cerr_if_false<MetronetInconsistentException>
         (const bool &expected_condition, const MetronetInconsistentException &exception);
 
 

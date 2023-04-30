@@ -45,7 +45,7 @@ public:
     Metronet();
     ~Metronet();
 
-    void moveTram(Tram* &tram, const int &steps=1) const;
+    void moveTram(Tram* &tram, const unsigned int &steps=1) const;
 
     void pushStation(Station* station);
     void pushTram(Tram* tram);
@@ -54,7 +54,7 @@ public:
     Tram* retrieveTram(const int &lijnNr, const int &voertuigNr) const;
     bool tramExists(const int &lijnNr) const;
 
-    void autoSimulate(const int &durationInSeconds);
+    void autoSimulate(const unsigned int &steps);
 };
 
 

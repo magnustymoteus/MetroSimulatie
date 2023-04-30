@@ -50,6 +50,8 @@
 <TRAM>
 <lijnNr>21</lijnNr>
 <type>PCC</type>
+<aantalDefecten>1</aantalDefecten>
+<reparatieTijd>3</reparatieTijd>
 <voertuigNr>1</voertuigNr>
 <beginStation>A</beginStation>
 </TRAM>

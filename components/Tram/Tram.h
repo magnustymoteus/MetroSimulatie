@@ -27,8 +27,10 @@ protected:
     Station* fBeginStation;
     Station* fHuidigeStation;
 
+    int fAantalDefecten;
+    int fReparatieTijd;
 public:
-    Tram(const int &lijnNr, const int &voertuigNr);
+    Tram(const int &lijnNr, const int &voertuigNr, const int &aantalDefecten=0, const int &reparatieTijd=0);
     bool properlyInitialized() const;
 
     int getLijnNr() const;
@@ -36,7 +38,12 @@ public:
     Station* getHuidigeStation() const;
     TramType* getType() const;
     int getVoertuigNr() const;
+    int getAantalDefecten() const;
+    int getReparatieTijd() const;
 
+
+    void setAantalDefecten(const int &newAantalDefecten);
+    void setReparatieTijd(const int &newReparatieTijd);
     void setVoertuigNr(const int &voertuigNr);
     void setType(TramType* &newType);
     void setLijnNr(const int &newLijnNr);
@@ -46,7 +53,7 @@ public:
     Station* getVorigeStation() const;
 
     unsigned int move();
-    unsigned int move(const int &steps);
+    unsigned int move(const unsigned int &steps);
     bool supportsStation(const Station* const &station) const;
 };
 

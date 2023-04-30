@@ -97,15 +97,15 @@ bool MetronetValidator::validate() const {
     const bool sprHaveTrams = sporenHaveTrams();
     const bool tramsHaveValidBeginSt = tramsHaveValidBeginStation();
 
-    EXPECT_NOTHROW(noDupTrams,
+    CERR_IF_FALSE(noDupTrams,
                    MetronetInconsistentException(getInvalidationMessage("Duplicate trams found!").c_str()));
-    EXPECT_NOTHROW(stopsLinked, MetronetInconsistentException(
+    CERR_IF_FALSE(stopsLinked, MetronetInconsistentException(
             getInvalidationMessage("Stations are not properly linked!").c_str()));
-    EXPECT_NOTHROW(tramsHaveSpr, MetronetInconsistentException(
+    CERR_IF_FALSE(tramsHaveSpr, MetronetInconsistentException(
             getInvalidationMessage("A tram doesn't have a corresponding spoor!").c_str()));
-    EXPECT_NOTHROW(sprHaveTrams, MetronetInconsistentException(
+    CERR_IF_FALSE(sprHaveTrams, MetronetInconsistentException(
             getInvalidationMessage("A spoor doesn't have a corresponding tram!").c_str()));
-    EXPECT_NOTHROW(tramsHaveValidBeginSt, MetronetInconsistentException(
+    CERR_IF_FALSE(tramsHaveValidBeginSt, MetronetInconsistentException(
             getInvalidationMessage("A tram doesn't have a valid beginStation!").c_str()));
 
     const bool bools[] = {noDupTrams, stopsLinked, tramsHaveSpr, sprHaveTrams,

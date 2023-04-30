@@ -24,8 +24,12 @@ public:
 
     std::string getNaam() const;
     int getSnelheid() const;
-    std::vector<std::string> getBediendeStationTypes();
+    std::vector<std::string> getBediendeStationTypes() const;
+    int getAantalDefecten() const;
+    int getReparatieTijd() const;;
 
+    void setAantalDefecten(const int &newDefecten);
+    void setReparatieTijd(const int &newReparatieTijd);
     void setNaam(const std::string &newNaam);
     void setSnelheid(const int &newSnelheid);
     void setBediendeStationTypes(const std::vector<std::string> &newBediendeStationTypes);

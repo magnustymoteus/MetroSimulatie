@@ -29,11 +29,12 @@ int TramType::getSnelheid() const {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized getSnelheid!");
     return fSnelheid;
 }
-
-std::vector<std::string> TramType::getBediendeStationTypes() {
+std::vector<std::string> TramType::getBediendeStationTypes() const {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized getBediendeStationTypes!");
     return fBediendeStationTypes;
 }
+
+
 
 void TramType::setNaam(const std::string &newNaam) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized setNaam!");

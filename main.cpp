@@ -10,7 +10,7 @@ int main() {
     // TODO: (maybe) a separate class for messages
     MetronetImporter parser;
     Metronet* metronet = parser.parseFile("input/input.xml");
-    metronet->autoSimulate(5);
+    metronet->autoSimulate(7);
     MetronetExporter::output(metronet, "output/output.txt");
     MetronetExporter::outputAdvanced(metronet, "output/output_advanced.txt");
     delete metronet;

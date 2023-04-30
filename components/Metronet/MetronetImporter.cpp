@@ -69,7 +69,7 @@ void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet* &metronet
             std::istringstream(currentSpoorElem->FirstChildElement("spoorNr")->GetText()) >> spoorNr;
             const bool spoorNotFound = sporen.find(spoorNr) == sporen.end();
             if(!spoorNotFound) metronet->setIsConsistent(false);
-            EXPECT_NOTHROW(spoorNotFound,
+            CERR_IF_FALSE(spoorNotFound,
                            MetronetInconsistentException("A station has one spoor more than once!"));
                 Station *vorige =
                         metronet->retrieveStation(currentSpoorElem->FirstChildElement("vorige")->GetText());

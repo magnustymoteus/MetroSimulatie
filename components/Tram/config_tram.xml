@@ -6,6 +6,8 @@
             <property>type</property>
             <property>voertuigNr</property>
             <property>beginStation</property>
+            <property>aantalDefecten</property>
+            <property>reparatieTijd</property>
         </properties>
     </tag>
 </SUPPORTED_TAGS>
