@@ -5,7 +5,7 @@
 #include "TramTypeImporter.h"
 
 #include "DesignByContract.h"
-\
+
 std::map<std::string, TramType *> TramTypeImporter::getSupportedTramTypes() const {
     REQUIRE(this->properlyInitialized(),
             "Expected MetronetImporter to be properly initialized!");

@@ -21,7 +21,7 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
     /*This function exports Metronet information to output.txt file
      * @param Metronet The metronetwork to save in txt-file
      * @param pathFile The relative path of the output file
-     * @return nothing (void functcion) */
+     * @return nothing (void function) */
     std::ofstream outputFile;
     outputFile.open(pathFile.c_str());
     // Write all stations to file
