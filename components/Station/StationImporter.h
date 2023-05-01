@@ -17,7 +17,7 @@
  * @version 0.1
  */
 
-class StationImporter :  protected VMetroObjectImporter {
+class StationImporter :  public VMetroObjectImporter {
 private:
     StationImporter* _initCheck;
 public:

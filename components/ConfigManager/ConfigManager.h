@@ -11,6 +11,15 @@ const std::string station_defaultConfigPath = "components/Station/config_station
 const std::string tramType_defaultConfigPath = "components/Tram/TramType/config_tramType.xml";
 const std::string tram_defaultConfigPath = "components/Tram/config_tram.xml";
 
+
+/**
+ * @brief Manages the default configuration file paths for IMetroObject instances.
+ * @author Patryk Pilichowski
+ * @author Daria Matviichuk
+ * @date 30/04/2023
+ * @version 0.1
+ */
+
 class ConfigManager {
 public:
     static std::string StationConfig() {return station_defaultConfigPath;}

@@ -18,7 +18,7 @@ class MetronetValidator; // forward declaration
  * @version 0.1
  */
 
-class Metronet : IMetroObject {
+class Metronet : public IMetroObject {
 private:
     Metronet* _initCheck;
 protected:

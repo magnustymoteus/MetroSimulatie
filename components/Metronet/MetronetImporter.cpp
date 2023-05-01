@@ -24,22 +24,24 @@ bool MetronetImporter::properlyInitialized() const {
  */
 void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTrams!");
-    TiXmlElement* currentElem = rootElem->FirstChildElement("TRAM");
+    TiXmlElement* currentElem = fTramImporter.getFirstChildTag(rootElem, "TRAM");
     const std::map<std::string, TramType*> tramTypes = fTramTypeImporter.getSupportedTramTypes();
     while(currentElem) {
         Tram* tram = fTramImporter.parse(currentElem);
-        TramType* tramType = tramTypes.at(currentElem->FirstChildElement("type")->GetText());
+        TramType* tramType = tramTypes.at(
+                getText(fTramImporter.getFirstChildProperty(currentElem, "type")));
         tram->setType(tramType);
         metronet->pushTram(tram);
         Station* beginStation = metronet->retrieveStation(
-                currentElem->FirstChildElement("beginStation")->GetText());
+                getText(fTramImporter.getFirstChildProperty(currentElem, "beginStation")));
         if(beginStation) {
             tram->setBeginStation(beginStation);
             tram->setHuidigeStation(beginStation);
         }
-        else std::cerr << "Could not find Station " << currentElem->FirstChildElement("beginStation")->GetText()
+        else std::cerr << "Could not find Station " <<
+        getText(fTramImporter.getFirstChildProperty(currentElem, "beginStation"))
         << " for Tram " << tram->getLijnNr() << "!\n";
-        currentElem = currentElem->NextSiblingElement("TRAM");
+        currentElem = fTramImporter.getNextSiblingTag(currentElem, "TRAM");
     }
 }
 /*
@@ -50,55 +52,59 @@ void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet* &metronet) c
  */
 void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet* &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStations!");
-    TiXmlElement* currentElem = rootElem->FirstChildElement("STATION");
+    TiXmlElement* currentElem = fStationImporter.getFirstChildTag(rootElem, "STATION");
     std::map<std::string, Station*> stations;
     while(currentElem) {
-        std::string naam = currentElem->FirstChildElement("naam")->GetText();
-        std::string type = currentElem->FirstChildElement("type")->GetText();
+        std::string naam = getText(fStationImporter.getFirstChildProperty(currentElem, "naam"));
+        std::string type = getText(fStationImporter.getFirstChildProperty(currentElem, "type"));
         Station* station = new Station(naam, type);
         stations.insert(std::make_pair(naam, station));
-        currentElem = currentElem->NextSiblingElement("STATION");
+        currentElem = fStationImporter.getNextSiblingTag(currentElem, "STATION");
     }
     metronet->setStations(stations);
-    currentElem = rootElem->FirstChildElement("STATION");
+    currentElem = fStationImporter.getFirstChildTag(rootElem, "STATION");
     while(currentElem) {
-        TiXmlElement* currentSpoorElem = currentElem->FirstChildElement("SPOOR");
+        TiXmlElement* currentSpoorElem = fStationImporter.getFirstChildProperty(currentElem, "SPOOR");
         std::map<int, std::pair<Station*, Station*> > sporen;
         while(currentSpoorElem) {
             int spoorNr;
-            std::istringstream(currentSpoorElem->FirstChildElement("spoorNr")->GetText()) >> spoorNr;
+            std::istringstream(
+                    getText(fStationImporter.getFirstChildProperty(
+                            currentSpoorElem, "spoorNr"))) >> spoorNr;
             const bool spoorNotFound = sporen.find(spoorNr) == sporen.end();
             if(!spoorNotFound) metronet->setIsConsistent(false);
             CERR_IF_FALSE(spoorNotFound,
                            MetronetInconsistentException("A station has one spoor more than once!"));
                 Station *vorige =
-                        metronet->retrieveStation(currentSpoorElem->FirstChildElement("vorige")->GetText());
+                        metronet->retrieveStation(getText(fStationImporter.getFirstChildProperty(
+                                currentSpoorElem, "vorige")));
                 Station *volgende =
-                        metronet->retrieveStation(currentSpoorElem->FirstChildElement("volgende")->GetText());
+                        metronet->retrieveStation(getText(fStationImporter.getFirstChildProperty(
+                                currentSpoorElem, "volgende")));
                 sporen.insert(std::make_pair(spoorNr, std::make_pair(vorige, volgende)));
-            currentSpoorElem = currentSpoorElem->NextSiblingElement("SPOOR");
+            currentSpoorElem = fStationImporter.getNextSiblingTag(currentSpoorElem, "SPOOR");
         }
-        metronet->retrieveStation(currentElem->FirstChildElement("naam")->GetText())->setSporen(
-                sporen);
-        currentElem = currentElem->NextSiblingElement("STATION");
+        metronet->retrieveStation(getText(fStationImporter.getFirstChildProperty(
+                currentElem, "naam")))->setSporen(sporen);
+        currentElem = fStationImporter.getNextSiblingTag(currentElem, "STATION");
     }
 }
-/*
- * This function retrieves information from the given XML file to the metro system
- * @param relativeFilePath_str The relative path to the parsed file
- * @return The resulted metro network
- */
-Metronet* MetronetImporter::parseFile(const std::string &relativeFilePath_str) {
+Metronet* MetronetImporter::parse(TiXmlElement* rootElem) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseFile!");
+    Metronet *metronet = new Metronet();
+    metronet->setTramTypes(fTramTypeImporter.getSupportedTramTypes());
+    parseStations(rootElem, metronet);
+    parseTrams(rootElem, metronet);
+    MetronetValidator metronetValidator(metronet);
+    metronet->setIsConsistent(metronetValidator.validate());
+    return metronet;
+}
+Metronet* MetronetImporter::parseFile(const std::string &relativeFilePath_str) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseFile!");
     const char *relativeFilePath = relativeFilePath_str.c_str();
     TiXmlDocument doc;
     REQUIRE(doc.LoadFile(relativeFilePath), "File expected to be loaded!");
     TiXmlElement* root = doc.RootElement();
-    Metronet *metronet = new Metronet();
-    metronet->setTramTypes(fTramTypeImporter.getSupportedTramTypes());
-    parseStations(root, metronet);
-    parseTrams(root, metronet);
-    MetronetValidator metronetValidator(metronet);
-    metronet->setIsConsistent(metronetValidator.validate());
+    Metronet* metronet = parse(root);
     return metronet;
 }

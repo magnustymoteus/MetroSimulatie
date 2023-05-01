@@ -14,16 +14,18 @@ bool TramImporter::properlyInitialized() const {
 Tram * TramImporter::parse(TiXmlElement *tramElem) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parse!");
     const std::string tramStr = "TRAM";
-    REQUIRE(tramElem->Value() == tramStr, "Expected tramElem to be Tram tag!");
+    REQUIRE(getValue(tramElem) == tramStr, "Expected tramElem to be Tram tag!");
 
     int lijnNr, voertuigNr, aantalDefecten=0, reparatieTijd=0;
-    std::istringstream(tramElem->FirstChildElement("lijnNr")->GetText()) >> lijnNr;
-    std::istringstream(tramElem->FirstChildElement("voertuigNr")->GetText()) >> voertuigNr;
+    std::istringstream(getText(getFirstChildProperty(tramElem, "lijnNr"))) >> lijnNr;
+    std::istringstream(getText(getFirstChildProperty(tramElem, "voertuigNr"))) >> voertuigNr;
 
     const std::string typeWithDefects = "PCC";
-    if(tramElem->FirstChildElement("type")->GetText() == typeWithDefects) {
-        std::istringstream(tramElem->FirstChildElement("aantalDefecten")->GetText()) >> aantalDefecten;
-        std::istringstream(tramElem->FirstChildElement("reparatieTijd")->GetText()) >> reparatieTijd;
+    if(getText(getFirstChildProperty(tramElem, "type")) == typeWithDefects) {
+        std::istringstream(getText(getFirstChildProperty(tramElem, "aantalDefecten")))
+        >> aantalDefecten;
+        std::istringstream(getText(getFirstChildProperty(tramElem, "reparatieTijd")))
+        >> reparatieTijd;
     }
     Tram* tram = new Tram(lijnNr, voertuigNr, aantalDefecten, reparatieTijd);
 

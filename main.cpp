@@ -2,11 +2,8 @@
 #include "Metronet/MetronetImporter.h"
 #include "components/Metronet/MetronetExporter.h"
 int main() {
-    // TODO: instead of ->FirstChildElement() / ->NextSiblingElement(),
-    //  implement our own function which does a cerr when the element isn't found
-    // TODO: hollywood principle for everything
     // TODO: more preconditions and postconditions for methods
-    // TODO: write contract description for each class and method
+    // TODO: hollywood principle for everything
     // TODO: (maybe) a separate class for messages
     MetronetImporter parser;
     Metronet* metronet = parser.parseFile("input/multiple_tracks.xml");

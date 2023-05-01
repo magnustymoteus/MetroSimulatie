@@ -52,5 +52,7 @@
         <type>PCC</type>
         <voertuigNr>1</voertuigNr>
         <beginStation>A</beginStation>
+        <aantalDefecten>1</aantalDefecten>
+        <reparatieTijd>3</reparatieTijd>
     </TRAM>
 </METRONET>

@@ -29,7 +29,7 @@
  * @version 0.1
  */
 
-class MetronetImporter {
+class MetronetImporter : VMetroObjectImporter {
 private:
     MetronetImporter* _initCheck;
 protected:
@@ -52,12 +52,14 @@ public:
      */
     MetronetImporter();
 
+    Metronet* parse(TiXmlElement* rootElem) const;
+
     /**
      * @brief Parses an xml file into a Metronet instance
      * @return An instance of Metronet
      * @param relativeFilePath The filepath of the xml file
      */
-    Metronet* parseFile(const std::string &relativeFilePath);
+    Metronet* parseFile(const std::string &relativeFilePath) const;
 
     /**
      * @brief Parses xml tags representing stations into multiple instances of Station and adds them to metronet

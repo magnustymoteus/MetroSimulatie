@@ -30,22 +30,23 @@ void TramTypeImporter::loadSupportedTramTypes() {
     while(currentElem) {
         TramType* tramType = parse(currentElem);
         fSupportedTramTypes.insert(std::make_pair(tramType->getNaam(), tramType));
-        currentElem = currentElem->NextSiblingElement("TRAM_TYPE");
+        currentElem = getNextSiblingTag(currentElem, "TRAM_TYPE");
     }
 }
 TramType* TramTypeImporter::parse(TiXmlElement *tramTypeElem) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parse!");
     const std::string tramStr = "TRAM_TYPE";
-    REQUIRE(tramTypeElem->Value() == tramStr, "Expected tramTypeElem to be TRAM_TYPE tag!");
-    const std::string naam = tramTypeElem->FirstChildElement("naam")->GetText();
+    REQUIRE(getValue(tramTypeElem) == tramStr, "Expected tramTypeElem to be TRAM_TYPE tag!");
+    const std::string naam = getText(getFirstChildProperty(tramTypeElem, "naam"));
     int snelheid;
     std::vector<std::string> bediendeStationTypes;
-    std::istringstream(tramTypeElem->FirstChildElement("snelheid")->GetText()) >> snelheid;
-    TiXmlElement* bedienden = tramTypeElem->FirstChildElement("bedient")->FirstChildElement("bediende");
+    std::istringstream(getText(getFirstChildProperty(tramTypeElem, "snelheid"))) >> snelheid;
+    TiXmlElement* bedienden = getFirstChildProperty(
+            getFirstChildProperty(tramTypeElem, "bedient"), "bediende");
     while(bedienden) {
-        const std::string bediende = bedienden->GetText();
+        const std::string bediende = getText(bedienden);
         bediendeStationTypes.push_back(bediende);
-        bedienden = bedienden->NextSiblingElement("bediende");
+        bedienden = getNextSiblingProperty(bedienden, "bediende");
     }
     TramType* tramType = new TramType(naam, snelheid, bediendeStationTypes);
     ENSURE(tramType->getNaam().c_str(), "Expected tramType to have a name!");

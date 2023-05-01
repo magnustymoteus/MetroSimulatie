@@ -7,6 +7,15 @@
             <property>volgende</property>
             <property>vorige</property>
             <property>spoorNr</property>
+            <property>SPOOR</property>
+        </properties>
+    </tag>
+    <tag>
+        <naam>SPOOR</naam>
+        <properties>
+            <property>spoorNr</property>
+            <property>volgende</property>
+            <property>vorige</property>
         </properties>
     </tag>
     <tag>

@@ -17,10 +17,10 @@ bool StationImporter::properlyInitialized() const {
 Station* StationImporter::parse(TiXmlElement *stationElem) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseStation!");
     const std::string stationStr = "STATION";
-    REQUIRE(stationElem->Value() == stationStr, "Expected stationElem to be Station tag!");
+    REQUIRE(getValue(stationElem) == stationStr, "Expected stationElem to be Station tag!");
 
-    std::string naam = stationElem->FirstChildElement("naam")->GetText();
-    std::string type = stationElem->FirstChildElement("type")->GetText();
+    std::string naam = getText(stationElem->FirstChildElement("naam"));
+    std::string type = getText(stationElem->FirstChildElement("type"));
     Station* station = new Station(naam, type);
 
     ENSURE(station->getNaam().c_str(), "Station expected to have a name!");

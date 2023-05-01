@@ -21,7 +21,7 @@
  * @version 0.1
  */
 
-class TramImporter : protected VMetroObjectImporter {
+class TramImporter : public VMetroObjectImporter {
 private:
     TramImporter* _initCheck;
 public:

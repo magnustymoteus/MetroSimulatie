@@ -20,27 +20,66 @@ class TramType : public IMetroObject {
 private:
     TramType* _initCheck;
 protected:
+    /**
+     * @brief The name of the tram type
+     */
     std::string fNaam;
+    /**
+     * @brief The speed of the tram type
+     */
     int fSnelheid;
+    /**
+     * @brief The stations that the tram type supports (can stop at)
+     */
     std::vector<std::string> fBediendeStationTypes;
 public:
+    bool properlyInitialized() const;
+    /**
+     * @brief The constructor which sets the name, speed and supported station types
+     * @param newNaam the name
+     * @param newSnelheid the speed
+     * @param newBediendeStationTypes the supported station types
+     */
     TramType(const std::string &newNaam, const int &newSnelheid,
              const std::vector<std::string> &newBediendeStationTypes);
 
-    bool properlyInitialized() const;
 
+    /**
+     * @brief Checks whether the tram type supports a specific station type
+     * @param stationType the station type
+     * @return a boolean denoting if the station type is supported
+     */
     bool supportsStationType(const std::string &stationType) const;
 
+    /**
+     * @brief Returns the name of the tram type
+     * @return the name of the tram type
+     */
     std::string getNaam() const;
+    /**
+     * @brief Returns the speec of the tram type
+     * @return The speed
+     */
     int getSnelheid() const;
+    /**
+     * @brief Returns all supported station types
+     * @return All station types supported by this tram type
+     */
     std::vector<std::string> getBediendeStationTypes() const;
-    int getAantalDefecten() const;
-    int getReparatieTijd() const;;
-
-    void setAantalDefecten(const int &newDefecten);
-    void setReparatieTijd(const int &newReparatieTijd);
+    /**
+     * @brief Sets the name of the tram type to a new value
+     * @param newNaam the new value
+     */
     void setNaam(const std::string &newNaam);
+    /**
+     * @brief Sets the speed of the tram type to a new value
+     * @param newSnelheid The new value
+     */
     void setSnelheid(const int &newSnelheid);
+    /**
+     * @brief Sets the supported station types to a new value
+     * @param newBediendeStationTypes the new value
+     */
     void setBediendeStationTypes(const std::vector<std::string> &newBediendeStationTypes);
 };
 

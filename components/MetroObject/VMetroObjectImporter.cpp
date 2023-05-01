@@ -14,6 +14,10 @@ VMetroObjectImporter::VMetroObjectImporter(const std::string &configFilePath) {
     ENSURE(properlyInitialized(), "Expected MetronetImporter to be properly initialized in constructor!");
     ENSURE(doc.LoadFile(configPath.c_str()), "Expected configPath to load!");
 }
+VMetroObjectImporter::VMetroObjectImporter() {
+    _initCheck = this;
+    ENSURE(properlyInitialized(), "Expected MetronetImporter to be properly initialized in constructor!");
+}
 
 bool VMetroObjectImporter::properlyInitialized() const {
     return _initCheck == this;
@@ -60,8 +64,50 @@ void VMetroObjectImporter::loadSupportedTags(const std::string &configFilePath) 
         currentElem = currentElem->NextSiblingElement();
     }
 }
+std::string VMetroObjectImporter::getValue(TiXmlElement *elem) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
+    REQUIRE(elem, "Expected element to not be null!");
+    return elem->Value();
+}
+std::string VMetroObjectImporter::getText(TiXmlElement *elem) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
+    REQUIRE(elem, "Expected element to not be null!");
+    return elem->GetText();
+}
 void VMetroObjectImporter::loadSupportedTags() {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
     loadSupportedTags(configPath);
+}
+TiXmlElement* VMetroObjectImporter::getNextSiblingProperty(TiXmlElement *elem, const std::string &propertyName) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
+    const std::string notSupportedPropertyStr1 = "Expected property '"+std::string(elem->Value())+"' to be supported!";
+    REQUIRE(isPropertySupported(elem->Parent()->Value(), elem->Value()),
+            notSupportedPropertyStr1.c_str());
+    const std::string notSupportedPropertyStr2 =  "Expected property '"+propertyName+"' to be supported!";
+    CERR_IF_FALSE(isPropertySupported(elem->Parent()->Value(), propertyName),
+                  VHandleableMetroObjectException(notSupportedPropertyStr2.c_str()));
+    return elem->NextSiblingElement(propertyName.c_str());
+}
+TiXmlElement* VMetroObjectImporter::getNextSiblingTag(TiXmlElement *elem, const std::string &tagName) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
+    const std::string notSupportedStr = "'"+tagName+"' tag is not supported!";
+    CERR_IF_FALSE(isTagSupported(tagName), VHandleableMetroObjectException(notSupportedStr.c_str()));
+    return elem->NextSiblingElement(tagName.c_str());
+}
+TiXmlElement *VMetroObjectImporter::getFirstChildProperty(TiXmlElement *elem, const std::string &propertyName) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
+    const std::string notSupportedTagStr = "Expected tag '"+std::string(elem->Value())+"' to be supported!";
+    REQUIRE(isTagSupported(elem->Value()), notSupportedTagStr.c_str());
+    const std::string notSupportedPropertyStr =  "Expected property '"+propertyName+"' to be supported!";
+    CERR_IF_FALSE(isPropertySupported(elem->Value(), propertyName),
+                  VHandleableMetroObjectException(notSupportedPropertyStr.c_str()));
+    return elem->FirstChildElement(propertyName.c_str());
+}
+TiXmlElement *VMetroObjectImporter::getFirstChildTag(TiXmlElement* elem, const std::string &tagName) const {
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in loadSupportedTags!");
+    const std::string notSupportedStr = "'"+tagName+"' tag is not supported!";
+    CERR_IF_FALSE(isTagSupported(tagName), VHandleableMetroObjectException(notSupportedStr.c_str()));
+    return elem->FirstChildElement(tagName.c_str());
 }
 
 bool VMetroObjectImporter::isPropertySupported(const std::string &tagName, const std::string &propertyName) const {

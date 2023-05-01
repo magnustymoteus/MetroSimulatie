@@ -14,8 +14,10 @@
 #include "tinyxml/tinyxml.h"
 
 #include "IMetroObject.h"
+#include "Exceptions/VHandleableMetroObjectException.h"
 
 #include "DesignByContract.h"
+#include "IfFalse.h"
 
 /**
  * @brief An importer for IMetroObject
@@ -34,10 +36,55 @@ protected:
 public:
     bool properlyInitialized() const;
     /**
+     * @brief Returns the value of an XML element (the name of the tag itself)
+     * @param elem The XML element
+     * @return The value of the element
+     * @pre elem is not null
+     */
+    std::string getValue(TiXmlElement* elem) const;
+    /**
+     * @brief Returns the text in an XML element
+     * @param elem The XML element
+     * @return The text of the element
+     * @pre elem is not null
+     */
+    std::string getText(TiXmlElement* elem) const;
+    /**
+     * @brief returns the next sibling element of an xml element
+     * @param elem The current xml element
+     * @param tagName The name of the first child element to be found if it's supported
+     * @pre The tag (sibling) of the property must be supported
+     * @return The next sibling element
+     */
+    TiXmlElement* getNextSiblingProperty(TiXmlElement* elem, const std::string &propertyName) const;
+    /**
+    * @brief returns the next sibling tag
+    * @param elem The current xml element
+    * @param tagName The tag name of the next sibling element
+    * @return The next sibling element
+    */
+    TiXmlElement* getNextSiblingTag(TiXmlElement* elem, const std::string &tagName) const;
+    /**
+     * @brief returns the first child element of an xml element only if the property of the tag is supported
+     * @param elem The current xml element
+     * @param tagName The name of the first child element to be found if it's supported
+     * @pre The tag (parent) of the property must be supported
+     * @return The first child element
+     */
+    TiXmlElement* getFirstChildProperty(TiXmlElement* elem, const std::string &propertyName) const;
+    /**
+     * @brief returns the first child element of an xml element only if the tag is supported
+     * @param elem The current xml element
+     * @param tagName The name of the first child element to be found if it's supported
+     * @return The first child element
+     */
+    TiXmlElement* getFirstChildTag(TiXmlElement* elem, const std::string &tagName) const;
+    /**
      * @brief Initializes the config path and calls loadSupportedTags()
      * @param configFilePath The path to the config file of the IMetroObject
      */
     VMetroObjectImporter(const std::string &configFilePath);
+    VMetroObjectImporter();
 
     /**
      * @brief Sets the config path to the new value
