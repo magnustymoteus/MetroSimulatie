@@ -2,6 +2,7 @@
 #include "Metronet/MetronetImporter.h"
 #include "components/Metronet/MetronetExporter.h"
 int main() {
+    // TODO: only Metrostation type must support multiple tracks (sporen)
     // TODO: more preconditions and postconditions for methods
     // TODO: hollywood principle for everything
     // TODO: (maybe) a separate class for messages
