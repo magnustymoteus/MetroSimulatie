@@ -4,8 +4,7 @@
 int main() {
     // TODO: only Metrostation type must support multiple tracks (sporen)
     // TODO: more preconditions and postconditions for methods
-    // TODO: hollywood principle for everything
-    // TODO: (maybe) a separate class for messages
+    // TODO: write tests for everything
     MetronetImporter parser;
     Metronet* metronet = parser.parseFile("input/multiple_tracks.xml");
     metronet->autoSimulate(7);

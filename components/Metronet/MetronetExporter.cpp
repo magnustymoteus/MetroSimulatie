@@ -51,6 +51,10 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
         outputFile << "\ttype: " << current->getType()->getNaam() << "\n";
         outputFile << "\tsnelheid: " << current->getType()->getSnelheid() << "\n";
         outputFile << "\thuidig station: " << current->getHuidigeStation()->getNaam() << "\n";
+        if(current->getAantalDefecten() && current->getReparatieTijd()) {
+            outputFile << "\taantal defecten: " << current->getAantalDefecten() << "\n";
+            outputFile << "\treparatie tijd: " << current->getReparatieTijd() << "\n";
+        }
     }
     // Close file
     outputFile.close();
