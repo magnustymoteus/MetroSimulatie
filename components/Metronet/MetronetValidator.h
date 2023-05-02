@@ -55,8 +55,14 @@ protected:
     bool tramsHaveValidBeginStation() const;
     /**
     * @brief For all trams calls the function validate() of a TramValidator instance
+    * @return A boolean denoting if all trams are valid
     * */
-    void validateTrams() const;
+    bool validateTrams() const;
+    /**
+     * @brief For all stations calls the function validate() of a StationValidator instance
+     * @return A boolean denoting if all stations are valid
+     */
+    bool validateStations() const;
 public:
     bool properlyInitialized() const;
 
@@ -74,7 +80,7 @@ public:
     std::string getInvalidationMessage(const std::string &error) const;
     /**
     * @brief Validates an instance of Metronet
-     * @return A boolean denoting if the Metronet instance is valid or not
+    * @return A boolean denoting if the Metronet instance is valid or not
     * */
     bool validate() const;
 };

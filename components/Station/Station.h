@@ -77,8 +77,15 @@ public:
      * @brief Returns a specific track of the station based on the given track number
      * @param spoorNr The given track number
      * @return The track with that track number
+     * @pre Spoor exists
      */
     std::pair<Station*, Station*> getSpoor(const int &spoorNr) const;
+    /**
+     * @brief Checks if a certain track exits
+     * @param spoorNr the track number
+     * @return A boolean denoting if the track exists
+     */
+    bool spoorExists(const int &spoorNr) const;
 
     // setters
     /**

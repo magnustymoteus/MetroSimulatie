@@ -37,18 +37,22 @@ int Tram::getReparatieTijd() const {
 void Tram::setAantalDefecten(const int &newAantalDefecten) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized!");
     fAantalDefecten = newAantalDefecten;
+    ENSURE(getAantalDefecten() == newAantalDefecten, "Expected aantalDefecten to equal to the new value");
 }
 void Tram::setReparatieTijd(const int &newReparatieTijd) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized!");
     fReparatieTijd = newReparatieTijd;
+    ENSURE(getReparatieTijd() == newReparatieTijd, "Expected reparatieTijd to equal to the new value");
 }
 void Tram::setLijnNr(const int &newLijnNr) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in setLijnNr!");
     fLijnNr = newLijnNr;
+    ENSURE(getLijnNr() == newLijnNr, "Expected lijnNr to equal to the new value");
 }
 void Tram::setBeginStation(Station *const &newBeginStation) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in setBeginStation!");
     fBeginStation = newBeginStation;
+    ENSURE(getBeginStation() == newBeginStation, "Expected beginStation to equal to the new value!");
 }
 
 Station *Tram::getHuidigeStation() const {
@@ -57,7 +61,8 @@ Station *Tram::getHuidigeStation() const {
 }
 void Tram::setHuidigeStation(Station* newHuidigeStation) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in setHuidigeStation!");
-    Tram::fHuidigeStation = newHuidigeStation;
+    fHuidigeStation = newHuidigeStation;
+    ENSURE(getHuidigeStation() == newHuidigeStation, "Expected huidigeStation to equal to the new value!");
 }
 Station* Tram::getVolgendeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVolgendeStation!");
@@ -86,6 +91,7 @@ unsigned int Tram::move(const unsigned int &steps) {
     return skippedStations;
 }
 bool Tram::supportsStation(const Station *const &station) const {
+    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getType!");
     return fType->supportsStationType(station->getType());
 }
 
@@ -97,6 +103,7 @@ TramType* Tram::getType() const {
 void Tram::setType(TramType* &type) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in setType!");
     fType = type;
+    ENSURE(getType() == type, "Expected type to equal to the new value");
 }
 
 int Tram::getVoertuigNr() const {
@@ -106,5 +113,6 @@ int Tram::getVoertuigNr() const {
 
 void Tram::setVoertuigNr(const int& voertuigNr) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in setVoertuigNr!");
-    Tram::fVoertuigNr = voertuigNr;
+    fVoertuigNr = voertuigNr;
+    ENSURE(getVoertuigNr() == voertuigNr, "Expected voertuigNr to equal to the new value");
 }

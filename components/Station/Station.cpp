@@ -19,16 +19,18 @@ std::string Station::getNaam() const {
 }
 Station* Station::getVolgende(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    return fSporen.at(spoorNr).second;
+    return getSpoor(spoorNr).second;
 }
 Station* Station::getVorige(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    return fSporen.at(spoorNr).first;
+    return getSpoor(spoorNr).first;
 }
 
 std::pair<Station *, Station *> Station::getSpoor(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    return fSporen.find(spoorNr)->second;
+    std::map<int, std::pair<Station*, Station*> >::const_iterator spoor = fSporen.find(spoorNr);
+    REQUIRE(spoor != fSporen.end(), "Expected spoor to exist!");
+    return spoor->second;
 }
 std::map<int, std::pair<Station *, Station *> > Station::getSporen() const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
@@ -38,7 +40,10 @@ const std::string &Station::getType() const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in getType!");
     return fType;
 }
-
+bool Station::spoorExists(const int &spoorNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
+    return fSporen.find(spoorNr) != fSporen.end();
+}
 // setters
 
 

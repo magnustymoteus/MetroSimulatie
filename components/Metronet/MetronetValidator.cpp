@@ -5,6 +5,7 @@
 #include "MetronetValidator.h"
 
 #include "Tram/TramValidator.h"
+#include "Station/StationValidator.h"
 
 MetronetValidator::MetronetValidator(const Metronet* const &metronet) : fMetronet(metronet) {
     _initCheck = this;
@@ -44,8 +45,15 @@ bool MetronetValidator::stationsLinked() const {
         const std::map<int, std::pair<Station*, Station*> > &sporen = iter->second->getSporen();
         for(std::map<int, std::pair<Station*, Station*> >::const_iterator iter2 = sporen.begin();
         iter2 != sporen.end(); iter2++) {
-            if(!iter->second->getVolgende(iter2->first)) return false;
-            if(!iter->second->getVorige(iter2->first)) return false;
+            Station* volgende = iter->second->getVolgende(iter2->first);
+            Station* vorige = iter->second->getVorige(iter2->first);
+            if(!volgende || !vorige) return false;
+            const bool bools[] = {volgende->spoorExists(iter2->first),
+                                  vorige->spoorExists(iter2->first),
+                                  volgende->getVorige(iter2->first) == iter->second,
+                                  vorige->getVolgende(iter2->first) == iter->second};
+            const unsigned int numOfBools = sizeof(bools)/sizeof(bools[0]);
+            for(unsigned int i=0;i<numOfBools;i++) if(!bools[i]) return false;
         }
     }
     return true;
@@ -79,14 +87,27 @@ bool MetronetValidator::tramsHaveSpoor() const {
     }
     return true;
 }
-void MetronetValidator::validateTrams() const {
+bool MetronetValidator::validateTrams() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
     const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+    bool validated = true;
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin(); iter != trams.end(); iter++) {
         const Tram* const currentTram = iter->second;
         TramValidator tramValidator(currentTram);
-        tramValidator.validate();
+        validated = validated && tramValidator.validate();
     }
+    return validated;
+}
+bool MetronetValidator::validateStations() const {
+    REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
+    const std::map<std::string, Station*> &stations = fMetronet->getStations();
+    bool validated = true;
+    for(std::map<std::string, Station*>::const_iterator iter = stations.begin(); iter != stations.end(); iter++) {
+        const Station* const currentStation = iter->second;
+        StationValidator stationValidator(currentStation);
+        validated = validated && stationValidator.validate();
+    }
+    return validated;
 }
 bool MetronetValidator::validate() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
@@ -96,6 +117,8 @@ bool MetronetValidator::validate() const {
     const bool tramsHaveSpr = tramsHaveSpoor();
     const bool sprHaveTrams = sporenHaveTrams();
     const bool tramsHaveValidBeginSt = tramsHaveValidBeginStation();
+    const bool tramsAreValid = validateTrams();
+    const bool stationsAreValid = validateStations();
 
     CERR_IF_FALSE(noDupTrams,
                    MetronetInconsistentException(getInvalidationMessage("Duplicate trams found!").c_str()));
@@ -108,11 +131,15 @@ bool MetronetValidator::validate() const {
     CERR_IF_FALSE(tramsHaveValidBeginSt, MetronetInconsistentException(
             getInvalidationMessage("A tram doesn't have a valid beginStation!").c_str()));
 
+    THROW_IF_FALSE(tramsAreValid, VUnhandleableMetroObjectException(
+            getInvalidationMessage("A tram isn't valid!").c_str()));
+    THROW_IF_FALSE(stationsAreValid, VUnhandleableMetroObjectException(
+            getInvalidationMessage("A station isn't valid!").c_str()));
+
     const bool bools[] = {noDupTrams, stopsLinked, tramsHaveSpr, sprHaveTrams,
-                          tramsHaveValidBeginSt};
+                          tramsHaveValidBeginSt, tramsAreValid, stationsAreValid};
     const unsigned int numOfBools = sizeof(bools)/sizeof(bools[0]);
     for(unsigned int i=0;i<numOfBools;i++) consistent = consistent && bools[i];
-    validateTrams();
     return consistent;
 }
 std::string MetronetValidator::getInvalidationMessage(const std::string &error) const {

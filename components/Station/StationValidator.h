@@ -31,7 +31,7 @@ public:
 
     std::string getInvalidationMessage(const std::string &error) const;
 
-    //void validate() const;
+    bool validate() const;
 };
 
 

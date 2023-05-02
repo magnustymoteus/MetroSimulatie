@@ -53,7 +53,7 @@ void wait(const long &durationInSeconds) {
 void Metronet::autoSimulate(const unsigned int &steps) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     REQUIRE(steps>0, "Expected steps > 0");
-    REQUIRE(isConsistent, "Expected metronet to be consistent");
+    REQUIRE(isConsistent, "Expected metronet to be consistent in a simulation!");
     std::multimap<int, Tram *>::iterator iter = fTrams.begin();
 
     //Tram : (stepsUntilDefect, stepsUntilFixed), only stores trams of PCC type
@@ -85,6 +85,8 @@ void Metronet::autoSimulate(const unsigned int &steps) {
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    REQUIRE(fStations.find(stationName) != fStations.end(), "Expected the station to exist in metronet!");
+    REQUIRE(fStations.at(stationName)->spoorExists(spoorNr), "Expected the station to have the given spoorNr!");
     for(std::multimap<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
         Station* huidigeStation = iter->second->getHuidigeStation();
         if(iter->second->getLijnNr() == spoorNr && huidigeStation->getNaam() == stationName) return true;
@@ -128,7 +130,7 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
 
         if (skippedStations)
             std::cout << "\t\t" << skippedStations <<
-                      " halte(s) genegeerd omdat tram daar niet mag stoppen.\n";
+                      " halte(s) genegeerd omdat een " << tram->getType()->getNaam() << " daar niet mag stoppen.\n";
     }
     else {
         std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tram->getType()->getNaam() <<
@@ -137,7 +139,8 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
 }
 Station* Metronet::retrieveStation(const std::string &naam) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    return fStations.find(naam)->second;
+    if(fStations.find(naam) == fStations.end()) return 0;
+    return fStations.at(naam);
 }
 Tram* Metronet::retrieveTram(const int &lijnNr, const int &voertuigNr) const{
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");

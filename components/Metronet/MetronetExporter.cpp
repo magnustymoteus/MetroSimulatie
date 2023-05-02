@@ -18,13 +18,9 @@ bool MetronetExporter::properlyInitialized() const {
 }
 
 void MetronetExporter::output(const Metronet* const &metronet, const std::string &pathFile) {
-    /*This function exports Metronet information to output.txt file
-     * @param Metronet The metronetwork to save in txt-file
-     * @param pathFile The relative path of the output file
-     * @return nothing (void function) */
+    REQUIRE(metronet->getIsConsistent(), "Expected metronet to be consistent before exporting!");
     std::ofstream outputFile;
     outputFile.open(pathFile.c_str());
-    // Write all stations to file
     std::map<std::string, Station*> stations = metronet->getStations();
     std::multimap<int, Tram*> fTrams = metronet->getTrams();
     for(std::map<std::string,Station*>::const_iterator iteratorIntStation = stations.begin(); iteratorIntStation != stations.end();
@@ -60,6 +56,7 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
     outputFile.close();
 }
 void MetronetExporter::outputAdvanced(const Metronet *const &metronet, const std::string &pathFile) {
+    REQUIRE(metronet->getIsConsistent(), "Expected metronet to be consistent before exporting!");
     std::ofstream outputFile;
     outputFile.open(pathFile.c_str());
     std::multimap<int, Tram*> trams = metronet->getTrams();

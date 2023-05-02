@@ -4,9 +4,6 @@
         <properties>
             <property>naam</property>
             <property>type</property>
-            <property>volgende</property>
-            <property>vorige</property>
-            <property>spoorNr</property>
             <property>SPOOR</property>
         </properties>
     </tag>

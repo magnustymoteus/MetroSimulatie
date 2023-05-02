@@ -88,6 +88,8 @@ public:
     * @param stationName the name of the station
      *@param spoorNr the track number of the station
      * @return Boolean denoting if there is a tram currently stopping on a station
+     * @pre Station is valid
+     * @pre Station has the given track number
     */
     bool isTramOnStation(const std::string &stationName, const int &spoorNr) const;
 
@@ -118,11 +120,13 @@ public:
     /**
     * @brief Adds a station to the metronet
     * @param station The station that must be added
+     *@post new Station instance has been added to the stations
     */
     void pushStation(Station* station);
     /**
     * @brief Adds a tram to the metronet
     * @param tram the tram that must be added
+     *@post new Tram instance has been added to the trams
     */
     void pushTram(Tram* tram);
 

@@ -35,7 +35,6 @@ std::vector<std::string> TramType::getBediendeStationTypes() const {
 }
 
 
-
 void TramType::setNaam(const std::string &newNaam) {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized setNaam!");
     fNaam = newNaam;

@@ -2,11 +2,10 @@
 #include "Metronet/MetronetImporter.h"
 #include "components/Metronet/MetronetExporter.h"
 int main() {
-    // TODO: only Metrostation type must support multiple tracks (sporen)
     // TODO: more preconditions and postconditions for methods
     // TODO: write tests for everything
     MetronetImporter parser;
-    Metronet* metronet = parser.parseFile("input/multiple_tracks.xml");
+    Metronet* metronet = parser.parseFile("input/input.xml");
     metronet->autoSimulate(7);
     MetronetExporter::output(metronet, "output/output.txt");
     MetronetExporter::outputAdvanced(metronet, "output/output_advanced.txt");
