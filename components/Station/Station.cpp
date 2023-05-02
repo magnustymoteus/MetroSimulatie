@@ -49,6 +49,7 @@ bool Station::spoorExists(const int &spoorNr) const {
 
 void Station::setSpoor(const int &spoorNr, const std::pair<Station *, Station *> &newSpoor) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
+    REQUIRE(fSporen.find(spoorNr) != fSporen.end(), "Expected spoor to exist!");
     fSporen.at(spoorNr) = newSpoor;
     ENSURE(getSpoor(spoorNr) == newSpoor, "Expected spoor to equal to setter value!");
 }
@@ -64,11 +65,13 @@ void Station::setNaam(const std::string &newNaam) {
 }
 void Station::setVolgende(const int &spoorNr, Station *const &newVolgende) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVolgende!");
+    REQUIRE(fSporen.find(spoorNr) != fSporen.end(), "Expected spoor to exist!");
     fSporen.at(spoorNr).second = newVolgende;
     ENSURE(getVolgende(spoorNr) == newVolgende, "Expected getVolgende to equal to newVolgende");
 }
 void Station::setVorige(const int &spoorNr, Station *const &newVorige) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVorige!");
+    REQUIRE(fSporen.find(spoorNr) != fSporen.end(), "Expected spoor to exist!");
     fSporen.at(spoorNr).first = newVorige;
     ENSURE(getVorige(spoorNr) == newVorige, "Expected getVorige to equal to newVorige");
 }

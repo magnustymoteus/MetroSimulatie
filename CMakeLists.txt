@@ -16,11 +16,11 @@ include_directories(gtest/googlemock/include)
 include_directories(tools)
 include_directories(components)
 
-FILE(GLOB SOURCES "components/*/*.cpp" "components/*/*/*.cpp" "main.cpp")
-FILE(GLOB TOOLS "tools/*" "tools/*/*")
-FILE(GLOB TESTS "tests/*/*/*.cpp")
+FILE(GLOB_RECURSE SOURCES "components/*.cpp")
+FILE(GLOB_RECURSE TOOLS "tools/*")
+FILE(GLOB_RECURSE TESTS "tests/*.cpp")
 
-set(RELEASE_SOURCE_FILES ${SOURCES} ${TOOLS})
+set(RELEASE_SOURCE_FILES ${SOURCES} ${TOOLS} main.cpp)
 set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TOOLS} tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
