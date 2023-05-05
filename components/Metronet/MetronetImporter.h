@@ -29,7 +29,7 @@
  * @version 0.1
  */
 
-class MetronetImporter : VMetroObjectImporter {
+class MetronetImporter : public VMetroObjectImporter {
 private:
     MetronetImporter* _initCheck;
 protected:
