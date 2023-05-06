@@ -129,12 +129,19 @@ public:
      *@post new Tram instance has been added to the trams
     */
     void pushTram(Tram* tram);
+    /**
+    * @brief Adds a tram to the metronet
+    * @param tram the tram that must be added
+     *@post new Tram instance has been added to the trams
+    */
+    void pushSpoor(const std::string& stationName, const int &spoorNr, const std::pair<Station*, Station*> &newSpoor);
 
     /**
     * @brief Retrieves a station
     * @param naam the name of the station
     * @return A unique station
     */
+
     Station* retrieveStation(const std::string &naam) const;
 
     /**
@@ -151,6 +158,12 @@ public:
     * @return A boolean denoting if the tram exists
     */
     bool tramExists(const int &lijnNr) const;
+    /**
+    * @brief Checks if a spoor with a given line number exists
+    * @param lijnNr the line number of the spoor that is to be checked
+    * @return A boolean denoting if the spoor exists
+    */
+    bool spoorExists(const int &lijnNr) const;
 
     /**
      * @brief Simulates circulating of trams on the metronet

@@ -103,9 +103,28 @@ void Metronet::pushTram(Tram* tram) {
     fTrams.insert(std::make_pair(tram->getLijnNr(), tram));
     ENSURE(fTrams.find(tram->getLijnNr()) != fTrams.end(), "Expected tram to be pushed to fTrams!");
 }
+void Metronet::pushSpoor(const std::string& stationName, const int &spoorNr, const std::pair<Station*, Station*> &newSpoor){
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    REQUIRE(!this->fStations.empty(), "There are no stations in Metronet!");
+    std::map<std::basic_string<char>, Station *> extractedStations = getStations();
+    Station* station = extractedStations.at(stationName);
+    REQUIRE(station != nullptr, "Station with given stationName is not found!");
+    station->setSpoor(spoorNr, newSpoor);
+}
 bool Metronet::tramExists(const int &lijnNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     return fTrams.find(lijnNr) != fTrams.end();
+}
+bool Metronet::spoorExists(const int &lijnNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::map<std::string, Station*> allStations = getStations();
+    for(std::map<std::string, Station*>::iterator stationIterator = allStations.begin();
+                                                                            stationIterator != allStations.end(); stationIterator++){
+        if(stationIterator->second->spoorExists(lijnNr)){
+            return true;
+        }
+    }
+    return false;
 }
 std::map<std::string, TramType*> Metronet::getTramTypes() const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");

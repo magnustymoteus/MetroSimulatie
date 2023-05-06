@@ -11,6 +11,18 @@
 MetronetImporter::MetronetImporter() {
     _initCheck = this;
     ENSURE(properlyInitialized(), "Expected MetronetImporter to be properly initialized in constructor!");
+    REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getSupportedTags!");
+    // Collect all tags from importers
+    std::map<std::string, std::vector<std::string> > tagsOfTramImporter = fTramImporter.getSupportedTags();
+    std::map<std::string, std::vector<std::string> > tagsOfStationImporter = fStationImporter.getSupportedTags();
+    std::map<std::string, std::vector<std::string> > tagsOfTramTypeImporter = fTramTypeImporter.getSupportedTags();
+    REQUIRE(!tagsOfStationImporter.empty(), "Expected StationImporter to have at least one supported tag");
+    REQUIRE(!tagsOfTramImporter.empty(), "Expected TramImporter to have at least one supported tag");
+    REQUIRE(!tagsOfTramTypeImporter.empty(), "Expected TramTypeImporter to have at least one supported tag");
+    fSupportedTags.insert(tagsOfTramTypeImporter.begin(), tagsOfTramTypeImporter.end());
+    fSupportedTags.insert(tagsOfTramImporter.begin(), tagsOfTramImporter.end());
+    fSupportedTags.insert(tagsOfStationImporter.begin(), tagsOfStationImporter.end());
+    ENSURE(!fSupportedTags.empty(), "Expected MetronetImporter to have at least one supported tag");
 }
 
 bool MetronetImporter::properlyInitialized() const {

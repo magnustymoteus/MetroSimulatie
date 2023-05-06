@@ -73,6 +73,10 @@ public:
     * @param metronet An instance of Metronet
     */
     void parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const;
+    /**
+     * @brief Gets the tags that are supported
+     * @return A map of all the supported tags
+     */
 };
 
 

@@ -23,7 +23,7 @@ TEST_F(MetronetOutputTest, ShowMeYourTrainsSimple){
     MetronetImporter metronetImporter;
     Metronet* metronet = metronetImporter.parseFile(inputPath);
     MetronetExporter::output(metronet, outputPath);
-    //std::string fileStrA= fileToString(outputPath), fileStrB= fileToString(referencePath);
-
-    //EXPECT_EQ(fileStrA, fileStrB);
+    std::string fileStrA= fileToString(outputPath);
+    std::string fileStrB= fileToString(referencePath);
+    EXPECT_EQ(fileStrA, fileStrB);
 }
