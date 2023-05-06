@@ -50,7 +50,7 @@ bool Station::spoorExists(const int &spoorNr) const {
 void Station::setSpoor(const int &spoorNr, const std::pair<Station *, Station *> &newSpoor) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
     REQUIRE(fSporen.find(spoorNr) == fSporen.end(), "Spoor with given spoorNr already exists!");
-    fSporen.insert({spoorNr, newSpoor});
+    fSporen[spoorNr] = newSpoor;
     ENSURE(getSpoor(spoorNr) == newSpoor, "Expected spoor to equal to setter value!");
 }
 void Station::setSporen(const std::map<int, std::pair<Station *, Station *> > &newSporen) {

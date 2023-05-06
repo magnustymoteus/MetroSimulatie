@@ -110,3 +110,32 @@ TEST_F(MetronetInputTest, ReadTramsAndStationsTypes5){
     EXPECT_FALSE(metronet->tramExists(666));
     EXPECT_TRUE(importer_.properlyInitialized());
 }
+TEST_F(MetronetInputTest, TramNr){
+    EXPECT_TRUE(importer_.properlyInitialized());
+    EXPECT_NO_THROW(importer_.parseFile(filePath+"input/readTramsAndStationsTypesTest.xml"));
+    Metronet* metronet = importer_.parseFile(filePath+"input/readTramsAndStationsTypesTest.xml");
+    EXPECT_TRUE(metronet->getIsConsistent());
+    EXPECT_NO_THROW(metronet->getTrams());
+    std::multimap<int, Tram *> trams = metronet->getTrams();
+    for(std::multimap<int, Tram *>::iterator tramIterator = trams.begin(); tramIterator != trams.end(); tramIterator++){
+        EXPECT_TRUE(tramIterator->second->getVoertuigNr() == 1 || tramIterator->second->getVoertuigNr() == 3);
+    }
+    EXPECT_TRUE(importer_.properlyInitialized());
+}
+TEST_F(MetronetInputTest, MeerdereSporen){
+    EXPECT_TRUE(importer_.properlyInitialized());
+    EXPECT_NO_THROW(importer_.parseFile(filePath+"input/MeerdereSporenTest.xml"));
+    EXPECT_TRUE(importer_.properlyInitialized());
+}
+TEST_F(MetronetInputTest, MeerdereSporen2){
+    EXPECT_TRUE(importer_.properlyInitialized());
+    EXPECT_NO_THROW(importer_.parseFile(filePath+"input/MeerdereSporenTest.xml"));
+    Metronet* metronet = importer_.parseFile(filePath+"input/MeerdereSporenTest.xml");
+    EXPECT_NO_THROW(metronet->getStations());
+    std::map<std::string, Station*> stations = metronet->getStations();
+    for(std::map<std::string, Station*>::iterator stationIterator = stations.begin(); stationIterator != stations.end();
+                                                                                    stationIterator++){
+        EXPECT_EQ(stationIterator->second->getSporen().size(), 2);
+    }
+    EXPECT_TRUE(importer_.properlyInitialized());
+}

@@ -108,7 +108,7 @@ void Metronet::pushSpoor(const std::string& stationName, const int &spoorNr, con
     REQUIRE(!this->fStations.empty(), "There are no stations in Metronet!");
     std::map<std::basic_string<char>, Station *> extractedStations = getStations();
     Station* station = extractedStations.at(stationName);
-    REQUIRE(station != nullptr, "Station with given stationName is not found!");
+    REQUIRE(station != NULL, "Station with given stationName is not found!");
     station->setSpoor(spoorNr, newSpoor);
 }
 bool Metronet::tramExists(const int &lijnNr) const {
