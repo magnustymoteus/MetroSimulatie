@@ -41,4 +41,16 @@
             <vorige>A</vorige>
         </SPOOR>
     </STATION>
+    <TRAM>
+        <lijnNr>12</lijnNr>
+        <type>Stadslijner</type>
+        <voertuigNr>1</voertuigNr>
+        <beginStation>A</beginStation>
+    </TRAM>
+    <TRAM>
+        <lijnNr>21</lijnNr>
+        <type>Stadslijner</type>
+        <voertuigNr>1</voertuigNr>
+        <beginStation>B</beginStation>
+    </TRAM>
 </METRONET>
