@@ -57,7 +57,7 @@ TEST_F(TramDomainTest, MoveOneTram){
     tram.setHuidigeStation(station1);
     std::vector<std::string > bediendeStations;
     bediendeStations.push_back("Halte");
-    TramType* tramType = new TramType("Stadslijner", 70, bediendeStations);
+    TramType* tramType = new TramType("PCC", 70, bediendeStations);
     EXPECT_NO_THROW(tram.setType(tramType));
     EXPECT_NO_THROW(tram.move());
     Station* huidigeStation = tram.getHuidigeStation();
