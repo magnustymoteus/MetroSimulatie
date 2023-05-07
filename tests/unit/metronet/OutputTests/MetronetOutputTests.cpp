@@ -28,6 +28,19 @@ TEST_F(MetronetOutputTest, ShowMeYourTrains){
     EXPECT_EQ(fileStrA, fileStrB);
 }
 
+TEST_F(MetronetOutputTest, ShowMeYourTrains2){
+    // Meerdere sporen en trams
+    const std::string outputPath = "tests/unit/metronet/OutputTests/output/ShowMeYourTrains2.txt";
+    const std::string referencePath = "tests/unit/metronet/OutputTests/references/ShowMeYourTrains2.txt";
+    const std::string inputPath = "tests/unit/metronet/OutputTests/input/ShowMeYourTrains2.xml";
+    MetronetImporter metronetImporter;
+    Metronet* metronet = metronetImporter.parseFile(inputPath);
+    MetronetExporter::output(metronet, outputPath);
+    std::string fileStrA= fileToString(outputPath);
+    std::string fileStrB= fileToString(referencePath);
+    EXPECT_EQ(fileStrA, fileStrB);
+}
+
 TEST_F(MetronetOutputTest, GeavanceerdeUitvoer){
     const std::string outputPath = "tests/unit/metronet/OutputTests/output/GeavanceerdeUitvoer.txt";
     const std::string referencePath = "tests/unit/metronet/OutputTests/references/GeavanceerdeUitvoer.txt";
@@ -40,7 +53,7 @@ TEST_F(MetronetOutputTest, GeavanceerdeUitvoer){
     EXPECT_EQ(fileStrA, fileStrB);
 }
 TEST_F(MetronetOutputTest, GeavanceerdeUitvoer2){
-    // Meerdere sporen
+    // Meerdere sporen en trams
     const std::string outputPath = "tests/unit/metronet/OutputTests/output/GeavanceerdeUitvoer2.txt";
     const std::string referencePath = "tests/unit/metronet/OutputTests/references/GeavanceerdeUitvoer2.txt";
     const std::string inputPath = "tests/unit/metronet/OutputTests/input/GeavanceerdeUitvoer2.xml";
