@@ -1,37 +1,37 @@
---== STATIONS ==--
-= Station A =
-* Spoor 10:
-	-> Station B
-	<- Station C
-
-* Spoor 12:
-	-> Station B
-	<- Station C
-
-= Station B =
-* Spoor 10:
-	-> Station C
-	<- Station A
-
-* Spoor 12:
-	-> Station C
-	<- Station A
-
-= Station C =
-* Spoor 10:
-	-> Station A
-	<- Station B
-
-* Spoor 12:
-	-> Station A
-	<- Station B
-
---== TRAMS ==--
-Tram 10 nr 1
-	type: Stadslijner
-	snelheid: 70
-	huidig station: C
-Tram 12 nr 1
-	type: Stadslijner
-	snelheid: 70
-	huidig station: A
+--== STATIONS ==--
+= Station A =
+* Spoor 10:
+	-> Station B
+	<- Station C
+
+* Spoor 12:
+	-> Station B
+	<- Station C
+
+= Station B =
+* Spoor 10:
+	-> Station C
+	<- Station A
+
+* Spoor 12:
+	-> Station C
+	<- Station A
+
+= Station C =
+* Spoor 10:
+	-> Station A
+	<- Station B
+
+* Spoor 12:
+	-> Station A
+	<- Station B
+
+--== TRAMS ==--
+Tram 10 nr 1
+	type: Stadslijner
+	snelheid: 70
+	huidig station: C
+Tram 12 nr 1
+	type: Stadslijner
+	snelheid: 70
+	huidig station: A
