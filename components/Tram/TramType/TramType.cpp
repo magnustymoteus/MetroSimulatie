@@ -15,6 +15,7 @@ bool TramType::properlyInitialized() const {
     return _initCheck == this;
 }
 bool TramType::supportsStationType(const std::string &stationType) const {
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized supportsStationType!");
     for(size_t i = 0; i<fBediendeStationTypes.size(); i++) {
         if(fBediendeStationTypes[i] == stationType) return true;
     }
@@ -26,26 +27,26 @@ std::string TramType::getNaam() const {
 }
 
 int TramType::getSnelheid() const {
-    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized getSnelheid!");
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized getSnelheid!");
     return fSnelheid;
 }
 std::vector<std::string> TramType::getBediendeStationTypes() const {
-    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized getBediendeStationTypes!");
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized getBediendeStationTypes!");
     return fBediendeStationTypes;
 }
 
 
 void TramType::setNaam(const std::string &newNaam) {
-    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized setNaam!");
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized setNaam!");
     fNaam = newNaam;
 }
 
 void TramType::setSnelheid(const int &newSnelheid) {
-    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized setSnelheid!");
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized setSnelheid!");
     fSnelheid = newSnelheid;
 }
 
 void TramType::setBediendeStationTypes(const std::vector<std::string> &newBediendeStationTypes) {
-    REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized setBediendeStationTypes!");
+    REQUIRE(this->properlyInitialized(), "Expected TramType to be properly initialized setBediendeStationTypes!");
     fBediendeStationTypes = newBediendeStationTypes;
 }
