@@ -44,8 +44,8 @@ TEST_F(MetronetDomainTest, SettersGetters) {
     EXPECT_TRUE(metronet.getStations().empty());
     EXPECT_TRUE(metronet.getTrams().empty());
 
-    setSporen();
-    setStations();
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
 
     EXPECT_EQ(station1->getVolgende(1), station2);
     EXPECT_EQ(station2->getVolgende(1), station3);
@@ -56,37 +56,43 @@ TEST_F(MetronetDomainTest, SettersGetters) {
     EXPECT_TRUE(metronet.properlyInitialized());
 }
 TEST_F(MetronetDomainTest, Push) {
-    setSporen();
-    setStations();
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
     EXPECT_EQ(metronet.getStations().size(), 3);
     EXPECT_EQ(station1->getSporen().size(), 1);
     EXPECT_EQ(station2->getSporen().size(), 1);
     EXPECT_EQ(station3->getSporen().size(), 1);
 
-    metronet.pushStation(station4);
+    EXPECT_NO_THROW(metronet.pushStation(station4));
 
     EXPECT_EQ(metronet.getStations().size(), 4);
 
-    metronet.pushSpoor("A", 17, std::make_pair(station4, station2));
-    metronet.pushSpoor("B", 17, std::make_pair(station1, station3));
-    metronet.pushSpoor("C", 17, std::make_pair(station2, station4));
-    metronet.pushSpoor("D", 17, std::make_pair(station3, station1));
+    EXPECT_NO_THROW(metronet.pushSpoor("A", 17, std::make_pair(station4, station2)));
+    EXPECT_NO_THROW(metronet.pushSpoor("B", 17, std::make_pair(station1, station3)));
+    EXPECT_NO_THROW(metronet.pushSpoor("C", 17, std::make_pair(station2, station4)));
+    EXPECT_NO_THROW(metronet.pushSpoor("D", 17, std::make_pair(station3, station1)));
 
     EXPECT_EQ(station1->getSporen().size(), 2);
     EXPECT_EQ(station2->getSporen().size(), 2);
     EXPECT_EQ(station3->getSporen().size(), 2);
     EXPECT_EQ(station4->getSporen().size(), 1);
 
-    setTrams();
+    EXPECT_NO_THROW(setTrams());
     EXPECT_EQ(metronet.getTrams().size(), 2);
 }
 
 TEST_F(MetronetDomainTest, MoveTrams){
-    setSporen();
-    setStations();
-    setTrams();
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
+    EXPECT_NO_THROW(setTrams());
     EXPECT_NO_THROW(metronet.moveTram(tram1, 4));
     EXPECT_NO_THROW(metronet.moveTram(tram2, 4));
     EXPECT_EQ(tram1->getHuidigeStation(), station2);
     EXPECT_EQ(tram2->getHuidigeStation(), station1);
+}
+TEST_F(MetronetDomainTest, AutoSimulatie){
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
+    EXPECT_NO_THROW(setTrams());
+    EXPECT_NO_THROW(metronet.autoSimulate(3));
 }
