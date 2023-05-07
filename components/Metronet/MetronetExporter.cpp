@@ -23,33 +23,33 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
     outputFile.open(pathFile.c_str());
     std::map<std::string, Station*> stations = metronet->getStations();
     std::multimap<int, Tram*> fTrams = metronet->getTrams();
-    outputFile << "--== STATIONS ==--" << "\n";
+    outputFile << "--== STATIONS ==--" << "\r\n";
     for(std::map<std::string,Station*>::const_iterator iteratorIntStation = stations.begin(); iteratorIntStation != stations.end();
     iteratorIntStation++){
         // Save begin Station for further comparison
         Station* currentStation = iteratorIntStation->second;
         // Iterate over all stations in the Metronet
-        outputFile << "= Station " << currentStation->getNaam() << " =\n";
+        outputFile << "= Station " << currentStation->getNaam() << " =\r\n";
         std::map<int, std::pair<Station*, Station*> > sporen = currentStation->getSporen();
         for(std::map<int, std::pair<Station*, Station*> >::const_iterator iterSpoor = sporen.begin();
         iterSpoor != sporen.end(); iterSpoor++) {
-            outputFile << "* Spoor " << iterSpoor->first << ":\n";
-            outputFile << "\t-> Station " << iterSpoor->second.second->getNaam() << "\n";
-            outputFile << "\t<- Station " << iterSpoor->second.first->getNaam() << "\n";
-            outputFile << "\n";
+            outputFile << "* Spoor " << iterSpoor->first << ":\r\n";
+            outputFile << "\t-> Station " << iterSpoor->second.second->getNaam() << "\r\n";
+            outputFile << "\t<- Station " << iterSpoor->second.first->getNaam() << "\r\n";
+            outputFile << "\r\n";
         }
     };
-    outputFile << "--== TRAMS ==--" << "\n";
+    outputFile << "--== TRAMS ==--" << "\r\n";
     // Iterate over all trams in the Metronet
     for(std::multimap<int, Tram*>::const_iterator iteratorIntTrams = fTrams.begin(); iteratorIntTrams != fTrams.end(); iteratorIntTrams++){
         Tram* current = iteratorIntTrams->second;
-        outputFile << "Tram " << current->getLijnNr() << " nr " << current->getVoertuigNr() << "\n";
-        outputFile << "\ttype: " << current->getType()->getNaam() << "\n";
-        outputFile << "\tsnelheid: " << current->getType()->getSnelheid() << "\n";
-        outputFile << "\thuidig station: " << current->getHuidigeStation()->getNaam() << "\n";
+        outputFile << "Tram " << current->getLijnNr() << " nr " << current->getVoertuigNr() << "\r\n";
+        outputFile << "\ttype: " << current->getType()->getNaam() << "\r\n";
+        outputFile << "\tsnelheid: " << current->getType()->getSnelheid() << "\r\n";
+        outputFile << "\thuidig station: " << current->getHuidigeStation()->getNaam() << "\r\n";
         if(current->getAantalDefecten() && current->getReparatieTijd()) {
-            outputFile << "\taantal defecten: " << current->getAantalDefecten() << "\n";
-            outputFile << "\treparatie tijd: " << current->getReparatieTijd() << "\n";
+            outputFile << "\taantal defecten: " << current->getAantalDefecten() << "\r\n";
+            outputFile << "\treparatie tijd: " << current->getReparatieTijd() << "\r\n";
         }
     }
     // Close file
@@ -76,6 +76,6 @@ void MetronetExporter::outputAdvanced(const Metronet *const &metronet, const std
             else tramsStr += "   ";
             currentStation = currentStation->getVolgende(tramIter->first);
         } while(currentStation != beginStation);
-        outputFile << stationsStr << "\n" << tramsStr << "\n\n";
+        outputFile << stationsStr << "\r\n" << tramsStr << "\r\n\r\n";
     }
 }
