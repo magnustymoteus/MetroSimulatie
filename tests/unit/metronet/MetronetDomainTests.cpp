@@ -19,12 +19,6 @@ protected:
         station3->setSpoor(1, std::make_pair(station2, station1));
     }
     void setStations() {
-        station1->setVolgende(1, station2);
-        station2->setVolgende(1, station3);
-        station3->setVolgende(1, station1);
-        station1->setVorige(1, station3);
-        station3->setVorige(1, station2);
-        station2->setVorige(1, station1);
         metronet.pushStation(station1);
         metronet.pushStation(station2);
         metronet.pushStation(station3);
@@ -34,6 +28,13 @@ protected:
     void setTrams(){
         tram1->setBeginStation(station1);
         tram2->setBeginStation(station3);
+        tram1->setHuidigeStation(station1);
+        tram2->setHuidigeStation(station3);
+        std::vector<std::string > bediendeStations;
+        bediendeStations.push_back("type");
+        TramType* tramType = new TramType("tramType", 40, bediendeStations);
+        tram1->setType(tramType);
+        tram2->setType(tramType);
         metronet.pushTram(tram1);
         metronet.pushTram(tram2);
     }
@@ -80,10 +81,12 @@ TEST_F(MetronetDomainTest, Push) {
     EXPECT_EQ(metronet.getTrams().size(), 2);
 }
 
-//TEST_F(MetronetDomainTest, MoveTrams){
-//    setSporen();
-//    setStations();
-//    setTrams();
-//    EXPECT_NO_THROW(metronet.moveTram(tram1, 3));
-//    EXPECT_NO_THROW(metronet.moveTram(tram2, 3));
-//}
+TEST_F(MetronetDomainTest, MoveTrams){
+    setSporen();
+    setStations();
+    setTrams();
+    EXPECT_NO_THROW(metronet.moveTram(tram1, 4));
+    EXPECT_NO_THROW(metronet.moveTram(tram2, 4));
+    EXPECT_EQ(tram1->getHuidigeStation(), station2);
+    EXPECT_EQ(tram2->getHuidigeStation(), station1);
+}
