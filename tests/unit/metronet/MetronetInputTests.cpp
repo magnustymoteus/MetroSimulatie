@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <sstream>
 
-const std::string filePath = "tests/unit/Metronet/";
+const std::string filePath = "tests/unit/metronet/";
 
 class MetronetInputTest: public ::testing::Test {
 protected:
