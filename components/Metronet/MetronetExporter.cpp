@@ -23,11 +23,11 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
     outputFile.open(pathFile.c_str());
     std::map<std::string, Station*> stations = metronet->getStations();
     std::multimap<int, Tram*> fTrams = metronet->getTrams();
+    outputFile << "--== STATIONS ==--" << "\n";
     for(std::map<std::string,Station*>::const_iterator iteratorIntStation = stations.begin(); iteratorIntStation != stations.end();
     iteratorIntStation++){
         // Save begin Station for further comparison
         Station* currentStation = iteratorIntStation->second;
-        outputFile << "--== STATIONS ==--" << "\n";
         // Iterate over all stations in the Metronet
         outputFile << "= Station " << currentStation->getNaam() << " =\n";
         std::map<int, std::pair<Station*, Station*> > sporen = currentStation->getSporen();
