@@ -6,6 +6,14 @@
 
 class TramDomainTest: public ::testing::Test {
 protected:
+    Station* station1 = new Station("A", "Halte");
+    Station* station2 = new Station("B", "Halte");
+    Station* station3 = new Station("C", "Halte");
+    void setStations(){
+        station1->setSpoor(1, std::make_pair(station3, station2));
+        station2->setSpoor(1, std::make_pair(station1, station3));
+        station3->setSpoor(1, std::make_pair(station2, station1));
+    }
 };
 
 TEST_F(TramDomainTest, DefaultConstructor) {
@@ -13,7 +21,7 @@ TEST_F(TramDomainTest, DefaultConstructor) {
     EXPECT_TRUE(tram_.properlyInitialized());
 
     EXPECT_EQ(tram_.getLijnNr(), 1);
-    EXPECT_EQ(tram_.getType(), nullptr);
+    EXPECT_FALSE(tram_.getType()->properlyInitialized());
     EXPECT_EQ(tram_.getVoertuigNr(), 2);
     EXPECT_EQ(tram_.getReparatieTijd(), 0);
     EXPECT_EQ(tram_.getAantalDefecten(), 0);
@@ -40,4 +48,19 @@ TEST_F(TramDomainTest, SettersGetters) {
     EXPECT_EQ(tram_.getLijnNr(), lijnNr);
     EXPECT_FALSE(tram_.getBeginStation());
     EXPECT_FALSE(tram_.getHuidigeStation());
+    delete tramType;
+}
+TEST_F(TramDomainTest, MoveOneTram){
+    Tram tram(1, 2);
+    setStations();
+    tram.setBeginStation(station1);
+    tram.setHuidigeStation(station1);
+    std::vector<std::string > bediendeStations;
+    bediendeStations.push_back("Halte");
+    TramType* tramType = new TramType("Stadslijner", 70, bediendeStations);
+    EXPECT_NO_THROW(tram.setType(tramType));
+    EXPECT_NO_THROW(tram.move());
+    Station* huidigeStation = tram.getHuidigeStation();
+    EXPECT_EQ(huidigeStation, station2);
+    delete tramType;
 }

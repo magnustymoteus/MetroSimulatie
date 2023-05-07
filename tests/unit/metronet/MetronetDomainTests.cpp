@@ -32,6 +32,8 @@ protected:
     Tram* tram1 = new Tram(1,1);
     Tram* tram2 = new Tram(1,2);
     void setTrams(){
+        tram1->setBeginStation(station1);
+        tram2->setBeginStation(station3);
         metronet.pushTram(tram1);
         metronet.pushTram(tram2);
     }
@@ -77,3 +79,11 @@ TEST_F(MetronetDomainTest, Push) {
     setTrams();
     EXPECT_EQ(metronet.getTrams().size(), 2);
 }
+
+//TEST_F(MetronetDomainTest, MoveTrams){
+//    setSporen();
+//    setStations();
+//    setTrams();
+//    EXPECT_NO_THROW(metronet.moveTram(tram1, 3));
+//    EXPECT_NO_THROW(metronet.moveTram(tram2, 3));
+//}
