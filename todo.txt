@@ -1,0 +1,17 @@
+TODO:
+- Polymorfisme: tram heeft nog 2 afgeleide klassen: pcc en normale trein.
+Uit normale trein leid je nog albatros en stadslijner af
+- 2.4: beweging van trams in 3d
+- Verander cout in exporter klasse
+- Station subklasse
+- Correct geinitieerd in preconditie van .h files
+- Denk na over postcondities en zet die in .h en .cpp
+- 3.6: botspreventie
+- 3.8: reparatiekosten
+- 3.9: statistische verwerking simulatie
+(Gedurende de uitvoering worden er gegevens verzameld over het metronet, zoals
+ de reparatiekost per tram, totale reparatiekost voor het metronet, hoeveel trams er
+ voorbij een station zijn gereden)
+ - 4.1: Gui. Een gebruiksvriendelijke gebruikersinterface hebben voor het controleren van de si-
+             mulatie. Deze bevat knoppen voor onder andere start en stop, alsook volgende en
+             vorige stap.
