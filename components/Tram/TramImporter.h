@@ -25,8 +25,9 @@ class TramImporter : public VMetroObjectImporter {
 private:
     TramImporter* _initCheck;
 public:
-    TramImporter(const std::string &configPath=ConfigManager::TramConfig());
     bool properlyInitialized() const;
+
+    TramImporter(const std::string &configPath=ConfigManager::TramConfig());
 
     Tram * parse(TiXmlElement *tramElem) const;
 };

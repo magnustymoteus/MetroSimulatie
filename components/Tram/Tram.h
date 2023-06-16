@@ -7,7 +7,6 @@
 
 #include "MetroObject/IMetroObject.h"
 #include "Station/Station.h"
-#include "Tram/TramType/TramType.h"
 
 /**
  * @brief This serves as a Tram in a metro.
@@ -17,6 +16,10 @@
  * @version 0.1
  */
 
+enum TramType {TramType_PCC=1, TramType_Stadslijner=2, TramType_Albatros=3, TramType_Null=0};
+std::string tramTypeToString(TramType type);
+TramType stringToTramType(const std::string &typeStr);
+
 class Tram : public IMetroObject {
 private:
     Tram* _initCheck;
@@ -24,32 +27,40 @@ protected:
     /**
      * @brief The line number which must correspond to a track number
      */
-    int fLijnNr;
+    const int fLijnNr;
     /**
      * @brief The vehicle number which must be unique if multiple trams have the same line number
      */
-    int fVoertuigNr;
+    const int fVoertuigNr;
+
     /**
      * @brief The type of the tram
      */
-    TramType* fType;
+    const TramType fType;
     /**
-     * @brief The starting station
+ * @brief The speed of the tram
+ */
+    const int fSnelheid;
+    /**
+ * @brief The stations that the tram type supports (can stop at)
+*/
+    const std::vector<std::string> fBediendeStationTypes;
+    /**
+* @brief How many stations it takes in a simulation before the tram is defective and must be repaired
+*/
+    const int fAantalDefecten;
+    /**
+     * @brief How many simulation steps it takes before the tram is repaired when it's defective
      */
-    Station* fBeginStation;
+    const int fReparatieTijd;
+    /**
+ * @brief The starting station
+ */
+    Station*  fBeginStation;
     /**
      * @brief The current station
      */
     Station* fHuidigeStation;
-
-    /**
-     * @brief How many stations it takes in a simulation before the tram is defective and must be repaired
-     */
-    int fAantalDefecten;
-    /**
-     * @brief How many simulation steps it takes before the tram is repaired when it's defective
-     */
-    int fReparatieTijd;
 public:
     bool properlyInitialized() const;
     /**
@@ -59,18 +70,14 @@ public:
      * @param aantalDefecten the defective steps
      * @param reparatieTijd the reparation steps
      */
-    Tram(const int &lijnNr, const int &voertuigNr, const int &aantalDefecten=0, const int &reparatieTijd=0);
+    Tram(const int &lijnNr, const int &voertuigNr, TramType type, const int &snelheid,
+         const std::vector<std::string> &bediendeStationTypes, const int &aantalDefecten, const int &reparatieTijd);
 
     /**
      * @brief Returns the line number
      * @return the line number
      */
     int getLijnNr() const;
-    /**
-     * @brief Returns the starting station
-     * @return the starting station
-     */
-    Station* getBeginStation() const;
     /**
      * @brief Returns the current station
      * @return the current station
@@ -80,22 +87,17 @@ public:
      * @brief Returns the type of the tram
      * @return the tram type
      */
-    TramType* getType() const;
+    TramType getType() const;
+    /**
+ * @brief Returns the starting station
+ * @return the starting station
+ */
+    Station* getBeginStation() const;
     /**
      * @brief Returns the vehicle number
      * @return the vehicle number
      */
     int getVoertuigNr() const;
-    /**
-     * @brief Returns the amount of defective steps
-     * @return the amount of defective steps
-     */
-    int getAantalDefecten() const;
-    /**
-     * @brief Returns the amount of reparation steps
-     * @return the amount of reparation steps
-     */
-    int getReparatieTijd() const;
     /**
     * @brief Returns the successor of the tram's current station
     * @return the successor of the tram's current station
@@ -106,33 +108,27 @@ public:
      * @return the predecessor of the tram's current station
      */
     Station* getVorigeStation() const;
+    /**
+    * @brief Returns all supported station types
+    * @return All station types supported by this tram type
+    */
+    std::vector<std::string> getBediendeStationTypes() const;
+    /**
+* @brief Returns the amount of defective steps
+* @return the amount of defective steps
+*/
+    int getAantalDefecten() const;
+    /**
+ * @brief Returns the amount of reparation steps
+ * @return the amount of reparation steps
+ */
+    int getReparatieTijd() const;
+    /**
+    * @brief Returns the speed of the tram
+    * @return The speed
+    */
+    int getSnelheid() const;
 
-
-    /**
-     * @brief Sets the amount of defective steps to a new value
-     * @param newAantalDefecten the new value
-     */
-    void setAantalDefecten(const int &newAantalDefecten);
-    /**
-     * @brief Sets the amount of reparation steps to a new value
-     * @param newReparatieTijd the new value
-     */
-    void setReparatieTijd(const int &newReparatieTijd);
-    /**
-     * @brief Sets the vehicle number to a new value
-     * @param voertuigNr the new value
-     */
-    void setVoertuigNr(const int &voertuigNr);
-    /**
-     * @brief Sets the tram type to a new value
-     * @param newType the new value
-     */
-    void setType(TramType* &newType);
-    /**
-     * @brief Sets the line number to a new value
-     * @param newLijnNr The new value
-     */
-    void setLijnNr(const int &newLijnNr);
     /**
      * @brief Sets the starting station to a new value
      * @param newBeginStation the new value
@@ -143,7 +139,6 @@ public:
      * @param newHuidigeStation the new value
      */
     void setHuidigeStation(Station* newHuidigeStation);
-
     /**
      * @brief Moves the tram to its next supported station
      * @return amount of unsupported stations that were skipped by the tram

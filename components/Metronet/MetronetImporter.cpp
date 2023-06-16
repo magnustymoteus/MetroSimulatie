@@ -15,11 +15,8 @@ MetronetImporter::MetronetImporter() {
     // Collect all tags from importers
     std::map<std::string, std::vector<std::string> > tagsOfTramImporter = fTramImporter.getSupportedTags();
     std::map<std::string, std::vector<std::string> > tagsOfStationImporter = fStationImporter.getSupportedTags();
-    std::map<std::string, std::vector<std::string> > tagsOfTramTypeImporter = fTramTypeImporter.getSupportedTags();
     REQUIRE(!tagsOfStationImporter.empty(), "Expected StationImporter to have at least one supported tag");
     REQUIRE(!tagsOfTramImporter.empty(), "Expected TramImporter to have at least one supported tag");
-    REQUIRE(!tagsOfTramTypeImporter.empty(), "Expected TramTypeImporter to have at least one supported tag");
-    fSupportedTags.insert(tagsOfTramTypeImporter.begin(), tagsOfTramTypeImporter.end());
     fSupportedTags.insert(tagsOfTramImporter.begin(), tagsOfTramImporter.end());
     fSupportedTags.insert(tagsOfStationImporter.begin(), tagsOfStationImporter.end());
     ENSURE(!fSupportedTags.empty(), "Expected MetronetImporter to have at least one supported tag");
@@ -37,12 +34,8 @@ bool MetronetImporter::properlyInitialized() const {
 void MetronetImporter::parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseTrams!");
     TiXmlElement* currentElem = fTramImporter.getFirstChildTag(rootElem, "TRAM");
-    const std::map<std::string, TramType*> tramTypes = fTramTypeImporter.getSupportedTramTypes();
     while(currentElem) {
         Tram* tram = fTramImporter.parse(currentElem);
-        TramType* tramType = tramTypes.at(
-                getText(fTramImporter.getFirstChildProperty(currentElem, "type")));
-        tram->setType(tramType);
         metronet->pushTram(tram);
         Station* beginStation = metronet->retrieveStation(
                 getText(fTramImporter.getFirstChildProperty(currentElem, "beginStation")));
@@ -104,7 +97,6 @@ void MetronetImporter::parseStations(TiXmlElement* rootElem, Metronet* &metronet
 Metronet* MetronetImporter::parse(TiXmlElement* rootElem) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in parseFile!");
     Metronet *metronet = new Metronet();
-    metronet->setTramTypes(fTramTypeImporter.getSupportedTramTypes());
     parseStations(rootElem, metronet);
     parseTrams(rootElem, metronet);
     MetronetValidator metronetValidator(metronet);

@@ -59,7 +59,7 @@ void Metronet::autoSimulate(const unsigned int &steps) {
     //Tram : (stepsUntilDefect, stepsUntilFixed), only stores trams of PCC type
     std::map<Tram*, std::pair<unsigned int, unsigned int> > tramsDefectInfo;
     for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
-        if(iter->second->getType()->getNaam() == "PCC")
+        if(iter->second->getType() == TramType_PCC)
             tramsDefectInfo.insert(std::make_pair(iter->second, std::make_pair(
                 iter->second->getAantalDefecten(),iter->second->getReparatieTijd())));
     }
@@ -142,17 +142,17 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
     if(steps) {
         Station *huidigeStation = tram->getHuidigeStation();
         unsigned int skippedStations = tram->move(steps);
-        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tram->getType()->getNaam() <<
+        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tramTypeToString(tram->getType()) <<
                   ") reed van Station " << huidigeStation->getNaam() << " (" << huidigeStation->getType() << ")" <<
                   " naar Station " << tram->getHuidigeStation()->getNaam() << " (" <<
                   tram->getHuidigeStation()->getType() << ")" << ".\n";
 
         if (skippedStations)
             std::cout << "\t\t" << skippedStations <<
-                      " halte(s) genegeerd omdat een " << tram->getType()->getNaam() << " daar niet mag stoppen.\n";
+                      " halte(s) genegeerd omdat een "<<tramTypeToString(tram->getType()) <<" daar niet mag stoppen.\n";
     }
     else {
-        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tram->getType()->getNaam() <<
+        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tramTypeToString(tram->getType()) <<
                   ") is defect en wordt gerepareerd.\n";
     }
 }

@@ -18,7 +18,6 @@
 
 #include "Tram/TramImporter.h"
 #include "Station/StationImporter.h"
-#include "Tram/TramType/TramTypeImporter.h"
 
 /**
  * @brief This serves as a parser which processes XML files containing information about the metro and
@@ -41,10 +40,6 @@ protected:
      * @brief Importer for stations
      */
     StationImporter fStationImporter;
-    /**
-     * @brief Importer for tram types
-     */
-    TramTypeImporter fTramTypeImporter;
 public:
     bool properlyInitialized() const;
     /**

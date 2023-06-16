@@ -1,6 +1,5 @@
 TODO:
-- Polymorfisme: tram heeft nog 2 afgeleide klassen: pcc en normale trein.
-Uit normale trein leid je nog albatros en stadslijner af
+- Verander tests zodat ze werken met de nieuwe polymorfisme
 - 2.4: beweging van trams in 3d
 - Verander cout in exporter klasse
 - Station subklasse

@@ -3,6 +3,9 @@
 //
 
 #include "TramImporter.h"
+#include "PCC.h"
+#include "Stadslijner.h"
+#include "Albatros.h"
 
 TramImporter::TramImporter(const std::string &configPath) : VMetroObjectImporter(configPath) {
     _initCheck = this;
@@ -19,16 +22,29 @@ Tram * TramImporter::parse(TiXmlElement *tramElem) const {
     int lijnNr, voertuigNr, aantalDefecten=0, reparatieTijd=0;
     std::istringstream(getText(getFirstChildProperty(tramElem, "lijnNr"))) >> lijnNr;
     std::istringstream(getText(getFirstChildProperty(tramElem, "voertuigNr"))) >> voertuigNr;
+    TramType type = stringToTramType(getText(getFirstChildProperty(tramElem, "type")));
 
-    const std::string typeWithDefects = "PCC";
-    if(getText(getFirstChildProperty(tramElem, "type")) == typeWithDefects) {
+    if(type == TramType_PCC) {
         std::istringstream(getText(getFirstChildProperty(tramElem, "aantalDefecten")))
         >> aantalDefecten;
         std::istringstream(getText(getFirstChildProperty(tramElem, "reparatieTijd")))
         >> reparatieTijd;
     }
-    Tram* tram = new Tram(lijnNr, voertuigNr, aantalDefecten, reparatieTijd);
-
+    Tram* tram = 0;
+    switch(type) {
+        case TramType_PCC:
+            tram = new PCC(lijnNr, voertuigNr, type, aantalDefecten, reparatieTijd);
+            break;
+        case TramType_Stadslijner:
+            tram = new Stadslijner(lijnNr, voertuigNr, type);
+            break;
+        case TramType_Albatros:
+            tram = new Albatros(lijnNr, voertuigNr, type);
+            break;
+        default:
+            break;
+    }
+    ENSURE(tram, "Tram type unsupported!");
     ENSURE(tram->getLijnNr(), "Tram expected to have lijnNr!");
     ENSURE(tram->getVoertuigNr(), "Tram expected to have voertuigNr!");
     return tram;
