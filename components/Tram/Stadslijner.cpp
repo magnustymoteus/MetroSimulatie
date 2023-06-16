@@ -4,8 +4,8 @@
 
 #include "Stadslijner.h"
 
-Stadslijner::Stadslijner(const int &lijnNr, const int &voertuigNr, TramType type) :
-StandardTram(lijnNr, voertuigNr, type) {
+Stadslijner::Stadslijner(const int &lijnNr, const int &voertuigNr) :
+StandardTram(lijnNr, voertuigNr, TramType_Stadslijner) {
     _initCheck = this;
 
     ENSURE(properlyInitialized(), "Expected Stadslijner to be properly initialized in constructor!");

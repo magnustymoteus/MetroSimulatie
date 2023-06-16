@@ -13,7 +13,7 @@ private:
 public:
     bool properlyInitialized() const;
 
-    Stadslijner(const int &lijnNr, const int &voertuigNr, TramType type);
+    Stadslijner(const int &lijnNr, const int &voertuigNr);
 };
 
 

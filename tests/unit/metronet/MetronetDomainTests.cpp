@@ -4,6 +4,9 @@
 
 #include <gtest/gtest.h>
 #include "Metronet/Metronet.h"
+#include "Tram/PCC.h"
+#include "Tram/Albatros.h"
+#include "Tram/Stadslijner.h"
 
 class MetronetDomainTest: public ::testing::Test {
 protected:
@@ -22,10 +25,9 @@ protected:
     // Create Different types for metronet2
     std::vector<std::string > stationTypesVanPCC = {"Metrostation", "Halte"};
     std::vector<std::string > stationTypesVanAlbatros = {"Metrostation"};
-    TramType* PCCType = new TramType("PCC", 40, stationTypesVanPCC);
     TramType* AlbatrosType = new TramType("Albatros", 40, stationTypesVanAlbatros);
     // Create trams for metronet2
-    Tram* PCC = new Tram(1, 1);
+    Tram* PCC = new PCC(1, 1, 40);
     Tram* Albatros = new Tram(1, 2);
 
     void setSporen(){

@@ -13,7 +13,7 @@ private:
 public:
     bool properlyInitialized() const;
 
-    Albatros(const int &lijnNr, const int &voertuigNr, TramType type);
+    Albatros(const int &lijnNr, const int &voertuigNr);
 };
 
 

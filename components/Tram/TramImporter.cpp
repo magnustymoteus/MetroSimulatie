@@ -33,13 +33,13 @@ Tram * TramImporter::parse(TiXmlElement *tramElem) const {
     Tram* tram = 0;
     switch(type) {
         case TramType_PCC:
-            tram = new PCC(lijnNr, voertuigNr, type, aantalDefecten, reparatieTijd);
+            tram = new PCC(lijnNr, voertuigNr, aantalDefecten, reparatieTijd);
             break;
         case TramType_Stadslijner:
-            tram = new Stadslijner(lijnNr, voertuigNr, type);
+            tram = new Stadslijner(lijnNr, voertuigNr);
             break;
         case TramType_Albatros:
-            tram = new Albatros(lijnNr, voertuigNr, type);
+            tram = new Albatros(lijnNr, voertuigNr);
             break;
         default:
             break;

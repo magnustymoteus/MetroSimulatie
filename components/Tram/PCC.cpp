@@ -11,8 +11,8 @@ std::vector<std::string> getPCCSupportedStations() {
     return supportedStations;
 }
 
-PCC::PCC(const int &lijnNr, const int &voertuigNr, TramType type, const int &aantalDefecten, const int &reparatieTijd)
-: Tram(lijnNr, voertuigNr, type, 40, getPCCSupportedStations(), aantalDefecten, reparatieTijd)
+PCC::PCC(const int &lijnNr, const int &voertuigNr, const int &aantalDefecten, const int &reparatieTijd)
+: Tram(lijnNr, voertuigNr, TramType_PCC, 40, getPCCSupportedStations(), aantalDefecten, reparatieTijd)
 {
     _initCheck = this;
 

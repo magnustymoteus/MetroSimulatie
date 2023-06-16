@@ -13,7 +13,7 @@ private:
 public:
     bool properlyInitialized() const;
 
-    PCC(const int &lijnNr, const int &voertuigNr, TramType type,
+    PCC(const int &lijnNr, const int &voertuigNr,
         const int &aantalDefecten=0, const int &reparatieTijd=0);
 };
 
