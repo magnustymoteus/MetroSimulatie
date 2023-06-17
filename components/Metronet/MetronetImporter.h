@@ -44,6 +44,8 @@ public:
     bool properlyInitialized() const;
     /**
      * @brief Constructor of MetronetImporter
+     * @pre: MetronetImporter is properly initialised
+     * @post: MetronetImporter with at least one supported tag is created
      */
     MetronetImporter();
 
@@ -51,6 +53,7 @@ public:
 
     /**
      * @brief Parses an xml file into a Metronet instance
+     * @pre: MetronetImporter is properly initialised
      * @return An instance of Metronet
      * @param relativeFilePath The filepath of the xml file
      */
@@ -58,18 +61,21 @@ public:
 
     /**
      * @brief Parses xml tags representing stations into multiple instances of Station and adds them to metronet
+     * @pre: MetronetImporter is properly initialised
      * @param rootElem The root element of the xml file
      * @param metronet An instance of Metronet
      */
     void parseStations(TiXmlElement* rootElem, Metronet* &metronet) const;
     /**
     * @brief Parses xml tags representing trams into multiple instances of Tram and adds them to metronet
+    * @pre: MetronetImporter is properly initialised
     * @param rootElem The root element of the xml file
     * @param metronet An instance of Metronet
     */
     void parseTrams(TiXmlElement* rootElem, Metronet* &metronet) const;
     /**
      * @brief Gets the tags that are supported
+     * @pre: MetronetImporter is properly initialised
      * @return A map of all the supported tags
      */
 };

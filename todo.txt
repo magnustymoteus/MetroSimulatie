@@ -1,9 +1,7 @@
 TODO:
-- Verander tests zodat ze werken met de nieuwe polymorfisme
 - 2.4: beweging van trams in 3d
 - Verander cout in exporter klasse
 - Station subklasse
-- Correct geinitieerd in preconditie van .h files
 - Denk na over postcondities en zet die in .h en .cpp
 - 3.6: botspreventie
 - 3.8: reparatiekosten

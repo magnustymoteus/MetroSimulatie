@@ -40,6 +40,7 @@ public:
 
     /**
      * @brief Constructor that initializes name and type of the station
+     * @post: Station is properly initialised
      * @param naam name of the station
      * @param type type of the station, crucial for certain tram types that only stop at specific station types
      */
@@ -48,33 +49,39 @@ public:
     // getters
     /**
      * @brief Returns the name of the station
+     * @pre: Station is properly initialised
      * @return name of the station
      */
     std::string getNaam() const;
     /**
      * @brief Returns the station's predecessor depending on the track number
+     * @pre: Station is properly initialised
      * @param spoorNr The track number
      * @return The preceding station on a specific track
      */
     Station* getVorige(const int &spoorNr) const;
     /**
     * @brief Returns the station's successor depending on the track number
+    * @pre: Station is properly initialised
     * @param spoorNr The track number
     * @return The succeeding station on a specific track
     */
     Station* getVolgende(const int &spoorNr) const;
     /**
      * @brief Returns the type of the station
+     * @pre: Station is properly initialised
      * @return Station type
      */
     const std::string &getType() const;
     /**
      * @brief Returns all the tracks of the station
+     * @pre: Station is properly initialised
      * @return Tracks of the station
      */
     std::map<int, std::pair<Station*, Station*> > getSporen() const;
     /**
      * @brief Returns a specific track of the station based on the given track number
+     * @pre: Station is properly initialised
      * @param spoorNr The given track number
      * @return The track with that track number
      * @pre Spoor exists
@@ -82,6 +89,7 @@ public:
     std::pair<Station*, Station*> getSpoor(const int &spoorNr) const;
     /**
      * @brief Checks if a certain track exits
+     * @pre: Station is properly initialised
      * @param spoorNr the track number
      * @return A boolean denoting if the track exists
      */
@@ -90,33 +98,39 @@ public:
     // setters
     /**
      * @brief Sets name of the station to the new value
+     * @pre: Station is properly initialised
      * @param newNaam The new value
      */
     void setNaam(const std::string &newNaam);
     /**
      * @brief Sets the station's predecessor on a specific track based on the track number
+     * @pre: Station is properly initialised
      * @param spoorNr the track number
      * @param newVorige the new predecessor
      */
     void setVorige(const int &spoorNr, Station* const &newVorige);
     /**
      * @brief Sets the station's successor on a specific track based on the track number
+     * @pre: Station is properly initialised
      * @param spoorNr the track number
      * @param newVolgende the new successor
      */
     void setVolgende(const int &spoorNr, Station* const &newVolgende);
     /**
      * @brief Sets the station's type to a new value
+     * @pre: Station is properly initialised
      * @param type the new value
      */
     void setType(const std::string &type);
     /**
      * @brief Sets the station's tracks to a new value
+     * @pre: Station is properly initialised
      * @param newSporen the new value
      */
     void setSporen(const std::map<int, std::pair<Station*, Station*> > &newSporen);
     /**
      * @brief Sets a station's specific track to a new value
+     * @pre: Station is properly initialised
      * @param spoorNr The track number
      * @param newSpoor the new value
      */

@@ -65,6 +65,7 @@ public:
     bool properlyInitialized() const;
     /**
      * @brief The constructor which initializes the line number, the vehicle number, defective and reparation steps
+     * @post: Tram is properly initialised
      * @param lijnNr the line number
      * @param voertuigNr the vehicle number
      * @param aantalDefecten the defective steps
@@ -75,72 +76,86 @@ public:
 
     /**
      * @brief Returns the line number
+     * @pre: Tram is properly initialised
      * @return the line number
      */
     int getLijnNr() const;
     /**
      * @brief Returns the current station
+     * @pre: Tram is properly initialised
      * @return the current station
      */
     Station* getHuidigeStation() const;
     /**
      * @brief Returns the type of the tram
+     * @pre: Tram is properly initialised
      * @return the tram type
      */
     TramType getType() const;
     /**
- * @brief Returns the starting station
- * @return the starting station
- */
+     * @brief Returns the starting station
+     * @pre: Tram is properly initialised
+     * @return the starting station
+     */
     Station* getBeginStation() const;
     /**
      * @brief Returns the vehicle number
+     * @pre: Tram is properly initialised
      * @return the vehicle number
      */
     int getVoertuigNr() const;
     /**
     * @brief Returns the successor of the tram's current station
+    * @pre: Tram is properly initialised
     * @return the successor of the tram's current station
     */
     Station* getVolgendeStation() const;
     /**
      * @brief Returns the predecessor of the tram's current station
+     * @pre: Tram is properly initialised
      * @return the predecessor of the tram's current station
      */
     Station* getVorigeStation() const;
     /**
     * @brief Returns all supported station types
+    * @pre: Tram is properly initialised
     * @return All station types supported by this tram type
     */
     std::vector<std::string> getBediendeStationTypes() const;
     /**
-* @brief Returns the amount of defective steps
-* @return the amount of defective steps
-*/
+    * @brief Returns the amount of defective steps
+    * @pre: Tram is properly initialised
+    * @return the amount of defective steps
+    */
     int getAantalDefecten() const;
     /**
- * @brief Returns the amount of reparation steps
- * @return the amount of reparation steps
- */
+     * @brief Returns the amount of reparation steps
+     * @pre: Tram is properly initialised
+     * @return the amount of reparation steps
+     */
     int getReparatieTijd() const;
     /**
     * @brief Returns the speed of the tram
+    * @pre: Tram is properly initialised
     * @return The speed
     */
     int getSnelheid() const;
 
     /**
      * @brief Sets the starting station to a new value
+     * @pre: Tram is properly initialised
      * @param newBeginStation the new value
      */
     void setBeginStation(Station* const &newBeginStation);
     /**
      * @brief Sets the current station to a new value
+     * @pre: Tram is properly initialised
      * @param newHuidigeStation the new value
      */
     void setHuidigeStation(Station* newHuidigeStation);
     /**
      * @brief Moves the tram to its next supported station
+     * @pre: Tram is properly initialised
      * @return amount of unsupported stations that were skipped by the tram
      */
     unsigned int move();
@@ -148,11 +163,13 @@ public:
      * @brief Moves the tram to its next supported station steps times
      * @param steps amount of times to move the tram
      * @return amount of unsupported stations that were skipped by the tram
+     * @pre: Tram is properly initialised
      * @pre steps >= 0
      */
     unsigned int move(const unsigned int &steps);
     /**
      * @brief Checks if the tram supports a certain station (type)
+     * @pre: Tram is properly initialised
      * @param station the station
      * @return Boolean denoting if the tram supports the given station
      */

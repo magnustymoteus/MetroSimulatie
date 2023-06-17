@@ -27,12 +27,14 @@ public:
 
     /**
     * @brief Outputs information of a Metronet instance to a .txt file.
+     * @pre: The given metronet is properly initialised and is consistent
      * @param metronet The Metronet instance
      * @param pathFile The file path where the text file must be outputted to.
     */
     static void output(const Metronet* const &metronet, const std::string &pathFile);
     /**
     * @brief Outputs information of a Metronet instance in an "advanced" manner to a .txt file.
+    * @pre: The given metronet is properly initialised and is consistent
      * @param metronet The Metronet instance
      * @param pathFile The file path where the text file must be outputted to.
     */
