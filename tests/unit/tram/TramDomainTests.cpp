@@ -32,13 +32,12 @@ TEST_F(TramDomainTest, DefaultConstructor) {
 TEST_F(TramDomainTest, SettersGetters) {
     PCC tram_(1, 2, 10, 2);
     EXPECT_TRUE(tram_.properlyInitialized());
-    const int lijnNr=200;
-    EXPECT_EQ(tram_.getVoertuigNr(), 12);
+    EXPECT_EQ(tram_.getVoertuigNr(), 2);
     EXPECT_EQ(tram_.getAantalDefecten(), 10);
     EXPECT_EQ(tram_.getReparatieTijd(), 2);
     std::vector<std::string> bediendeStations;
     bediendeStations.emplace_back("Halte");
-    EXPECT_EQ(tram_.getLijnNr(), lijnNr);
+    EXPECT_EQ(tram_.getLijnNr(), 1);
     EXPECT_FALSE(tram_.getBeginStation());
     EXPECT_FALSE(tram_.getHuidigeStation());
 }

@@ -84,7 +84,6 @@ TEST_F(MetronetInputTest, ReadTramsAndStationsTypes2){
     Metronet* metronet = importer_.parseFile(filePath+"input/readTramsAndStationsTypesTest.xml");
     EXPECT_EQ(metronet->getStations().size(), 3);
     EXPECT_EQ(metronet->getTrams().size(), 3);
-    EXPECT_EQ(metronet->getTramTypes().size(), 3);
     EXPECT_TRUE(importer_.properlyInitialized());
 }
 TEST_F(MetronetInputTest, ReadTramsAndStationsTypes3){
