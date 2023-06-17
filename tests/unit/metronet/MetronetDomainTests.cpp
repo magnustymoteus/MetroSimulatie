@@ -14,10 +14,10 @@ protected:
     Metronet metronet2;
 
     // Stations for metronet
-    Station* station1 = new Station("A", "type");
-    Station* station2 = new Station("B", "type");
-    Station* station3 = new Station("C", "type");
-    Station* station4 = new Station("D", "type");
+    Station* station1 = new Station("A", "Metrostation");
+    Station* station2 = new Station("B", "Metrostation");
+    Station* station3 = new Station("C", "Metrostation");
+    Station* station4 = new Station("D", "Metrostation");
     // Stations for metronet2
     Station* metrostation1 = new Station("M1", "Metrostation");
     Station* metrostation2 = new Station("M2", "Metrostation");
@@ -26,8 +26,8 @@ protected:
     std::vector<std::string > stationTypesVanPCC = {"Metrostation", "Halte"};
     std::vector<std::string > stationTypesVanAlbatros = {"Metrostation"};
     // Create trams for metronet2
-    Tram* PCC_tram = new PCC(1, 1, 5, 10);
-    Tram* Albatros_tram = new Albatros(1, 2);
+    Tram* PCCTram = new PCC(1, 1, 5, 10);
+    Tram* AlbatrosTram = new Albatros(1, 2);
 
     void setSporen(){
         station1->setSpoor(1, std::make_pair(station3, station2));
@@ -47,7 +47,7 @@ protected:
         tram1->setHuidigeStation(station1);
         tram2->setHuidigeStation(station3);
         std::vector<std::string > bediendeStations;
-        bediendeStations.push_back("type");
+        bediendeStations.push_back("Metrostation");
         metronet.pushTram(tram1);
         metronet.pushTram(tram2);
     }
@@ -57,16 +57,16 @@ protected:
         metrostation2->setSpoor(1, std::make_pair(metrostation1, halte));
         halte->setSpoor(1, std::make_pair(metrostation2, metrostation1));
         // Set trams
-        PCC_tram->setBeginStation(halte);
-        PCC_tram->setHuidigeStation(halte);
-        Albatros_tram->setBeginStation(metrostation1);
-        Albatros_tram->setHuidigeStation(metrostation1);
+        PCCTram->setBeginStation(halte);
+        PCCTram->setHuidigeStation(halte);
+        AlbatrosTram->setBeginStation(metrostation1);
+        AlbatrosTram->setHuidigeStation(metrostation1);
         // Push everything to metronet2
         metronet2.pushStation(metrostation1);
         metronet2.pushStation(metrostation2);
         metronet2.pushStation(halte);
-        metronet2.pushTram(PCC_tram);
-        metronet2.pushTram(Albatros_tram);
+        metronet2.pushTram(PCCTram);
+        metronet2.pushTram(AlbatrosTram);
     };
 };
 TEST_F(MetronetDomainTest, SettersGetters) {
@@ -111,41 +111,41 @@ TEST_F(MetronetDomainTest, Push) {
     EXPECT_EQ(metronet.getTrams().size(), 2);
 }
 
-//TEST_F(MetronetDomainTest, MoveTrams){
-//    EXPECT_NO_THROW(setSporen());
-//    EXPECT_NO_THROW(setStations());
-//    EXPECT_NO_THROW(setTrams());
-//    EXPECT_NO_THROW(metronet.moveTram(tram1, 4));
-//    EXPECT_NO_THROW(metronet.moveTram(tram2, 4));
-//    EXPECT_EQ(tram1->getHuidigeStation(), station2);
-//    EXPECT_EQ(tram2->getHuidigeStation(), station1);
-//}
-//TEST_F(MetronetDomainTest, AutoSimulatie){
-//    EXPECT_NO_THROW(setSporen());
-//    EXPECT_NO_THROW(setStations());
-//    EXPECT_NO_THROW(setTrams());
-//    EXPECT_NO_THROW(metronet.autoSimulate(3));
-//}
+TEST_F(MetronetDomainTest, MoveTrams){
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
+    EXPECT_NO_THROW(setTrams());
+    EXPECT_NO_THROW(metronet.moveTram(tram1, 4));
+    EXPECT_NO_THROW(metronet.moveTram(tram2, 4));
+    EXPECT_EQ(tram1->getHuidigeStation(), station2);
+    EXPECT_EQ(tram2->getHuidigeStation(), station1);
+}
+TEST_F(MetronetDomainTest, AutoSimulatie){
+    EXPECT_NO_THROW(setSporen());
+    EXPECT_NO_THROW(setStations());
+    EXPECT_NO_THROW(setTrams());
+    EXPECT_NO_THROW(metronet.autoSimulate(3));
+}
 
 TEST_F(MetronetDomainTest, RijdenVanTramsMetType){
     EXPECT_NO_THROW(setMetronet2());
 }
 TEST_F(MetronetDomainTest, RijdenVanTramsMetType2){
     EXPECT_NO_THROW(setMetronet2());
-    EXPECT_NO_THROW(metronet2.moveTram(PCC_tram, 1));
-    EXPECT_NO_THROW(metronet2.moveTram(Albatros_tram, 1));
+    EXPECT_NO_THROW(metronet2.moveTram(PCCTram, 1));
+    EXPECT_NO_THROW(metronet2.moveTram(AlbatrosTram, 1));
 }
 TEST_F(MetronetDomainTest, RijdenVanTramsMetType3){
     EXPECT_NO_THROW(setMetronet2());
-    EXPECT_NO_THROW(metronet2.moveTram(PCC_tram, 3));
-    EXPECT_NO_THROW(metronet2.moveTram(Albatros_tram, 3));
+    EXPECT_NO_THROW(metronet2.moveTram(PCCTram, 3));
+    EXPECT_NO_THROW(metronet2.moveTram(AlbatrosTram, 3));
 }
 TEST_F(MetronetDomainTest, RijdenVanTramsMetType4){
     EXPECT_NO_THROW(setMetronet2());
-    EXPECT_NO_THROW(metronet2.moveTram(PCC_tram, 3));
-    EXPECT_NO_THROW(metronet2.moveTram(Albatros_tram, 3));
-    EXPECT_EQ(PCC_tram->getHuidigeStation(), halte);
-    EXPECT_EQ(Albatros_tram->getHuidigeStation(), metrostation2);
+    EXPECT_NO_THROW(metronet2.moveTram(PCCTram, 3));
+    EXPECT_NO_THROW(metronet2.moveTram(AlbatrosTram, 3));
+    EXPECT_EQ(PCCTram->getHuidigeStation(), halte);
+    EXPECT_EQ(AlbatrosTram->getHuidigeStation(), metrostation2);
 }
 TEST_F(MetronetDomainTest, DefectenEnReparaties){
     EXPECT_NO_THROW(setSporen());
@@ -164,5 +164,5 @@ TEST_F(MetronetDomainTest, DefectenEnReparaties2){
 TEST_F(MetronetDomainTest, DefectenEnReparaties3){
     EXPECT_NO_THROW(setMetronet2());
     EXPECT_NO_THROW(metronet2.autoSimulate(5));
-    EXPECT_EQ(PCC_tram->getHuidigeStation(), metrostation2);
+    EXPECT_EQ(PCCTram->getHuidigeStation(), metrostation2);
 }
