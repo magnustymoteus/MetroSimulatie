@@ -5,6 +5,7 @@
 #include "MetronetExporter.h"
 
 #include <fstream>
+#include <iostream>
 
 #include "DesignByContract.h"
 
@@ -80,4 +81,7 @@ void MetronetExporter::outputAdvanced(const Metronet *const &metronet, const std
         } while(currentStation != beginStation);
         outputFile << stationsStr << "\n" << tramsStr << "\n";
     }
+}
+void MetronetExporter::print(const std::string& lijn){
+    std::cout << lijn;
 }

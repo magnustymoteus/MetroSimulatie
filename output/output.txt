@@ -1,0 +1,37 @@
+--== STATIONS ==--
+= Station A =
+* Spoor 12:
+	-> Station B
+	<- Station C
+
+* Spoor 21:
+	-> Station B
+	<- Station B
+
+= Station B =
+* Spoor 12:
+	-> Station C
+	<- Station A
+
+* Spoor 21:
+	-> Station A
+	<- Station A
+
+= Station C =
+* Spoor 12:
+	-> Station A
+	<- Station B
+
+--== TRAMS ==--
+Tram 12 nr 1
+	type: Stadslijner
+	snelheid: 70
+	huidig station: B
+Tram 21 nr 1
+	type: PCC
+	snelheid: 40
+	huidig station: A
+	aantal defecten: 1
+	reparatie tijd: 3
+	reparatiekosten: 10000 euro
+	totale reparatiekosten: 50000 euro

@@ -39,6 +39,12 @@ public:
      * @param pathFile The file path where the text file must be outputted to.
     */
     static void outputAdvanced(const Metronet* const &metronet, const std::string &pathFile);
+    /**
+    * @brief Outputs information on the given line
+    * @pre: The given metronetExporter is properly initialised and is consistent
+     * @param lijn Line to print
+    */
+    static void print(const std::string& lijn);
 };
 
 

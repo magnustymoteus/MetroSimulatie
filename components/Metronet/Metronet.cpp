@@ -3,9 +3,11 @@
 //
 
 #include "Metronet.h"
+#include "MetronetExporter.h"
 
 #include <iostream>
 #include <ctime>
+#include "utils.h"
 
 #include "Exceptions/MetronetInconsistentException.h"
 
@@ -67,7 +69,7 @@ void Metronet::autoSimulate(const unsigned int &steps) {
         wait(1);
         std::cout << "Stap " << i + 1 << ":\n";
         for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
-            std::cout << "\t";
+            print("\t");
             if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
                 const unsigned int stepsUntilDefect =  tramsDefectInfo.at(iter->second).first;
                 const unsigned int stepsUntilFixed =  tramsDefectInfo.at(iter->second).second;
