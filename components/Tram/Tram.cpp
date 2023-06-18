@@ -122,3 +122,14 @@ void Tram::setBeginStation(Station *const &newBeginStation) {
     fBeginStation = newBeginStation;
     ENSURE(getBeginStation() == newBeginStation, "Expected beginStation to equal to the new value!");
 }
+double Tram::getReparatieKost() const {
+    return fReparatieKost;
+}
+
+double Tram::getTotaleReparatieKost() const {
+    return fTotaleReparatieKost;
+}
+
+void Tram::increaseTotaleReparatieKost(){
+    fTotaleReparatieKost += fReparatieKost;
+}

@@ -154,6 +154,8 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
     else {
         std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tramTypeToString(tram->getType()) <<
                   ") is defect en wordt gerepareerd.\n";
+        tram->increaseTotaleReparatieKost();
+        std::cout << "\t\tTotale reparatiekosten voor de tram: " << tram->getTotaleReparatieKost()<< " euro.\n";
     }
 }
 Station* Metronet::retrieveStation(const std::string &naam) const {

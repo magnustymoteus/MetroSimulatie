@@ -58,6 +58,14 @@ protected:
  */
     Station*  fBeginStation;
     /**
+ * @brief The reparation cost
+ */
+    double fReparatieKost;
+    /**
+    * @brief The total reparation cost
+    */
+    double fTotaleReparatieKost;
+    /**
      * @brief The current station
      */
     Station* fHuidigeStation;
@@ -77,66 +85,96 @@ public:
     /**
      * @brief Returns the line number
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the line number
      */
     int getLijnNr() const;
     /**
      * @brief Returns the current station
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the current station
      */
     Station* getHuidigeStation() const;
     /**
      * @brief Returns the type of the tram
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the tram type
      */
     TramType getType() const;
     /**
      * @brief Returns the starting station
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the starting station
      */
     Station* getBeginStation() const;
     /**
      * @brief Returns the vehicle number
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the vehicle number
      */
     int getVoertuigNr() const;
     /**
     * @brief Returns the successor of the tram's current station
     * @pre: Tram is properly initialised
+    * @post: Tram is unchanged
     * @return the successor of the tram's current station
     */
     Station* getVolgendeStation() const;
     /**
      * @brief Returns the predecessor of the tram's current station
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the predecessor of the tram's current station
      */
     Station* getVorigeStation() const;
     /**
     * @brief Returns all supported station types
     * @pre: Tram is properly initialised
+    * @post: Tram is unchanged
     * @return All station types supported by this tram type
     */
     std::vector<std::string> getBediendeStationTypes() const;
     /**
+     * @brief Returns the costs for tram reparation
+     * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
+     */
+    double getReparatieKost() const;
+    /**
+     * @brief Returns the total costs after all tram reparations
+     * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
+     */
+    double getTotaleReparatieKost() const;
+    /**
+    * @brief Increases the total repation cots of the tram
+    * @pre: Tram is properly initialised
+    * @post: Tram total repation costs have increased
+    * @return the amount of defective steps
+    */
+    void increaseTotaleReparatieKost();
+    /**
     * @brief Returns the amount of defective steps
     * @pre: Tram is properly initialised
+    * @post: Tram is unchanged
     * @return the amount of defective steps
     */
     int getAantalDefecten() const;
     /**
      * @brief Returns the amount of reparation steps
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @return the amount of reparation steps
      */
     int getReparatieTijd() const;
     /**
     * @brief Returns the speed of the tram
     * @pre: Tram is properly initialised
+    * @post: Tram is unchanged
     * @return The speed
     */
     int getSnelheid() const;
@@ -144,6 +182,7 @@ public:
     /**
      * @brief Sets the starting station to a new value
      * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
      * @param newBeginStation the new value
      */
     void setBeginStation(Station* const &newBeginStation);

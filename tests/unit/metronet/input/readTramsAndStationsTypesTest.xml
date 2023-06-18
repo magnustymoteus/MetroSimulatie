@@ -49,6 +49,7 @@
         <beginStation>A</beginStation>
         <aantalDefecten>1</aantalDefecten>
         <reparatieTijd>3</reparatieTijd>
+        <reparatieKost>10000</reparatieKost>
     </TRAM>
     <TRAM>
         <lijnNr>12</lijnNr>
@@ -57,5 +58,6 @@
         <beginStation>B</beginStation>
         <aantalDefecten>4</aantalDefecten>
         <reparatieTijd>5</reparatieTijd>
+        <reparatieKost>10000</reparatieKost>
     </TRAM>
 </METRONET>

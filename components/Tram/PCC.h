@@ -19,9 +19,11 @@ public:
      * @param voertuigNr the vehicle number
      * @param aantalDefecten the defective steps
      * @param reparatieTijd the reparation steps
+     * @param reparatieKost the reparation costs
      */
     PCC(const int &lijnNr, const int &voertuigNr,
-        const int &aantalDefecten=0, const int &reparatieTijd=0);
+        const int &aantalDefecten=0, const int &reparatieTijd=0, const double& reparatieKost=0);
+
 };
 
 

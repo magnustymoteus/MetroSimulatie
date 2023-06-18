@@ -8,6 +8,7 @@
             <property>beginStation</property>
             <property>aantalDefecten</property>
             <property>reparatieTijd</property>
+            <property>reparatieKost</property>
         </properties>
     </tag>
 </SUPPORTED_TAGS>

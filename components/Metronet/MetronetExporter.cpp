@@ -50,6 +50,8 @@ void MetronetExporter::output(const Metronet* const &metronet, const std::string
         if(current->getAantalDefecten() && current->getReparatieTijd()) {
             outputFile << "\taantal defecten: " << current->getAantalDefecten() << "\n";
             outputFile << "\treparatie tijd: " << current->getReparatieTijd() << "\n";
+            outputFile << "\treparatiekosten: " << current->getReparatieKost() << " euro\n";
+            outputFile << "\ttotale reparatiekosten: " << current->getTotaleReparatieKost() << " euro\n";
         }
     }
     // Close file
