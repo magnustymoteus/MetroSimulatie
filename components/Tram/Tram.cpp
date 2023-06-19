@@ -133,3 +133,11 @@ double Tram::getTotaleReparatieKost() const {
 void Tram::increaseTotaleReparatieKost(){
     fTotaleReparatieKost += fReparatieKost;
 }
+
+bool Tram::isDefect() const {
+    return fDefect;
+}
+
+void Tram::setDefect(bool defect) {
+    Tram::fDefect = defect;
+}

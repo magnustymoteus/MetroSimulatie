@@ -20,43 +20,47 @@ class MetronetValidator; // forward declaration
 
 class Metronet : public IMetroObject {
 private:
-    Metronet* _initCheck;
+    Metronet *_initCheck;
 protected:
     /**
     * @brief All stations of the metronet
     */
-    std::map<std::string, Station*> fStations; // stations (name : Station*)
+    std::map<std::string, Station *> fStations; // stations (name : Station*)
     /**
     * @brief All trams of the metronet
     */
-    std::multimap<int, Tram*> fTrams; // a map that holds all trams (lijnNr : Tram*)
+    std::multimap<int, Tram *> fTrams; // a map that holds all trams (lijnNr : Tram*)
     /**
     * @brief All tram types of the metronet
     */
-    std::map<std::string, TramType*> fTramTypes;
+    std::map<std::string, TramType *> fTramTypes;
     /**
     * @brief A boolean denoting the consistency of the metronet
     */
     bool isConsistent;
 public:
     bool properlyInitialized() const;
+
     /**
     * @brief Gets the trams of the metronet
     * @return the trams of the metronet
     */
-    std::multimap<int, Tram*> getTrams() const;
+    std::multimap<int, Tram *> getTrams() const;
+
     /**
     * @brief Gets the stations of the metronet
     * @pre: Metronet is properly initialised
     * @return the stations of the metronet
     */
-    std::map<std::string, Station*> getStations() const;
+    std::map<std::string, Station *> getStations() const;
+
     /**
     * @brief Gets the tram types of the metronet
     * @pre: Metronet is properly initialised
     * @return the tram types of the metronet
     */
-    std::map<std::string, TramType*> getTramTypes() const;
+    std::map<std::string, TramType *> getTramTypes() const;
+
     /**
     * @brief Returns the consistency of the metronet
     * @pre: Metronet is properly initialised
@@ -69,13 +73,15 @@ public:
     * @pre: Metronet is properly initialised
     * @param newTrams the new value
     */
-    void setTrams(std::multimap<int, Tram*> &newTrams);
+    void setTrams(std::multimap<int, Tram *> &newTrams);
+
     /**
     * @brief Sets stations to a new value
     * @pre: Metronet is properly initialised
     * @param newStations the new value
     */
-    void setStations(std::map<std::string, Station*> &newStations);
+    void setStations(std::map<std::string, Station *> &newStations);
+
     /**
     * @brief Sets tramTypes to a new value
     * @pre: Metronet is properly initialised
@@ -107,11 +113,13 @@ public:
     * @param newStations the new stations of the metronet
      *@param newTrams the new trams of the metronet
     */
-    Metronet(std::map<std::string, Station*> &newStations, std::multimap<int, Tram*> &newTrams);
+    Metronet(std::map<std::string, Station *> &newStations, std::multimap<int, Tram *> &newTrams);
+
     /**
     * @brief Initializes metronet
     */
     Metronet();
+
     /**
     * @brief Deletes all dynamically created instances of Tram, Station, and TramType
     */
@@ -125,7 +133,7 @@ public:
     * @pre steps > 0
     * @post Successfully moved the tram to the next supporting station n times
     */
-    void moveTram(Tram* &tram, const unsigned int &steps=1) const;
+    void moveTram(Tram *&tram, const unsigned int &steps = 1) const;
 
     /**
     * @brief Adds a station to the metronet
@@ -133,21 +141,23 @@ public:
     * @pre: Metronet is properly initialised
     * @post new Station instance has been added to the stations
     */
-    void pushStation(Station* station);
+    void pushStation(Station *station);
+
     /**
     * @brief Adds a tram to the metronet
     * @pre: Metronet is properly initialised
     * @param tram the tram that must be added
     * @post new Tram instance has been added to the trams
     */
-    void pushTram(Tram* tram);
+    void pushTram(Tram *tram);
+
     /**
     * @brief Adds a tram to the metronet
     * @pre: Metronet is properly initialised
     * @param tram the tram that must be added
      *@post new Tram instance has been added to the trams
     */
-    void pushSpoor(const std::string& stationName, const int &spoorNr, const std::pair<Station*, Station*> &newSpoor);
+    void pushSpoor(const std::string &stationName, const int &spoorNr, const std::pair<Station *, Station *> &newSpoor);
 
     /**
     * @brief Retrieves a station
@@ -156,7 +166,7 @@ public:
     * @return A unique station
     */
 
-    Station* retrieveStation(const std::string &naam) const;
+    Station *retrieveStation(const std::string &naam) const;
 
     /**
     * @brief Retrieves a tram
@@ -165,7 +175,7 @@ public:
     * @param voertuigNr the vehicle number of the tram
     * @return A unique tram with a given line number and vehicle number
     */
-    Tram* retrieveTram(const int &lijnNr, const int &voertuigNr) const;
+    Tram *retrieveTram(const int &lijnNr, const int &voertuigNr) const;
 
     /**
     * @brief Checks if a tram with a given line number exists
@@ -174,6 +184,7 @@ public:
     * @return A boolean denoting if the tram exists
     */
     bool tramExists(const int &lijnNr) const;
+
     /**
     * @brief Checks if a spoor with a given line number exists
     * @pre: Metronet is properly initialised
@@ -192,6 +203,4 @@ public:
      */
     void autoSimulate(const unsigned int &steps);
 };
-
-
 #endif //PROJECT_SOFTWARE_PRACTICUM2_METRONET_H

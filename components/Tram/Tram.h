@@ -38,28 +38,32 @@ protected:
      */
     const TramType fType;
     /**
- * @brief The speed of the tram
- */
+    * @brief The speed of the tram
+    */
     const int fSnelheid;
     /**
- * @brief The stations that the tram type supports (can stop at)
-*/
+    * @brief The stations that the tram type supports (can stop at)
+    */
     const std::vector<std::string> fBediendeStationTypes;
     /**
-* @brief How many stations it takes in a simulation before the tram is defective and must be repaired
-*/
+    * @brief How many stations it takes in a simulation before the tram is defective and must be repaired
+    */
     const int fAantalDefecten;
     /**
      * @brief How many simulation steps it takes before the tram is repaired when it's defective
      */
     const int fReparatieTijd;
     /**
- * @brief The starting station
- */
+     * @brief Shows if the tram is now on reparation
+     */
+    bool fDefect;
+    /**
+    * @brief The starting station
+    */
     Station*  fBeginStation;
     /**
- * @brief The reparation cost
- */
+    * @brief The reparation cost
+    */
     double fReparatieKost;
     /**
     * @brief The total reparation cost
@@ -142,12 +146,14 @@ public:
      * @brief Returns the costs for tram reparation
      * @pre: Tram is properly initialised
      * @post: Tram is unchanged
+     * @return Reparation costs
      */
     double getReparatieKost() const;
     /**
      * @brief Returns the total costs after all tram reparations
      * @pre: Tram is properly initialised
      * @post: Tram is unchanged
+     * @return Total reparation costs
      */
     double getTotaleReparatieKost() const;
     /**
@@ -178,7 +184,20 @@ public:
     * @return The speed
     */
     int getSnelheid() const;
-
+    /**
+    * @brief Checks of the tram is defect
+    * @pre: Tram is properly initialised
+    * @post: Tram is unchanged
+    * @return Is tram on reparation now
+    */
+    bool isDefect() const;
+    /**
+    * @brief Sets if the trams is defect
+    * @pre: Tram is properly initialised
+    * @post: The given tram defect status is set
+    * @param defect Defect status to set
+    */
+    void setDefect(bool defect);
     /**
      * @brief Sets the starting station to a new value
      * @pre: Tram is properly initialised
@@ -189,12 +208,14 @@ public:
     /**
      * @brief Sets the current station to a new value
      * @pre: Tram is properly initialised
+     * @post: The given station is set as begin station
      * @param newHuidigeStation the new value
      */
     void setHuidigeStation(Station* newHuidigeStation);
     /**
      * @brief Moves the tram to its next supported station
      * @pre: Tram is properly initialised
+     * @post: Tram is on the next supported station
      * @return amount of unsupported stations that were skipped by the tram
      */
     unsigned int move();

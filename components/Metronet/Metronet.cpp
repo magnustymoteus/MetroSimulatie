@@ -67,7 +67,7 @@ void Metronet::autoSimulate(const unsigned int &steps) {
     }
     for (unsigned int i = 0; i < steps; i++) {
         wait(1);
-        std::cout << "Stap " << i + 1 << ":\n";
+        print("Stap "); print(i + 1); print(":\n");
         for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
             print("\t");
             if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
@@ -142,22 +142,26 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
     const int lijnNr = tram->getLijnNr();
     const int voertuigNr = tram->getVoertuigNr();
     if(steps) {
+        tram->setDefect(false);
         Station *huidigeStation = tram->getHuidigeStation();
         unsigned int skippedStations = tram->move(steps);
-        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tramTypeToString(tram->getType()) <<
-                  ") reed van Station " << huidigeStation->getNaam() << " (" << huidigeStation->getType() << ")" <<
-                  " naar Station " << tram->getHuidigeStation()->getNaam() << " (" <<
-                  tram->getHuidigeStation()->getType() << ")" << ".\n";
+        print("Tram "); print(lijnNr); print(" ("); print(voertuigNr); print(") ("); print(tramTypeToString(tram->getType()));
+                  print(") reed van Station "); print(huidigeStation->getNaam()); print(" (");
+                  print(huidigeStation->getType()); print(")"); print(" naar Station ");
+                  print(tram->getHuidigeStation()->getNaam()); print(" (");
+                  print(tram->getHuidigeStation()->getType()); print(")"); print(".\n");
 
-        if (skippedStations)
-            std::cout << "\t\t" << skippedStations <<
-                      " halte(s) genegeerd omdat een "<<tramTypeToString(tram->getType()) <<" daar niet mag stoppen.\n";
-    }
+        if (skippedStations) {
+            print("\t\t"); print(skippedStations); print(" halte(s) genegeerd omdat een ");
+            print(tramTypeToString(tram->getType())); print(" daar niet mag stoppen.\n");
+        }
+        }
     else {
-        std::cout << "Tram " << lijnNr << " (" << voertuigNr << ") (" << tramTypeToString(tram->getType()) <<
-                  ") is defect en wordt gerepareerd.\n";
+        tram->setDefect(true);
+        print("Tram "); print(lijnNr); print(" ("); print(voertuigNr); print(") (");
+        print(tramTypeToString(tram->getType())); print(") is defect en wordt gerepareerd.\n");
         tram->increaseTotaleReparatieKost();
-        std::cout << "\t\tTotale reparatiekosten voor de tram: " << tram->getTotaleReparatieKost()<< " euro.\n";
+        print("\t\tTotale reparatiekosten voor de tram: "); print(tram->getTotaleReparatieKost()); print(" euro.\n");
     }
 }
 Station* Metronet::retrieveStation(const std::string &naam) const {
