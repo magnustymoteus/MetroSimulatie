@@ -38,13 +38,12 @@ bool Metronet::getIsConsistent() const {
 
 Metronet::~Metronet() {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    for(std::map<std::string, Station*>::const_iterator iter = fStations.begin(); iter!=fStations.end();iter++) {
+    const std::map<std::string, Station*> & stations = getStations();
+    for(std::map<std::string, Station*>::const_iterator iter = stations.begin(); iter!=stations.end();iter++) {
         delete iter->second;
     }
-    for(std::multimap<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
-        delete iter->second;
-    }
-    for(std::map<std::string, TramType*>::const_iterator iter = fTramTypes.begin(); iter != fTramTypes.end();iter++) {
+    const std::multimap<int, Tram*> & trams = getTrams();
+    for(std::multimap<int, Tram*>::const_iterator iter = trams.begin(); iter != trams.end(); iter++) {
         delete iter->second;
     }
 }
@@ -56,11 +55,12 @@ void Metronet::autoSimulate(const unsigned int &steps) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     REQUIRE(steps>0, "Expected steps > 0");
     REQUIRE(isConsistent, "Expected metronet to be consistent in a simulation!");
-    std::multimap<int, Tram *>::iterator iter = fTrams.begin();
+    std::multimap<int, Tram *> trams = getTrams();
+    std::multimap<int, Tram *>::iterator iter = trams.begin();
 
     //Tram : (stepsUntilDefect, stepsUntilFixed), only stores trams of PCC type
     std::map<Tram*, std::pair<unsigned int, unsigned int> > tramsDefectInfo;
-    for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+    for (iter = trams.begin(); iter != trams.end(); iter++) {
         if(iter->second->getType() == TramType_PCC)
             tramsDefectInfo.insert(std::make_pair(iter->second, std::make_pair(
                 iter->second->getAantalDefecten(),iter->second->getReparatieTijd())));
@@ -68,7 +68,7 @@ void Metronet::autoSimulate(const unsigned int &steps) {
     for (unsigned int i = 0; i < steps; i++) {
         wait(1);
         print("Stap "); print(i + 1); print(":\n");
-        for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+        for (iter = trams.begin(); iter != trams.end(); iter++) {
             print("\t");
             if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
                 const unsigned int stepsUntilDefect =  tramsDefectInfo.at(iter->second).first;
@@ -87,9 +87,11 @@ void Metronet::autoSimulate(const unsigned int &steps) {
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    REQUIRE(fStations.find(stationName) != fStations.end(), "Expected the station to exist in metronet!");
-    REQUIRE(fStations.at(stationName)->spoorExists(spoorNr), "Expected the station to have the given spoorNr!");
-    for(std::multimap<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+    const std::map<std::string, Station*> & stations = getStations();
+    REQUIRE(stations.find(stationName) != stations.end(), "Expected the station to exist in metronet!");
+    REQUIRE(stations.at(stationName)->spoorExists(spoorNr), "Expected the station to have the given spoorNr!");
+    const std::multimap<int, Tram*> & trams = getTrams();
+    for(std::multimap<int, Tram*>::const_iterator iter = trams.begin(); iter != trams.end(); iter++) {
         Station* huidigeStation = iter->second->getHuidigeStation();
         if(iter->second->getLijnNr() == spoorNr && huidigeStation->getNaam() == stationName) return true;
     }
@@ -107,7 +109,8 @@ void Metronet::pushTram(Tram* tram) {
 }
 void Metronet::pushSpoor(const std::string& stationName, const int &spoorNr, const std::pair<Station*, Station*> &newSpoor){
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    REQUIRE(!this->fStations.empty(), "There are no stations in Metronet!");
+    const std::map<std::string, Station*> &stations = getStations();
+    REQUIRE(!stations.empty(), "There are no stations in Metronet!");
     std::map<std::basic_string<char>, Station *> extractedStations = getStations();
     Station* station = extractedStations.at(stationName);
     REQUIRE(station != NULL, "Station with given stationName is not found!");
@@ -115,7 +118,8 @@ void Metronet::pushSpoor(const std::string& stationName, const int &spoorNr, con
 }
 bool Metronet::tramExists(const int &lijnNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    return fTrams.find(lijnNr) != fTrams.end();
+    const std::multimap<int, Tram*> & trams = getTrams();
+    return trams.find(lijnNr) != trams.end();
 }
 bool Metronet::spoorExists(const int &lijnNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -127,15 +131,6 @@ bool Metronet::spoorExists(const int &lijnNr) const {
         }
     }
     return false;
-}
-std::map<std::string, TramType*> Metronet::getTramTypes() const {
-    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    return fTramTypes;
-}
-void Metronet::setTramTypes(const std::map<std::string, TramType *> &newTramTypes) {
-    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    fTramTypes = newTramTypes;
-    ENSURE(getTramTypes() == newTramTypes, "Expected fTramTypes to equal to the setter value!");
 }
 void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -166,13 +161,15 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
 }
 Station* Metronet::retrieveStation(const std::string &naam) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
-    if(fStations.find(naam) == fStations.end()) return 0;
-    return fStations.at(naam);
+    const std::map<std::string, Station*> & stations = getStations();
+    if(stations.find(naam) == stations.end()) return 0;
+    return stations.at(naam);
 }
 Tram* Metronet::retrieveTram(const int &lijnNr, const int &voertuigNr) const{
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    const std::multimap<int, Tram*> & trams = getTrams();
     std::pair <std::multimap<int, Tram*>::const_iterator, std::multimap<int,Tram*>::const_iterator> range =
-            fTrams.equal_range(lijnNr);
+            trams.equal_range(lijnNr);
     for(std::_Rb_tree_const_iterator<std::pair<const int, Tram *> > i = range.first; i != range.second; i++){
         if(i->second->getVoertuigNr() == voertuigNr){
             return i->second;

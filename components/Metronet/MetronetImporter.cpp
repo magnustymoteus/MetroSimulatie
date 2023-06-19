@@ -25,6 +25,12 @@ MetronetImporter::MetronetImporter() {
 bool MetronetImporter::properlyInitialized() const {
     return _initCheck == this;
 }
+StationImporter MetronetImporter::getStationImporter() const {
+    return fStationImporter;
+}
+TramImporter MetronetImporter::getTramImporter() const {
+    return fTramImporter;
+}
 /*
  * This function retrieves information about trams from the given XML file to the metro system
  * @param doc The parsed file

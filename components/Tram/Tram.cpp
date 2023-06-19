@@ -74,11 +74,11 @@ void Tram::setHuidigeStation(Station* newHuidigeStation) {
 }
 Station* Tram::getVolgendeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVolgendeStation!");
-    return fHuidigeStation->getSpoor(fLijnNr).second;
+    return getHuidigeStation()->getSpoor(fLijnNr).second;
 }
 Station* Tram::getVorigeStation() const{
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getVorigeStation!");
-    return fHuidigeStation->getSpoor(fLijnNr).first;
+    return getHuidigeStation()->getSpoor(fLijnNr).first;
 }
 unsigned int Tram::move() {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in moveNaarVolgendeStation!");
@@ -88,7 +88,7 @@ unsigned int Tram::move() {
         skippedStations++;
         nextStation = nextStation->getVolgende(fLijnNr);
     }
-    fHuidigeStation = nextStation;
+    setHuidigeStation(nextStation);
     return skippedStations;
 }
 unsigned int Tram::move(const unsigned int &steps) {
@@ -101,7 +101,7 @@ unsigned int Tram::move(const unsigned int &steps) {
 bool Tram::supportsStation(const Station *const &station) const {
     REQUIRE(this->properlyInitialized(), "Expected Tram to be properly initialized in getType!");
     const std::string& stationType = station->getType();
-    for(size_t i = 0; i<fBediendeStationTypes.size(); i++) {
+    for(size_t i = 0; i<getBediendeStationTypes().size(); i++) {
         if(fBediendeStationTypes[i] == stationType) return true;
     }
     return false;

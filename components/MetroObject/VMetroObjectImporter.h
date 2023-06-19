@@ -32,7 +32,7 @@ private:
     VMetroObjectImporter* _initCheck;
 protected:
     std::map<std::string, std::vector<std::string> > fSupportedTags;
-    std::string configPath;
+    std::string fConfigPath;
 public:
     bool properlyInitialized() const;
     /**

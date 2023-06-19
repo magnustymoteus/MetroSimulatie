@@ -31,10 +31,6 @@ protected:
     */
     std::multimap<int, Tram *> fTrams; // a map that holds all trams (lijnNr : Tram*)
     /**
-    * @brief All tram types of the metronet
-    */
-    std::map<std::string, TramType *> fTramTypes;
-    /**
     * @brief A boolean denoting the consistency of the metronet
     */
     bool isConsistent;
@@ -54,12 +50,6 @@ public:
     */
     std::map<std::string, Station *> getStations() const;
 
-    /**
-    * @brief Gets the tram types of the metronet
-    * @pre: Metronet is properly initialised
-    * @return the tram types of the metronet
-    */
-    std::map<std::string, TramType *> getTramTypes() const;
 
     /**
     * @brief Returns the consistency of the metronet
@@ -82,12 +72,6 @@ public:
     */
     void setStations(std::map<std::string, Station *> &newStations);
 
-    /**
-    * @brief Sets tramTypes to a new value
-    * @pre: Metronet is properly initialised
-    * @param newTramTypes the new value
-    */
-    void setTramTypes(const std::map<std::string, TramType *> &newTramTypes);
 
     /**
     * @brief Sets isConsistent to a new value

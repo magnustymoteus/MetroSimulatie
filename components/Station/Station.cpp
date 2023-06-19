@@ -28,8 +28,8 @@ Station* Station::getVorige(const int &spoorNr) const {
 
 std::pair<Station *, Station *> Station::getSpoor(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    std::map<int, std::pair<Station*, Station*> >::const_iterator spoor = fSporen.find(spoorNr);
-    REQUIRE(spoor != fSporen.end(), "Expected spoor to exist!");
+    std::map<int, std::pair<Station*, Station*> >::const_iterator spoor = getSporen().find(spoorNr);
+    REQUIRE(spoor != getSporen().end(), "Expected spoor to exist!");
     return spoor->second;
 }
 std::map<int, std::pair<Station *, Station *> > Station::getSporen() const {
@@ -42,14 +42,14 @@ const std::string &Station::getType() const {
 }
 bool Station::spoorExists(const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    return fSporen.find(spoorNr) != fSporen.end();
+    return getSporen().find(spoorNr) != getSporen().end();
 }
 // setters
 
 
 void Station::setSpoor(const int &spoorNr, const std::pair<Station *, Station *> &newSpoor) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized!");
-    REQUIRE(fSporen.find(spoorNr) == fSporen.end(), "Spoor with given spoorNr already exists!");
+    REQUIRE(getSporen().find(spoorNr) == getSporen().end(), "Spoor with given spoorNr already exists!");
     fSporen[spoorNr] = newSpoor;
     ENSURE(getSpoor(spoorNr) == newSpoor, "Expected spoor to equal to setter value!");
 }
@@ -65,13 +65,13 @@ void Station::setNaam(const std::string &newNaam) {
 }
 void Station::setVolgende(const int &spoorNr, Station *const &newVolgende) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVolgende!");
-    REQUIRE(fSporen.find(spoorNr) != fSporen.end(), "Expected spoor to exist!");
+    REQUIRE(getSporen().find(spoorNr) != getSporen().end(), "Expected spoor to exist!");
     fSporen.at(spoorNr).second = newVolgende;
     ENSURE(getVolgende(spoorNr) == newVolgende, "Expected getVolgende to equal to newVolgende");
 }
 void Station::setVorige(const int &spoorNr, Station *const &newVorige) {
     REQUIRE(this->properlyInitialized(), "Expected Station to be properly initialized in setVorige!");
-    REQUIRE(fSporen.find(spoorNr) != fSporen.end(), "Expected spoor to exist!");
+    REQUIRE(getSporen().find(spoorNr) != getSporen().end(), "Expected spoor to exist!");
     fSporen.at(spoorNr).first = newVorige;
     ENSURE(getVorige(spoorNr) == newVorige, "Expected getVorige to equal to newVorige");
 }

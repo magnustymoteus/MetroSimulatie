@@ -28,6 +28,11 @@ protected:
     const Metronet* const fMetronet;
 
     /**
+     * @brief Gets metronet
+     */
+     const Metronet* getMetronet() const;
+
+    /**
      * @brief Checks if there are trams with the same line number and vehicle number
      * @pre: MetronetValidator is properly initialised
      * @return a boolean denoting if there are any duplicate trams in the metronet

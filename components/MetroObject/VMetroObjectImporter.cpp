@@ -6,13 +6,12 @@
 
 #include "DesignByContract.h"
 
-VMetroObjectImporter::VMetroObjectImporter(const std::string &configFilePath) {
+VMetroObjectImporter::VMetroObjectImporter(const std::string &configFilePath) : fConfigPath(configFilePath) {
     _initCheck = this;
-    configPath = configFilePath;
     loadSupportedTags();
     TiXmlDocument doc;
     ENSURE(properlyInitialized(), "Expected MetronetImporter to be properly initialized in constructor!");
-    ENSURE(doc.LoadFile(configPath.c_str()), "Expected configPath to load!");
+    ENSURE(doc.LoadFile(fConfigPath.c_str()), "Expected configPath to load!");
 }
 VMetroObjectImporter::VMetroObjectImporter() {
     _initCheck = this;
@@ -29,11 +28,11 @@ std::map<std::string, std::vector<std::string> > VMetroObjectImporter::getSuppor
 }
 std::string VMetroObjectImporter::getConfigPath() const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in getConfigPath!");
-    return configPath;
+    return fConfigPath;
 }
 void VMetroObjectImporter::setConfigPath(const std::string &configFilePath) {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized in setConfigPath!");
-    configPath = configFilePath;
+    fConfigPath = configFilePath;
     loadSupportedTags();
 }
 bool VMetroObjectImporter::isTagSupported(const std::string &tagName) const {
@@ -76,7 +75,7 @@ std::string VMetroObjectImporter::getText(TiXmlElement *elem) const {
 }
 void VMetroObjectImporter::loadSupportedTags() {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");
-    loadSupportedTags(configPath);
+    loadSupportedTags(fConfigPath);
 }
 TiXmlElement* VMetroObjectImporter::getNextSiblingProperty(TiXmlElement *elem, const std::string &propertyName) const {
     REQUIRE(this->properlyInitialized(), "Expected MetronetImporter to be properly initialized!");

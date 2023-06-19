@@ -26,6 +26,8 @@ protected:
 public:
     StationValidator(const Station* const &stationObject);
 
+    const Station* getStationObject() const;
+
     bool properlyInitialized() const;
 
 

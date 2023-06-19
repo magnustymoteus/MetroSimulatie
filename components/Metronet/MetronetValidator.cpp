@@ -17,16 +17,16 @@ bool MetronetValidator::properlyInitialized() const {
 }
 bool MetronetValidator::tramsHaveValidBeginStation() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+    const std::multimap<int, Tram*> &trams = getMetronet()->getTrams();
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin();iter!=trams.end();iter++) {
-        const std::map<std::string, Station*> &stations = fMetronet->getStations();
+        const std::map<std::string, Station*> &stations = getMetronet()->getStations();
         if(stations.find(iter->second->getBeginStation()->getNaam()) == stations.end()) return false;
     }
     return true;
 }
 bool MetronetValidator::noDuplicateTrams() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+    const std::multimap<int, Tram*> &trams = getMetronet()->getTrams();
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin();iter!=trams.end();iter++) {
         for(std::multimap<int, Tram*>::const_iterator iter2 = trams.begin();iter2!=trams.end();iter2++) {
             const Tram* const tram1 = iter->second;
@@ -38,9 +38,12 @@ bool MetronetValidator::noDuplicateTrams() const {
     }
     return true;
 }
+const Metronet* MetronetValidator::getMetronet() const {
+    return fMetronet;
+}
 bool MetronetValidator::stationsLinked() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::map<std::string, Station*> &stations = fMetronet->getStations();
+    const std::map<std::string, Station*> &stations = getMetronet()->getStations();
     for(std::map<std::string, Station*>::const_iterator iter = stations.begin(); iter != stations.end(); iter++) {
         const std::map<int, std::pair<Station*, Station*> > &sporen = iter->second->getSporen();
         for(std::map<int, std::pair<Station*, Station*> >::const_iterator iter2 = sporen.begin();
@@ -60,12 +63,12 @@ bool MetronetValidator::stationsLinked() const {
 }
 bool MetronetValidator::sporenHaveTrams() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::map<std::string, Station*> &stations = fMetronet->getStations();
+    const std::map<std::string, Station*> &stations = getMetronet()->getStations();
     for(std::map<std::string, Station*>::const_iterator iter = stations.begin(); iter != stations.end(); iter++) {
         const std::map<int, std::pair<Station*, Station*> > &sporen = iter->second->getSporen();
         for(std::map<int, std::pair<Station*, Station*> >::const_iterator iter2 = sporen.begin();
             iter2 != sporen.end(); iter2++) {
-            const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+            const std::multimap<int, Tram*> &trams = getMetronet()->getTrams();
             const bool foundTramForSpoor = trams.find(iter2->first) != trams.end();
             if(!foundTramForSpoor) return false;
         }
@@ -74,9 +77,9 @@ bool MetronetValidator::sporenHaveTrams() const {
 }
 bool MetronetValidator::tramsHaveSpoor() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+    const std::multimap<int, Tram*> &trams = getMetronet()->getTrams();
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin();iter!=trams.end();iter++) {
-        const std::map<std::string, Station*> &stations = fMetronet->getStations();
+        const std::map<std::string, Station*> &stations = getMetronet()->getStations();
         bool foundSpoor = false;
         for(std::map<std::string, Station*>::const_iterator iter2 = stations.begin();
         iter2 != stations.end(); iter2++) {
@@ -89,7 +92,7 @@ bool MetronetValidator::tramsHaveSpoor() const {
 }
 bool MetronetValidator::validateTrams() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::multimap<int, Tram*> &trams = fMetronet->getTrams();
+    const std::multimap<int, Tram*> &trams = getMetronet()->getTrams();
     bool validated = true;
     for(std::multimap<int, Tram*>::const_iterator iter = trams.begin(); iter != trams.end(); iter++) {
         const Tram* const currentTram = iter->second;
@@ -100,7 +103,7 @@ bool MetronetValidator::validateTrams() const {
 }
 bool MetronetValidator::validateStations() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    const std::map<std::string, Station*> &stations = fMetronet->getStations();
+    const std::map<std::string, Station*> &stations = getMetronet()->getStations();
     bool validated = true;
     for(std::map<std::string, Station*>::const_iterator iter = stations.begin(); iter != stations.end(); iter++) {
         const Station* const currentStation = iter->second;
@@ -111,7 +114,7 @@ bool MetronetValidator::validateStations() const {
 }
 bool MetronetValidator::validate() const {
     REQUIRE(properlyInitialized(), "Expected MetronetValidator to be properly initialized!");
-    bool consistent = fMetronet->getIsConsistent();
+    bool consistent = getMetronet()->getIsConsistent();
     const bool noDupTrams = noDuplicateTrams();
     const bool stopsLinked = stationsLinked();
     const bool tramsHaveSpr = tramsHaveSpoor();

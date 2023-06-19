@@ -17,14 +17,17 @@ std::string StationValidator::getInvalidationMessage(const std::string &error) c
     REQUIRE(properlyInitialized(), "Expected StationValidator to be properly initialized in getInvalidationMessage!");
     return "Station validation failed: "+error+"\n";
 }
-
+const Station* StationValidator::getStationObject() const {
+    return fStationObject;
+}
 bool StationValidator::validate() const {
     std::string test = "test";
     bool validated = true;
-    const bool stationHasName = fStationObject->getNaam().c_str();
-    const bool stationHasType = fStationObject->getType().c_str();
-    const bool stationHasValidAmountOfSporen = (fStationObject->getType() == "Halte") ?
-            fStationObject->getSporen().size() == 1 : !fStationObject->getSporen().empty();
+    const Station* const stationObject = getStationObject();
+    const bool stationHasName = stationObject->getNaam().c_str();
+    const bool stationHasType = stationObject->getType().c_str();
+    const bool stationHasValidAmountOfSporen = (stationObject->getType() == "Halte") ?
+            stationObject->getSporen().size() == 1 : !stationObject->getSporen().empty();
     THROW_IF_FALSE(stationHasName,
                    VUnhandleableMetroObjectException(getInvalidationMessage("Station name is null").c_str()));
     THROW_IF_FALSE(stationHasType,
@@ -33,7 +36,7 @@ bool StationValidator::validate() const {
             getInvalidationMessage("Station either doesn't have sporen or has too much sporen for its type")
             .c_str()));
 
-    std::map<int, std::pair<Station*, Station*> > sporen = fStationObject->getSporen();
+    std::map<int, std::pair<Station*, Station*> > sporen = stationObject->getSporen();
     for(std::map<int, std::pair<Station*, Station*> >::const_iterator iter = sporen.begin(); iter != sporen.end();
     iter++) {
         const bool stationHasVorige = iter->second.first;

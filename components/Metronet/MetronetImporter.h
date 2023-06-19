@@ -43,6 +43,14 @@ protected:
 public:
     bool properlyInitialized() const;
     /**
+     * @brief Gets station importer
+     */
+     StationImporter getStationImporter() const;
+    /**
+     * @brief Gets tram importer
+     */
+     TramImporter getTramImporter() const;
+    /**
      * @brief Constructor of MetronetImporter
      * @pre: MetronetImporter is properly initialised
      * @post: MetronetImporter with at least one supported tag is created
