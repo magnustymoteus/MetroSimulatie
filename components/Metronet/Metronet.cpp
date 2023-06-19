@@ -66,22 +66,37 @@ void Metronet::autoSimulate(const unsigned int &steps) {
                 iter->second->getAantalDefecten(),iter->second->getReparatieTijd())));
     }
     for (unsigned int i = 0; i < steps; i++) {
+        // Fill alreadyMoved map
+        std::map<Tram*, bool> alreadyMoved;
+        for(iter = fTrams.begin(); iter != fTrams.end(); iter++){
+            alreadyMoved.insert(std::make_pair(iter->second, false));
+        }
         wait(1);
         print("Stap "); print(i + 1); print(":\n");
         for (iter = fTrams.begin(); iter != fTrams.end(); iter++) {
             print("\t");
-            if(tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
-                const unsigned int stepsUntilDefect =  tramsDefectInfo.at(iter->second).first;
-                const unsigned int stepsUntilFixed =  tramsDefectInfo.at(iter->second).second;
-                if(stepsUntilDefect) tramsDefectInfo.at(iter->second).first--;
-                if(!tramsDefectInfo.at(iter->second).first && stepsUntilFixed) tramsDefectInfo.at(iter->second).second--;
-                if(!stepsUntilDefect && !stepsUntilFixed) {
-                    tramsDefectInfo.at(iter->second).first = iter->second->getAantalDefecten();
-                    tramsDefectInfo.at(iter->second).second = iter->second->getReparatieTijd();
-                }
-                moveTram(iter->second, stepsUntilDefect>0);
+            std::string stationName = iter->second->getVolgendeStation()->getNaam();
+            int lijnNr = iter->second->getLijnNr();
+            if(!isTramOnStation(stationName, lijnNr) || (getTramOnStation(stationName, lijnNr) != 0
+                    && !alreadyMoved.at(getTramOnStation(stationName, lijnNr)))) {
+                if (tramsDefectInfo.find(iter->second) != tramsDefectInfo.end()) {
+                    const unsigned int stepsUntilDefect = tramsDefectInfo.at(iter->second).first;
+                    const unsigned int stepsUntilFixed = tramsDefectInfo.at(iter->second).second;
+                    if (stepsUntilDefect) tramsDefectInfo.at(iter->second).first--;
+                    if (!tramsDefectInfo.at(iter->second).first && stepsUntilFixed)
+                        tramsDefectInfo.at(iter->second).second--;
+                    if (!stepsUntilDefect && !stepsUntilFixed) {
+                        tramsDefectInfo.at(iter->second).first = iter->second->getAantalDefecten();
+                        tramsDefectInfo.at(iter->second).second = iter->second->getReparatieTijd();
+                    }
+                    moveTram(iter->second, stepsUntilDefect > 0);
+                } else moveTram(iter->second);
+            }else{
+                print("Tram "); print(iter->second->getLijnNr()); print(" (");
+                print(iter->second->getVoertuigNr()); print(") (");
+                print(tramTypeToString(iter->second->getType())); print(") wacht tot volgende station vrij is");
             }
-            else moveTram(iter->second);
+            alreadyMoved[iter->second] = true;
         }
     }
 }
@@ -200,3 +215,14 @@ void Metronet::setStations(std::map<std::string, Station *> &newStations) {
     fStations=newStations;
     ENSURE(getStations() == newStations, "Expected fStations to equal to the setter value!");
 }
+Tram* Metronet::getTramOnStation(const std::string &stationName, const int &spoorNr) const {
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    REQUIRE(fStations.find(stationName) != fStations.end(), "Expected the station to exist in metronet!");
+    REQUIRE(fStations.at(stationName)->spoorExists(spoorNr), "Expected the station to have the given spoorNr!");
+    for(std::multimap<int, Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); iter++) {
+        Station* huidigeStation = iter->second->getHuidigeStation();
+        if(iter->second->getLijnNr() == spoorNr && huidigeStation->getNaam() == stationName) return iter->second;
+    }
+    return 0;
+}
+

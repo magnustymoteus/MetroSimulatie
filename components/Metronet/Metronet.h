@@ -97,6 +97,16 @@ public:
     void setIsConsistent(const bool &newIsConsistent);
 
     /**
+    * @brief Get the tram currently stopping at a station
+    * @param stationName the name of the station
+     *@param spoorNr the track number of the station
+     * @return Tram pointer denoting the tram currently stopping on the station
+     * @pre: Metronet is properly initialised
+     * @pre Station is valid
+     * @pre Station has the given track number
+    */
+    Tram* getTramOnStation(const std::string &stationName, const int &spoorNr) const;
+    /**
     * @brief Checks if there is a tram currently stopping at a station
     * @param stationName the name of the station
      *@param spoorNr the track number of the station
