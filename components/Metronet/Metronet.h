@@ -7,6 +7,7 @@
 
 #include "Station/Station.h"
 #include "Tram/Tram.h"
+#include <set>
 
 class MetronetValidator; // forward declaration
 
@@ -49,7 +50,6 @@ public:
     * @return the stations of the metronet
     */
     std::map<std::string, Station *> getStations() const;
-
 
     /**
     * @brief Returns the consistency of the metronet
@@ -196,5 +196,58 @@ public:
      * @post Successful simulation with no errors
      */
     void autoSimulate(const unsigned int &steps);
+    /**
+     * @brief Prints the rapport of the metronet after simulation
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     */
+    void printRapport() const;
+    /**
+     * @brief Gets all station types in the current metronet
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     */
+    std::set<std::string> getStationTypes() const;
+    /**
+     * @brief Gets all tram types in the current metronet
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     */
+    std::set<std::string> getTramTypes() const;
+    /**
+     * @brief Gets number of stations with the given type
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Number of stations with the given type
+     */
+    int getNumberOfStationsWithGivenType(const std::string& stationType) const;
+    /**
+     * @brief Gets number of trams with the given type
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Number of trams with the given type
+     */
+    int getNumberOfTramsWithGivenType(const std::string& tramType) const;
+    /**
+     * @brief Gets stations with the given type
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Set of pointers to stations with the given type
+     */
+    std::set<Station*> getStationsWithGivenType(const std::string& stationType) const;
+    /**
+     * @brief Gets stations with the given type
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Set of pointers to stations with the given type
+     */
+    std::set<Tram*> getTramsWithGivenType(const std::string& tramType) const;
 };
 #endif //PROJECT_SOFTWARE_PRACTICUM2_METRONET_H

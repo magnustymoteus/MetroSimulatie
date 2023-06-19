@@ -99,6 +99,8 @@ void Metronet::autoSimulate(const unsigned int &steps) {
             alreadyMoved[iter->second] = true;
         }
     }
+    // Print the rapport
+    printRapport();
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -223,3 +225,99 @@ Tram* Metronet::getTramOnStation(const std::string &stationName, const int &spoo
     return 0;
 }
 
+void Metronet::printRapport() const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<std::string> stationTypes = getStationTypes();
+    std::set<std::string> tramTypes = getTramTypes();
+    print("\n######################## Rapport ########################\n\n");
+    print("Aantal stations in het metronet: "); print(fStations.size()); print("\n");
+    print("Daarvan:\n");
+    std::set<std::string>::iterator iter;
+    // Iterate through all station types
+    for(iter = stationTypes.begin(); iter != stationTypes.end(); ++iter){
+        print("\t- " + *iter + ": "); print(getNumberOfStationsWithGivenType(*iter)); print("\n");
+        std::set<Station*> stationsWithType = getStationsWithGivenType(*iter);
+        for(std::set<Station*>::const_iterator stationIt = stationsWithType.begin();
+                                stationIt != stationsWithType.end(); ++stationIt){
+            print("\t\t Station " + (*stationIt)->getNaam() + ". ");
+            // TODO: some station info
+            print("\n");
+        }
+    }
+    print("\nAantal trams in het metronet: "); print(fTrams.size()); print("\n");
+    print("Daarvan:\n");
+    double totaleKosten = 0;
+    // Iterate through all tram types
+    for(iter = tramTypes.begin(); iter != tramTypes.end(); ++iter){
+        print("\t- " + *iter + ": "); print(getNumberOfTramsWithGivenType(*iter)); print("\n");
+        std::set<Tram*> tramsWithType = getTramsWithGivenType(*iter);
+        for(std::set<Tram*>::const_iterator tramIt = tramsWithType.begin();
+            tramIt != tramsWithType.end(); ++tramIt){
+            print("\t\t Totale reparatiekosten voor tram "); print((*tramIt)->getLijnNr()); print(" ("); print((*tramIt)->getVoertuigNr());
+            print("): "); print((*tramIt)->getTotaleReparatieKost()); print(" euro.\n");
+            totaleKosten += (*tramIt)->getTotaleReparatieKost();
+        }
+    }
+    print("\nTotale reparatiekosten voor alle trams: "); print(totaleKosten); print("\n");
+    print("\n#########################################################\n");
+}
+std::set<std::string> Metronet::getStationTypes() const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<std::string> to_return;
+    for(std::map<std::string,Station*>::const_iterator iter = fStations.begin(); iter != fStations.end(); ++iter){
+        to_return.insert(iter->second->getType());
+    }
+    return to_return;
+}
+std::set<std::string> Metronet::getTramTypes() const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<std::string> to_return;
+    for(std::map<int,Tram*>::const_iterator iter = fTrams.begin(); iter != fTrams.end(); ++iter){
+        to_return.insert(tramTypeToString(iter->second->getType()));
+    }
+    return to_return;
+}
+
+int Metronet::getNumberOfStationsWithGivenType(const std::string& stationType) const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    int numberOfStations = 0;
+    for(std::map<std::string, Station*>::const_iterator iter = fStations.begin();
+                        iter != fStations.end(); ++iter){
+        if(iter->second->getType() == stationType) numberOfStations++;
+    }
+    return numberOfStations;
+}
+
+int Metronet::getNumberOfTramsWithGivenType(const std::string& tramType) const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    int numberOfTrams = 0;
+    for(std::map<int, Tram*>::const_iterator iter = fTrams.begin();
+        iter != fTrams.end(); ++iter){
+        if(tramTypeToString(iter->second->getType()) == tramType) numberOfTrams++;
+    }
+    return numberOfTrams;
+}
+
+std::set<Station*> Metronet::getStationsWithGivenType(const std::string& stationType) const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<Station*> stations;
+    for(std::map<std::string,Station*>::const_iterator iter = fStations.begin();
+                iter != fStations.end(); ++iter){
+        if(iter->second->getType() == stationType){
+            stations.insert(iter->second);
+        }
+    }
+    return stations;
+}
+
+std::set<Tram*> Metronet::getTramsWithGivenType(const std::string& tramType) const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<Tram*> trams;
+    for(std::map<int,Tram*>::const_iterator iter = fTrams.begin();
+        iter != fTrams.end(); ++iter){
+        if(tramTypeToString(iter->second->getType()) == tramType){
+            trams.insert(iter->second);
+        }
+    }
+    return trams;
+}
