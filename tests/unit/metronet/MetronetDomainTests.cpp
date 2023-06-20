@@ -26,7 +26,7 @@ protected:
     std::vector<std::string > stationTypesVanPCC = {"Metrostation", "Halte"};
     std::vector<std::string > stationTypesVanAlbatros = {"Metrostation"};
     // Create trams for metronet2
-    Tram* PCCTram = new PCC(1, 1, 5, 10);
+    Tram* PCCTram = new PCC(1, 1, 5, 10, 32);
     Tram* AlbatrosTram = new Albatros(1, 2);
 
     void setSporen(){
@@ -59,6 +59,23 @@ protected:
         // Set trams
         PCCTram->setBeginStation(halte);
         PCCTram->setHuidigeStation(halte);
+        AlbatrosTram->setBeginStation(metrostation1);
+        AlbatrosTram->setHuidigeStation(metrostation1);
+        // Push everything to metronet2
+        metronet2.pushStation(metrostation1);
+        metronet2.pushStation(metrostation2);
+        metronet2.pushStation(halte);
+        metronet2.pushTram(PCCTram);
+        metronet2.pushTram(AlbatrosTram);
+    };
+    void setMetronet3(){
+        // Add spoor to all stations
+        metrostation1->setSpoor(1, std::make_pair(halte, metrostation2));
+        metrostation2->setSpoor(1, std::make_pair(metrostation1, halte));
+        halte->setSpoor(1, std::make_pair(metrostation2, metrostation1));
+        // Set trams
+        PCCTram->setBeginStation(metrostation1);
+        PCCTram->setHuidigeStation(metrostation1);
         AlbatrosTram->setBeginStation(metrostation1);
         AlbatrosTram->setHuidigeStation(metrostation1);
         // Push everything to metronet2
@@ -165,4 +182,40 @@ TEST_F(MetronetDomainTest, DefectenEnReparaties3){
     EXPECT_NO_THROW(setMetronet2());
     EXPECT_NO_THROW(metronet2.autoSimulate(5));
     EXPECT_EQ(PCCTram->getHuidigeStation(), metrostation2);
+}
+TEST_F(MetronetDomainTest, Botsingen){
+    EXPECT_NO_THROW(setMetronet3());
+}
+TEST_F(MetronetDomainTest, Botsingen2){
+    EXPECT_NO_THROW(setMetronet3());
+    EXPECT_NO_THROW(metronet2.autoSimulate(5));
+}
+TEST_F(MetronetDomainTest, Botsingen3){
+    EXPECT_NO_THROW(setMetronet3());
+    EXPECT_NO_THROW(metronet2.autoSimulate(5));
+    EXPECT_EQ(AlbatrosTram->getHuidigeStation(), metrostation2);
+}
+TEST_F(MetronetDomainTest, Reparatiekosten){
+    EXPECT_NO_THROW(setMetronet2());
+}
+TEST_F(MetronetDomainTest, Reparatiekosten2){
+    EXPECT_NO_THROW(setMetronet2());
+    EXPECT_EQ(PCCTram->getReparatieKost(), 32);
+}
+TEST_F(MetronetDomainTest, Reparatiekosten3){
+    EXPECT_NO_THROW(setMetronet2());
+    EXPECT_EQ(PCCTram->getReparatieKost(), 32);
+    EXPECT_NO_THROW(metronet2.autoSimulate(5));
+}
+TEST_F(MetronetDomainTest, Reparatiekosten4){
+    EXPECT_NO_THROW(setMetronet2());
+    EXPECT_EQ(PCCTram->getReparatieKost(), 32);
+    EXPECT_NO_THROW(metronet2.autoSimulate(5));
+    EXPECT_EQ(PCCTram->getTotaleReparatieKost(), 0);
+}
+TEST_F(MetronetDomainTest, Reparatiekosten5){
+    EXPECT_NO_THROW(setMetronet2());
+    EXPECT_EQ(PCCTram->getReparatieKost(), 32);
+    EXPECT_NO_THROW(metronet2.autoSimulate(10));
+    EXPECT_EQ(PCCTram->getTotaleReparatieKost(), 160);
 }

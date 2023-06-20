@@ -42,6 +42,10 @@ protected:
     */
     const int fSnelheid;
     /**
+    * @brief The color of the tram
+    */
+    std::string fColor;
+    /**
     * @brief The stations that the tram type supports (can stop at)
     */
     const std::vector<std::string> fBediendeStationTypes;
@@ -107,6 +111,13 @@ public:
      * @return the tram type
      */
     TramType getType() const;
+    /**
+     * @brief Returns the color of the tram
+     * @pre: Tram is properly initialised
+     * @post: Tram is unchanged
+     * @return the tram color
+     */
+    const std::string &getColor() const;
     /**
      * @brief Returns the starting station
      * @pre: Tram is properly initialised
@@ -198,6 +209,14 @@ public:
     * @param defect Defect status to set
     */
     void setDefect(bool defect);
+    /**
+    * @brief Sets the color of the tram
+    * @pre: Tram is properly initialised
+    * @post: The given tram color is set
+    * @param Color The tram color
+    */
+    void setColor(const std::string &Color);
+
     /**
      * @brief Sets the starting station to a new value
      * @pre: Tram is properly initialised

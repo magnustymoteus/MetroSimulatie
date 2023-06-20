@@ -26,7 +26,7 @@
 Tram 12 nr 1
 	type: Stadslijner
 	snelheid: 70
-	huidig station: B
+	huidig station: A
 Tram 21 nr 1
 	type: PCC
 	snelheid: 40

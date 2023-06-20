@@ -13,6 +13,7 @@ fAantalDefecten(aantalDefecten), fReparatieTijd(reparatieTijd)
     _initCheck = this;
     fBeginStation = 0;
     fHuidigeStation = 0;
+    fColor = "(1,1,1)";
 
     ENSURE(properlyInitialized(), "Expected Tram to be properly initialized in constructor!");
 }
@@ -140,4 +141,12 @@ bool Tram::isDefect() const {
 
 void Tram::setDefect(bool defect) {
     Tram::fDefect = defect;
+}
+
+const std::string &Tram::getColor() const {
+    return fColor;
+}
+
+void Tram::setColor(const std::string &Color) {
+    Tram::fColor = Color;
 }

@@ -3,11 +3,12 @@
 //
 
 #include "Metronet.h"
-#include "MetronetExporter.h"
 
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include "utils.h"
+#include "engine.h"
 
 #include "Exceptions/MetronetInconsistentException.h"
 
@@ -51,7 +52,7 @@ void wait(const long &durationInSeconds) {
     clock_t now = clock();
     while(clock()-now < durationInSeconds*CLOCKS_PER_SEC);
 }
-void Metronet::autoSimulate(const unsigned int &steps) {
+void Metronet::autoSimulate(const unsigned int &steps, bool printRapportOn) {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     REQUIRE(steps>0, "Expected steps > 0");
     REQUIRE(isConsistent, "Expected metronet to be consistent in a simulation!");
@@ -94,13 +95,13 @@ void Metronet::autoSimulate(const unsigned int &steps) {
             }else{
                 print("Tram "); print(iter->second->getLijnNr()); print(" (");
                 print(iter->second->getVoertuigNr()); print(") (");
-                print(tramTypeToString(iter->second->getType())); print(") wacht tot volgende station vrij is");
+                print(tramTypeToString(iter->second->getType())); print(") wacht tot volgende station vrij is\n");
             }
             alreadyMoved[iter->second] = true;
         }
     }
     // Print the rapport
-    printRapport();
+    if(printRapportOn) printRapport();
 }
 bool Metronet::isTramOnStation(const std::string &stationName, const int &spoorNr) const {
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
@@ -167,8 +168,7 @@ void Metronet::moveTram(Tram* &tram, const unsigned int &steps) const {
             print("\t\t"); print(skippedStations); print(" halte(s) genegeerd omdat een ");
             print(tramTypeToString(tram->getType())); print(" daar niet mag stoppen.\n");
         }
-        }
-    else {
+    } else {
         tram->setDefect(true);
         print("Tram "); print(lijnNr); print(" ("); print(voertuigNr); print(") (");
         print(tramTypeToString(tram->getType())); print(") is defect en wordt gerepareerd.\n");
@@ -240,7 +240,6 @@ void Metronet::printRapport() const{
         for(std::set<Station*>::const_iterator stationIt = stationsWithType.begin();
                                 stationIt != stationsWithType.end(); ++stationIt){
             print("\t\t Station " + (*stationIt)->getNaam() + ". ");
-            // TODO: some station info
             print("\n");
         }
     }
@@ -320,4 +319,149 @@ std::set<Tram*> Metronet::getTramsWithGivenType(const std::string& tramType) con
         }
     }
     return trams;
+}
+
+std::string Metronet::generateIni() const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    const char* pathToImages = "output/GeneratedImages/";
+    std::string fileName = intToString(getFileCount(pathToImages));
+    std::ofstream outputFile;
+    std::string pathFile = pathToImages + fileName + ".ini";
+    outputFile.open(pathFile.c_str());
+    outputFile << "[General]\n"
+                  "size = 1024\n"
+                  "backgroundcolor = (0, 0, 0)\n"
+                  "type = \"LightedZBuffering\"\n"
+                  "eye = (100, 50, 75)\n"
+                  "nrFigures = " << getTrams().size() + 1 << "\n";
+    outputFile << "nrLights = 1\n"
+                  "shadowEnabled = TRUE\n"
+                  "shadowMask = 2048\n"
+                  "\n"
+                  "[Light0]\n"
+                  "infinity = FALSE\n"
+                  "location = (75, 75, 75)\n"
+                  "ambientLight = (1, 1, 1)\n"
+                  "diffuseLight = (1, 1, 1)\n"
+                  "\n"
+                  "[Figure0]\n" // Rails
+                  "type = \"ThickLineDrawing\"\n"
+                  "m = 4\n"
+                  "n = 90\n"
+                  "radius = 0.2\n"
+                  "scale = 1\n"
+                  "rotateX = 0\n"
+                  "rotateY = 0\n"
+                  "rotateZ = 0\n"
+                  "ambientReflection = (0.50, 0.50, 0.50)\n"
+                  "diffuseReflection = (0.50, 0.50, 0.50)\n"
+                  "center = (0, 0, 0)\n"
+                  "color = (1, 1, 1)\n"
+                  "nrPoints = ";
+    outputFile << getStations().size() << "\n";
+    std::set<int> lineNrs = getAllLineNrs();
+    int numberOfLines = 0;
+    for(std::set<int>::const_iterator it = lineNrs.begin(); it != lineNrs.end(); ++it){
+        numberOfLines += getNumberOfStations(*it);
+    }
+    outputFile << "nrLines = " << numberOfLines << "\n";
+    // Points
+    for(long unsigned int i = 0; i != getStations().size(); i++){
+        outputFile << "point" << i << "= ("<< 4*std::cos(2*M_PI*i/(getStations().size()))
+        << ", " << 4*std::sin(2*M_PI*i/(getStations().size())) << ", 0)\n";
+    }
+    int i = 0;
+    // Lines
+    for(std::set<int>::const_iterator it = lineNrs.begin(); it != lineNrs.end(); ++it){
+        Station* startStation = 0;
+        int lijnNr = *it;
+        std::map<std::string,Station*> stations = getStations();
+        for(std::map<std::string,Station*>::const_iterator iter = stations.begin(); iter != stations.end(); ++iter){
+            if(iter->second->spoorExists(lijnNr)) {
+                startStation = iter->second;
+                break;
+            }
+        }
+        if (startStation == 0) continue;
+        Station* next = startStation->getVolgende(lijnNr);
+        do{
+            outputFile << "line" << i << " = (" << getIndex(getStations(), next) << ","
+                        << getIndex(getStations(), next->getVolgende(lijnNr)) << ")\n";
+            next = next->getVolgende(lijnNr);
+            i++;
+        }while(next != startStation);
+        outputFile << "line" << i << " = (" << getIndex(getStations(), next) << ","
+                   << getIndex(getStations(), next->getVolgende(lijnNr)) << ")\n";
+        i++;
+    }
+    i = 1;
+    // And now trains!
+    for(std::map<int, Tram*>::const_iterator it = fTrams.begin(); it != fTrams.end(); ++it){
+        outputFile << "[Figure" << i << "]\n";
+        outputFile << "type = \"obj\"\n"
+                      "src = \"train.obj\"\n"
+                      "scale = 0.03\n"
+                      "rotateX = 90\n"
+                      "rotateY = 0\n"
+                      "rotateZ = 90 \n"
+                      "center = (";
+        int stationNumber = getIndex(getStations(), it->second->getHuidigeStation());
+        outputFile << 4*std::cos(2*M_PI*stationNumber/(getStations().size()))
+                      << ", " << 4*std::sin(2*M_PI*stationNumber/(getStations().size())) << ", ";
+        if(!it->second->isDefect()) outputFile << "0.1";
+        else outputFile << "1";
+        outputFile << ")\n";
+        i++;
+        outputFile << "color = " << it->second->getColor() << "\n"
+                      "ambientReflection " << it->second->getColor() << "\n"
+                      "diffuseReflection = (0.00, 0.50, 0.00)\n"
+                      "normalOn = false\n";
+    }
+    // Close file
+    outputFile.close();
+    return pathFile;
+}
+std::set<int> Metronet::getAllLineNrs() const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    std::set<int> lineNrs;
+    for(std::map<int,Tram*>::const_iterator iter = fTrams.begin();
+        iter != fTrams.end(); ++iter){
+        lineNrs.insert(iter->first);
+    }
+    return lineNrs;
+}
+
+int Metronet::getNumberOfStations(int lijnNr) const{
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    int numberOfStations = 0;
+    // Find a station with given lijnNr
+    Station* startStation = 0;
+    if(!spoorExists(lijnNr)) return numberOfStations;
+    for(std::map<std::string,Station*>::const_iterator it = fStations.begin(); it != fStations.end(); ++it){
+        if(it->second->spoorExists(lijnNr)) {
+            startStation = it->second;
+            break;
+        }
+    }
+    if(startStation == 0) return numberOfStations;
+    Station* current = startStation->getVolgende(lijnNr);
+    numberOfStations++;
+    do{
+        current = current->getVolgende(lijnNr);
+        numberOfStations++;
+    } while(current != startStation);
+    return numberOfStations;
+}
+void Metronet::graphicalSimulation(const unsigned int &steps){
+    REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
+    REQUIRE(steps>0, "Expected steps > 0");
+    REQUIRE(isConsistent, "Expected metronet to be consistent in a simulation!");
+    unsigned int i = 0;
+    while(i != steps){
+        std::string iniPath = generateIni();
+        //generate_image(iniPath);
+        //generate_image(5);
+        autoSimulate(1, false);
+        i++;
+    }
 }

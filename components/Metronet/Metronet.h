@@ -190,12 +190,13 @@ public:
     /**
      * @brief Simulates circulating of trams on the metronet
      * @param steps durationInSeconds number of steps (1 step/sec) made by all trams
+     * @param printRapportOn does the rapport has to be printed
      * @pre: Metronet is properly initialised
      * @pre steps > 0
      * @pre Metronet is consistent
      * @post Successful simulation with no errors
      */
-    void autoSimulate(const unsigned int &steps);
+    void autoSimulate(const unsigned int &steps, bool printRapportOn=true);
     /**
      * @brief Prints the rapport of the metronet after simulation
      * @pre: Metronet is properly initialised
@@ -249,5 +250,38 @@ public:
      * @return Set of pointers to stations with the given type
      */
     std::set<Tram*> getTramsWithGivenType(const std::string& tramType) const;
+    /**
+     * @brief Returns number of stations on the give line
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Returns number of stations on the give line
+     */
+    int getNumberOfStations(int lijnNr) const;
+    /**
+     * @brief Gets all line numbers
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Set of numbers of line numbers with the given type
+     */
+    std::set<int> getAllLineNrs() const;
+    /**
+     * @brief Generates an ini of the metronet in output/GeneratedImages
+     * @pre: Metronet is properly initialised
+     * @pre Metronet is consistent
+     * @post Metronet is unchanged
+     * @return Path to the generated ini file
+     */
+    std::string generateIni() const;
+    /**
+     * @brief Simulates circulating of trams on the metronet
+     * @param steps number of steps made by all trams
+     * @pre: Metronet is properly initialised
+     * @pre steps > 0
+     * @pre Metronet is consistent
+     * @post Successful simulation with no errors
+     */
+    void graphicalSimulation(const unsigned int &steps);
 };
 #endif //PROJECT_SOFTWARE_PRACTICUM2_METRONET_H

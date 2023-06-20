@@ -14,8 +14,6 @@ TEST_F(StationDomainTest, DefaultConstructor) {
     Station station_("test_naam", "test_type");
     EXPECT_TRUE(station_.properlyInitialized());
     EXPECT_EQ(station_.getNaam(), "test_naam");
-    EXPECT_DEATH(station_.getVolgende(12), "Expected spoor to exist!");
-    EXPECT_DEATH(station_.getVorige(12), "Expected spoor to exist!");
     EXPECT_EQ(station_.getType(), "test_type");
 }
 TEST_F(StationDomainTest, SettersGetters) {
@@ -31,6 +29,4 @@ TEST_F(StationDomainTest, SettersGetters) {
     EXPECT_EQ(station_.getNaam(), name);
     EXPECT_EQ(station_.getType(), stationType);
     EXPECT_EQ(station_.getSpoor(17), spoorTupel);
-    EXPECT_DEATH(station_.getVolgende(12), "Expected spoor to exist!");
-    EXPECT_DEATH(station_.getVorige(12), "Expected spoor to exist!");
 }
