@@ -2,7 +2,7 @@
 = Station A =
 * Spoor 12:
 	-> Station B
-	<- Station C
+	<- Station D
 
 * Spoor 21:
 	-> Station B
@@ -19,18 +19,23 @@
 
 = Station C =
 * Spoor 12:
-	-> Station A
+	-> Station D
 	<- Station B
+
+= Station D =
+* Spoor 12:
+	-> Station A
+	<- Station C
 
 --== TRAMS ==--
 Tram 12 nr 1
 	type: Stadslijner
 	snelheid: 70
-	huidig station: A
+	huidig station: B
 Tram 21 nr 1
 	type: PCC
 	snelheid: 40
-	huidig station: A
+	huidig station: B
 	aantal defecten: 1
 	reparatie tijd: 3
 	reparatiekosten: 10000 euro

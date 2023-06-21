@@ -17,7 +17,7 @@ set (CMAKE_CXX_STANDARD 17)
 ############################################################
 set(engine_sources
 	easy_image.cc
-	engine.cc main/main.cpp engine.h
+	engine.cc engine.h
 	ini_configuration.cc l_parser.cc
         ZBuffer.cpp ZBuffer.h Point2D.h Figure.cpp Figure.h Face.cpp Face.h Light.h Light.cpp utils.cpp utils.h Line2D.h Texture.cpp Texture.h obj_parser.h obj_parser.cc)
 
@@ -30,3 +30,5 @@ set(lib_name "engine_lib")
 add_library(${lib_name} ${engine_sources})
 install( TARGETS ${exe_name} DESTINATION ${PROJECT_SOURCE_DIR}/ )
 include_directories(vector)
+target_include_directories(engine_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+export(TARGETS engine_lib FILE engineConfig.cmake)

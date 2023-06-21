@@ -37,7 +37,7 @@ Tram * TramImporter::parse(TiXmlElement *tramElem) const {
     switch(type) {
         case TramType_PCC:
             tram = new PCC(lijnNr, voertuigNr, aantalDefecten, reparatieTijd, reparatieKost);
-            tram->setColor("(0,1,0)");
+            tram->setColor("(0,0.75,0)");
             break;
         case TramType_Stadslijner:
             tram = new Stadslijner(lijnNr, voertuigNr);

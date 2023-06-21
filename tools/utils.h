@@ -5,8 +5,16 @@
 #ifndef METROSIMULATIE_UTILS_H
 #define METROSIMULATIE_UTILS_H
 #include <sstream>
-#include <dirent.h>
 #include <cstring>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <dirent.h>
+#endif
 
 
 /**
@@ -19,26 +27,42 @@ inline void print(const T& lijn) {
     oss << lijn;
     std::cout << oss.str();
 }
-inline int getFileCount(const char* folderPath) {
-    const char* extension = ".ini";
-    DIR* directory = opendir(folderPath);
-    if (directory == NULL) {
-        std::cerr << "Failed to open directory." << std::endl;
-        return -1;
-    }
-
+int getFileCount(const std::string& directoryPath) {
     int fileCount = 0;
+
+#ifdef _WIN32
+    WIN32_FIND_DATA findData;
+    HANDLE hFind = INVALID_HANDLE_VALUE;
+
+    std::string searchPath = directoryPath + "\\*";
+
+    hFind = FindFirstFile(searchPath.c_str(), &findData);
+
+    if (hFind != INVALID_HANDLE_VALUE) {
+        do {
+            if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+                fileCount++;
+            }
+        } while (FindNextFile(hFind, &findData) != 0);
+
+        FindClose(hFind);
+    }
+#else
+    DIR* dir;
     struct dirent* entry;
-    while ((entry = readdir(directory)) != NULL) {
-        if (entry->d_type == DT_REG) {  // Regular file
-            const char* fileExtension = strrchr(entry->d_name, '.');
-            if (fileExtension != NULL && strcmp(fileExtension, extension) == 0) {
+
+    dir = opendir(directoryPath.c_str());
+
+    if (dir != nullptr) {
+        while ((entry = readdir(dir)) != nullptr) {
+            if (entry->d_type == DT_REG) {
                 fileCount++;
             }
         }
-    }
 
-    closedir(directory);
+        closedir(dir);
+    }
+#endif
 
     return fileCount;
 }

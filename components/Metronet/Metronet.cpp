@@ -8,7 +8,8 @@
 #include <fstream>
 #include <ctime>
 #include "utils.h"
-#include "engine.h"
+#include <cstdlib>
+#include <unistd.h>
 
 #include "Exceptions/MetronetInconsistentException.h"
 
@@ -324,7 +325,7 @@ std::set<Tram*> Metronet::getTramsWithGivenType(const std::string& tramType) con
 std::string Metronet::generateIni() const{
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     const char* pathToImages = "output/GeneratedImages/";
-    std::string fileName = intToString(getFileCount(pathToImages));
+    std::string fileName = intToString(getFileCount(pathToImages) - 2);
     std::ofstream outputFile;
     std::string pathFile = pathToImages + fileName + ".ini";
     outputFile.open(pathFile.c_str());
@@ -367,8 +368,12 @@ std::string Metronet::generateIni() const{
     outputFile << "nrLines = " << numberOfLines << "\n";
     // Points
     for(long unsigned int i = 0; i != getStations().size(); i++){
-        outputFile << "point" << i << "= ("<< 4*std::cos(2*M_PI*i/(getStations().size()))
-        << ", " << 4*std::sin(2*M_PI*i/(getStations().size())) << ", 0)\n";
+        double x = 4*std::cos(2*M_PI*i/(getStations().size()));
+        double y = 4*std::sin(2*M_PI*i/(getStations().size()));
+        if(std::abs(x) < 0.0001) x = 0;
+        if(std::abs(y) < 0.0001) y = 0;
+        outputFile << "point" << i << " = ("<< x
+        << ", " << y << ", 0)\n";
     }
     int i = 0;
     // Lines
@@ -406,14 +411,19 @@ std::string Metronet::generateIni() const{
                       "rotateZ = 90 \n"
                       "center = (";
         int stationNumber = getIndex(getStations(), it->second->getHuidigeStation());
-        outputFile << 4*std::cos(2*M_PI*stationNumber/(getStations().size()))
-                      << ", " << 4*std::sin(2*M_PI*stationNumber/(getStations().size())) << ", ";
-        if(!it->second->isDefect()) outputFile << "0.1";
-        else outputFile << "1";
+        double x = 4*std::cos(2*M_PI*stationNumber/(getStations().size()));
+        double y = 4*std::sin(2*M_PI*stationNumber/(getStations().size()));
+        if(std::abs(x) < 0.0001) x = 0;
+        if(std::abs(y) < 0.0001) y = 0;
+        outputFile << x
+                      << ", " << y << ", ";
+//        if(it->second->isDefect()) outputFile << "1";
+//        else
+            outputFile << "0.1";
         outputFile << ")\n";
         i++;
         outputFile << "color = " << it->second->getColor() << "\n"
-                      "ambientReflection " << it->second->getColor() << "\n"
+                      "ambientReflection = " << it->second->getColor() << "\n"
                       "diffuseReflection = (0.00, 0.50, 0.00)\n"
                       "normalOn = false\n";
     }
@@ -457,10 +467,21 @@ void Metronet::graphicalSimulation(const unsigned int &steps){
     REQUIRE(steps>0, "Expected steps > 0");
     REQUIRE(isConsistent, "Expected metronet to be consistent in a simulation!");
     unsigned int i = 0;
-    while(i != steps){
+    while(i != steps + 1){
         std::string iniPath = generateIni();
-        //generate_image(iniPath);
-        //generate_image(5);
+        char buffer[PATH_MAX];
+        if (getcwd(buffer, sizeof(buffer))) {
+            std::cout << "Current working directory: " << buffer << std::endl;
+        } else {
+            std::cerr << "Failed to get current working directory." << std::endl;
+        }
+        std::string command = std::string("cd ") + buffer +
+                               " && " + ENGINE_PATH + iniPath;
+        system(command.c_str());
+        //wait(5);
+        // Remove last 3 chars
+        command = std::string("xdg-open ") + iniPath.substr(0, iniPath.length() - 3) + "bmp";
+        system(command.c_str());
         autoSimulate(1, false);
         i++;
     }
