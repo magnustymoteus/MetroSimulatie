@@ -484,7 +484,7 @@ void Metronet::graphicalSimulation(const unsigned int &steps){
         if(res == 90) return;
         res++;
         // Remove last 3 chars
-        command = std::string("eog ") + iniPath.substr(0, iniPath.length() - 3) + "bmp";
+        command = std::string("eog ") + iniPath.substr(0, iniPath.length() - 3) + "bmp & sleep 1 && xdotool key --window $(xdotool search --name 'Image Viewer') Escape";
         print(command + "\n");
         res = system(command.c_str());
         autoSimulate(1, false);
