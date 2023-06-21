@@ -325,7 +325,9 @@ std::set<Tram*> Metronet::getTramsWithGivenType(const std::string& tramType) con
 std::string Metronet::generateIni() const{
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     const char* pathToImages = "output/GeneratedImages/";
-    std::string fileName = intToString(getFileCount(pathToImages) - 2);
+    std::string fileName;
+    if(getFileCount(pathToImages) >= 3) fileName = intToString(getFileCount(pathToImages) - 3);
+    else fileName = intToString(getFileCount(pathToImages));
     std::ofstream outputFile;
     std::string pathFile = pathToImages + fileName + ".ini";
     outputFile.open(pathFile.c_str());
@@ -476,12 +478,15 @@ void Metronet::graphicalSimulation(const unsigned int &steps){
             std::cerr << "Failed to get current working directory." << std::endl;
         }
         std::string command = std::string("cd ") + buffer +
-                               " && " + ENGINE_PATH + iniPath;
-        system(command.c_str());
-        //wait(5);
+                               " && " + ENGINE_PATH + std::string(" ") + iniPath;
+        print(command + "\n");
+        int res = system(command.c_str());
+        if(res == 90) return;
+        res++;
         // Remove last 3 chars
-        command = std::string("xdg-open ") + iniPath.substr(0, iniPath.length() - 3) + "bmp";
-        system(command.c_str());
+        command = std::string("eog ") + iniPath.substr(0, iniPath.length() - 3) + "bmp";
+        print(command + "\n");
+        res = system(command.c_str());
         autoSimulate(1, false);
         i++;
     }

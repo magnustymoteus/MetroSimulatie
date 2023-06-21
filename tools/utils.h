@@ -53,8 +53,8 @@ int getFileCount(const std::string& directoryPath) {
 
     dir = opendir(directoryPath.c_str());
 
-    if (dir != nullptr) {
-        while ((entry = readdir(dir)) != nullptr) {
+    if (dir != 0) {
+        while ((entry = readdir(dir)) != 0) {
             if (entry->d_type == DT_REG) {
                 fileCount++;
             }

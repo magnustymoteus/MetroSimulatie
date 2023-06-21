@@ -15,10 +15,10 @@ ExternalProject_Add(
         INSTALL_COMMAND ""
 )
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
+#find_package(Qt5 COMPONENTS Widgets REQUIRED)
+#set(CMAKE_AUTOUIC ON)
+#set(CMAKE_AUTOMOC ON)
+#set(CMAKE_AUTORCC ON)
 
 
 add_subdirectory(gtest)
@@ -29,7 +29,7 @@ include_directories(gtest/googlemock/include)
 include_directories(tools)
 include_directories(components)
 ### TO EDIT
-add_compile_definitions(ENGINE_PATH="./cmake-build-debug/Engine/engine")
+add_compile_definitions(ENGINE_PATH="./Engine/cmake-build-debug/engine")
 ######################################
 
 FILE(GLOB_RECURSE SOURCES "components/*.cpp")
@@ -41,7 +41,7 @@ set(DEBUG_SOURCE_FILES ${TESTS} ${SOURCES} ${TOOLS} tests/tests_main.cpp)
 
 add_executable(main_executable ${RELEASE_SOURCE_FILES})
 add_executable(testing_tool ${DEBUG_SOURCE_FILES})
-target_link_libraries(main_executable PRIVATE Qt5::Widgets)
+#target_link_libraries(main_executable PRIVATE Qt5::Widgets)
 target_link_libraries(testing_tool gtest)
 set(lib_name "metronet_lib")
 add_library(${lib_name} ${SOURCES})
