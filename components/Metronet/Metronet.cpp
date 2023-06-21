@@ -326,8 +326,7 @@ std::string Metronet::generateIni() const{
     REQUIRE(this->properlyInitialized(), "Expected Metronet to be properly initialized!");
     const char* pathToImages = "output/GeneratedImages/";
     std::string fileName;
-    if(getFileCount(pathToImages) >= 3) fileName = intToString(getFileCount(pathToImages) - 3);
-    else fileName = intToString(getFileCount(pathToImages));
+    fileName = intToString(getFileCount(pathToImages));
     std::ofstream outputFile;
     std::string pathFile = pathToImages + fileName + ".ini";
     outputFile.open(pathFile.c_str());

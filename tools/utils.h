@@ -40,7 +40,8 @@ int getFileCount(const std::string& directoryPath) {
 
     if (hFind != INVALID_HANDLE_VALUE) {
         do {
-            if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+            if (!(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) &&
+                strstr(findData.cFileName, ".ini") != 0) {
                 fileCount++;
             }
         } while (FindNextFile(hFind, &findData) != 0);
@@ -55,7 +56,8 @@ int getFileCount(const std::string& directoryPath) {
 
     if (dir != 0) {
         while ((entry = readdir(dir)) != 0) {
-            if (entry->d_type == DT_REG) {
+            if (entry->d_type == DT_REG &&
+                strstr(entry->d_name, ".ini") != 0) {
                 fileCount++;
             }
         }
@@ -66,6 +68,7 @@ int getFileCount(const std::string& directoryPath) {
 
     return fileCount;
 }
+
 
 std::string intToString(int value) {
     std::stringstream ss;

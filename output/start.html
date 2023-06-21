@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MetroSimulatie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .gallery-container {
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    
+    .image {
+      max-width: 500px;
+      max-height: 500px;
+      margin: 0 auto;
+    }
+
+    .gallery-buttons {
+      margin-top: 20px;
+    }
+
+    .gallery-button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      font-size: 16px;
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .play-stop-button {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <img class="image" id="galleryImage" src="" alt="Gallery Image">
+    <div class="gallery-buttons">
+      <button class="gallery-button" id="previousBtn">Vorige</button>
+      <button class="gallery-button play-stop-button" id="playStopBtn">Play</button>
+      <button class="gallery-button" id="nextBtn">Volgende</button>
+    </div>
+  </div>
+
+  <script>
+    const imageFolder = "GeneratedImages"; // Replace with the path to your image folder
+    const totalImages = 100; // Total number of images in the folder
+
+    let currentIndex = 0;
+    let isPlaying = false;
+    let intervalId;
+
+    const galleryImage = document.getElementById("galleryImage");
+    const previousBtn = document.getElementById("previousBtn");
+    const playStopBtn = document.getElementById("playStopBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function updateImage() {
+      galleryImage.src = imageFolder + currentIndex + ".bmp";
+    }
+
+    function previousImage() {
+      currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+      updateImage();
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
+      updateImage();
+    }
+
+    function playSlideshow() {
+      playStopBtn.textContent = "Stop";
+      isPlaying = true;
+
+      intervalId = setInterval(() => {
+        nextImage();
+      }, 1000);
+    }
+
+    function stopSlideshow() {
+      playStopBtn.textContent = "Play";
+      isPlaying = false;
+
+      clearInterval(intervalId);
+    }
+
+    previousBtn.addEventListener("click", previousImage);
+    nextBtn.addEventListener("click", nextImage);
+    playStopBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        stopSlideshow();
+      } else {
+        playSlideshow();
+      }
+    });
+
+    updateImage();
+  </script>
+</body>
+</html>
